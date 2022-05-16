@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadCurrentUser, logout } from '../redux/auth';
+import NavPanel from '../components/NavPanel';
 
 const Home = () => {
   const isAuthenticated = useSelector(loadCurrentUser);
@@ -8,21 +9,20 @@ const Home = () => {
   const handleLogout = () => {
     localStorage.clear();
     dispatch(logout);
+    window.location.reload();
   };
 
+  // if authtoken is not set show link to login
+
   return (
-    <div>
-      <h1>Home</h1>
+    <>
       <div>
-        {isAuthenticated ? (
-          <button type="button" onClick={handleLogout}>
-            Logout
-          </button>
-        ) : (
-          <button type="button">Login</button>
-        )}
+        <h1>Home</h1>
+        <div>{isAuthenticated.data.id}</div>
+        {handleLogout}
       </div>
-    </div>
+      <NavPanel />
+    </>
   );
 };
 

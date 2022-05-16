@@ -32,13 +32,17 @@ export const signup = async (user) => {
   }
 };
 
+// if user not signup show error message
 export const login = async (user) => {
-  const response = await baseApi.post('/login', { user });
-  const authToken = response.headers.authorization;
-  const currentUser = response.data;
-
-  localStorage.setItem('token', authToken);
-  return { authToken, currentUser };
+  try {
+    const response = await baseApi.post('/login', { user });
+    const authToken = response.headers.authorization;
+    const currentUser = response.data;
+    localStorage.setItem('token', authToken);
+    return { authToken, currentUser };
+  } catch (error) {
+    return { error: 'Something went wrong' };
+  }
 };
 
 export const logout = async () => {
