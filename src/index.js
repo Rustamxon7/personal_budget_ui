@@ -4,8 +4,8 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import store, { persistor } from './redux/configureStore';
 import { api } from './api/api';
-import './index.css';
 import App from './App';
+import './index.css';
 
 api.interceptors.request.use((config) => {
   const { auth: { token } } = store.getState();
