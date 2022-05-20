@@ -1,0 +1,54 @@
+$color-primary: #a855f7;
+$color-black: #18181b;
+$color-white: #fafafa;
+
+// BASE STYLING
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  line-height: 1;
+  font-weight: 400;
+  color: $color-white;
+  background-color: $color-black;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+// base screen is 390px / 844px
+
+.container {
+  /* 1140px */
+  max-width: 110rem;
+  padding: 0 3.2rem;
+  margin: 0 auto;
+}
+
+.container--center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.sidebar-container {
+  padding: 8.4rem 4.8rem;
+}
+
+/*
+### Font sizes
+- 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+### Spacing system
+- 2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+*/
