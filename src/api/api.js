@@ -41,7 +41,7 @@ export const login = async (user) => {
     localStorage.setItem('token', authToken);
     return { authToken, currentUser };
   } catch (error) {
-    return { error: 'Something went wrong' };
+    return { error: 'Something went wrong...' };
   }
 };
 
