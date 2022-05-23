@@ -2,7 +2,7 @@ const LOADING_PERSON = 'LOADING_PERSON';
 const LOADING_PERSON_SUCCESS = 'LOADING_PERSON_SUCCESS';
 const LOADING_PERSON_FAILURE = 'LOADING_PERSON_FAILURE';
 
-const END_POINT = 'http://localhost:3000/';
+const END_POINT = 'https://personal-budget-plan.herokuapp.com/';
 const API_ROUTE = '/api/v1/';
 
 const initialState = {
@@ -34,6 +34,7 @@ export const fetchPeople = () => async (dispatch) => {
       },
     });
     const people = await response.json();
+    console.log(people);
     dispatch(loadingPersonSuccess(people));
   } catch (error) {
     dispatch(loadingPersonFailure(error));

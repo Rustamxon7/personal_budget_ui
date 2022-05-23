@@ -2,7 +2,7 @@ const CREATE_PERSON = 'CREATE_PERSON';
 const UPDATE_PERSON = 'UPDATE_PERSON';
 const DELETE_PERSON = 'DELETE_PERSON';
 
-const END_POINT = 'http://localhost:3000/';
+const END_POINT = 'https://personal-budget-plan.herokuapp.com/';
 const API_ROUTE = '/api/v1/';
 
 const initialState = {
