@@ -16,31 +16,38 @@ const SignUp = () => {
   const error = useSelector((state) => state.auth.error);
 
   return (
-    <div className="container container--center">
-      <div className="login">
-        <div className="login__header">
-          <h1 className="login__title">Log In</h1>
+    <div className="contents">
+      <div className="content--right">
+        <div className="header">
+          <h1 className="sessions--title">Personal Budget</h1>
         </div>
-
-        <form action="" className="login__form" onSubmit={handleSubmit(onSubmit)} method="post">
-          <div>
-            <label htmlFor="email">Email</label>
-            <input type="email" id="email" {...register('email', { required: true })} />
+        <form action="#" method="post" className="form" onSubmit={handleSubmit(onSubmit)}>
+          <h2 className="form--title">Welcome</h2>
+          <p className="sub--title">Welcome! Please enter your details.</p>
+          <div className="form--group">
+            <label htmlFor="username">Email</label>
+            <input type="text" name="username" id="username" className="form--control" {...register('email', { required: true })} />
           </div>
-          <div>
+          <div className="form--group">
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" {...register('password', { required: true })} />
+            <input type="password" name="password" id="password" className="form--control" {...register('password', { required: true })} />
           </div>
-          <button type="submit">Sign Up</button>
+          <div className="form--group">
+            <input type="submit" value="Sign up" className="submit--btn" />
+          </div>
           {
             // show error if there any error else show login
             error && <p className="error">{error}</p>
           }
-          <p>
+          <p className="link-to">
             Already have an account?
-            <Link to="/users/login">Log In</Link>
+            {' '}
+            <Link to="/users/login">Login</Link>
           </p>
         </form>
+      </div>
+      <div className="content--left">
+        <img src="img/success_factors.svg" alt="Success Factors" className="welcome--img" />
       </div>
     </div>
   );
