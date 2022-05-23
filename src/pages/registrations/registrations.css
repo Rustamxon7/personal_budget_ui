@@ -93,9 +93,10 @@
     transform: translateY(20px);
     opacity: 0;
   }
+
   to {
     opacity: 1;
-    transform: translateY(0px);
+    transform: translateY(0.1px);
   }
 }
 

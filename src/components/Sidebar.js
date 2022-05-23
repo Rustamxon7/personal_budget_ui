@@ -43,8 +43,6 @@ const Sidebar = (props) => {
     },
   ];
 
-  console.log(props);
-
   return (
     <nav className="left--sidebar">
       <div className="sidebar--title">Personal Budget</div>

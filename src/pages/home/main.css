@@ -76,11 +76,10 @@ a {
 /* display grid one item left two item right */
 .dashboard {
   display: grid;
-  display: grid;
   grid-template-columns: 28rem repeat(4, 1fr);
   grid-template-rows: 6rem repeat(4, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
+  grid-column-gap: 0.1px;
+  grid-row-gap: 0.1px;
   height: 100vh;
 }
 
@@ -106,8 +105,6 @@ a {
 .sidebar--menu {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  /* align-items: center; */
   padding: 2.4rem 2.2rem;
 }
 
@@ -191,6 +188,135 @@ a {
   position: relative;
 }
 
+.container {
+  background-color: #eaecee;
+  color: #0f0c0c;
+  width: 100%;
+  height: 100%;
+  grid-area: 2 / 2 / 6 / 6;
+  display: grid;
+  grid-template-columns: 2fr 1.2fr;
+  padding: 2.4rem 0.1rem 0.1rem 2.4rem;
+}
+
+/* MAIN CATEGORIES */
+
+.main {
+  /* background-color: rgb(185, 190, 185); */
+}
+
+.main--title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main--title h2 {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #262626;
+}
+
+.main--title ion-icon {
+  font-size: 2.6rem;
+  background: rgb(84, 84, 216);
+  border-radius: 3px;
+  color: #fff;
+}
+
+/* CATEGORIES CARDS */
+
+.categories--cards {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-column-gap: 2.8rem;
+  grid-row-gap: 1.2rem;
+  padding-top: 2.4rem;
+  padding-bottom: 2.4rem;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 1.2rem;
+  margin-bottom: 1.2rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.2rem;
+  height: 14rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.card:hover {
+  background-color: #f5f5f5;
+  box-shadow: 0.1px 0.1px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card ion-icon {
+  font-size: 4rem;
+  color: #262626;
+  color: rgb(0, 179, 255);
+}
+
+/* CHART */
+
+.main--chart {
+  background-color: #fff;
+  border-radius: 5px;
+  width: 100%;
+  height: 40%;
+}
+
+/* RIGHT SIDEBAR */
+
+.right--sidebar {
+  padding: 1.2rem 2.4rem;
+}
+
+.right--sidebar__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.right--sidebar__title h2 {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #262626;
+}
+
+.right--sidebar__title span {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #f00;
+}
+
+.transactions--cards {
+  max-height: 82vh;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  margin: 2rem 0.1rem 0.1rem 0.1rem;
+  padding: 1.2rem;
+  overflow-y: scroll;
+}
+
+.transactions--cards::-webkit-scrollbar {
+  display: none;
+}
+
+.transaction--card {
+  border-radius: 5px;
+  padding: 2.4rem;
+  margin-bottom: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 1.2rem;
+  border: 1px solid #eaecee;
+}
+
 /* PERSONS POPUP */
 
 .hidden {
@@ -270,134 +396,4 @@ a {
   cursor: pointer;
   outline: blue solid 2px;
   border-radius: 50%;
-}
-
-.container {
-  background-color: #eaecee;
-  color: #0f0c0c;
-  width: 100%;
-  height: 100%;
-  grid-area: 2 / 2 / 6 / 6;
-  display: grid;
-  grid-template-columns: 2fr 1.2fr;
-  padding: 2.4rem 0rem 0rem 2.4rem;
-}
-
-/* MAIN CATEGORIES */
-
-.main {
-  /* background-color: rgb(185, 190, 185); */
-}
-
-.main--title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.main--title h2 {
-  font-size: 1.6rem;
-  font-weight: 500;
-  color: #262626;
-}
-
-.main--title ion-icon {
-  font-size: 2.6rem;
-  color: #262626;
-  background: rgb(84, 84, 216);
-  border-radius: 3px;
-  color: #fff;
-}
-
-/* CATEGORIES CARDS */
-
-.categories--cards {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-column-gap: 2.8rem;
-  grid-row-gap: 1.2rem;
-  padding-top: 2.4rem;
-  padding-bottom: 2.4rem;
-}
-
-.card {
-  background-color: #fff;
-  border-radius: 5px;
-  padding: 1.2rem;
-  margin-bottom: 1.2rem;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: 1.2rem;
-  height: 14rem;
-  transition: all 0.2s ease-in-out;
-}
-
-.card:hover {
-  background-color: #f5f5f5;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-.card ion-icon {
-  font-size: 4rem;
-  color: #262626;
-  color: rgb(0, 179, 255);
-}
-
-/* CHART */
-
-.main--chart {
-  background-color: #fff;
-  border-radius: 5px;
-  width: 100%;
-  height: 40%;
-}
-
-/* RIGHT SIDEBAR */
-
-.right--sidebar {
-  padding: 1.2rem 2.4rem;
-}
-
-.right--sidebar__title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.right--sidebar__title h2 {
-  font-size: 1.6rem;
-  font-weight: 500;
-  color: #262626;
-}
-
-.right--sidebar__title span {
-  font-size: 1.8rem;
-  font-weight: 500;
-  color: #f00;
-}
-
-.transactions--cards {
-  max-height: 82vh;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  margin: 2rem 0rem 0rem 0rem;
-  padding: 1.2rem;
-  overflow-y: scroll;
-}
-
-.transactions--cards::-webkit-scrollbar {
-  display: none;
-}
-
-.transaction--card {
-  border-radius: 5px;
-  padding: 2.4rem;
-  margin-bottom: 1.2rem;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  gap: 1.2rem;
-  border: 1px solid #eaecee;
 }

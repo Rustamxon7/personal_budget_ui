@@ -34,7 +34,6 @@ export const fetchPeople = () => async (dispatch) => {
       },
     });
     const people = await response.json();
-    console.log(people);
     dispatch(loadingPersonSuccess(people));
   } catch (error) {
     dispatch(loadingPersonFailure(error));
