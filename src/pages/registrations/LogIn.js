@@ -25,8 +25,8 @@ const LogIn = () => {
           <h2 className="form--title">Welcome back</h2>
           <p className="sub--title">Welcome back! Please enter your details.</p>
           <div className="form--group">
-            <label htmlFor="username">Email</label>
-            <input type="text" name="username" id="username" className="form--control" {...register('email', { required: true })} />
+            <label htmlFor="email">Email</label>
+            <input type="text" name="email" id="email" className="form--control" {...register('email', { required: true })} />
           </div>
           <div className="form--group">
             <label htmlFor="password">Password</label>

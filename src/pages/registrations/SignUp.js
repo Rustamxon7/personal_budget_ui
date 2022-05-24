@@ -25,12 +25,20 @@ const SignUp = () => {
           <h2 className="form--title">Welcome</h2>
           <p className="sub--title">Welcome! Please enter your details.</p>
           <div className="form--group">
-            <label htmlFor="username">Email</label>
-            <input type="text" name="username" id="username" className="form--control" {...register('email', { required: true })} />
+            <label htmlFor="name">Username</label>
+            <input type="name" name="name" id="name" className="form--control" {...register('name', { required: true })} />
+          </div>
+          <div className="form--group">
+            <label htmlFor="email">Email</label>
+            <input type="email" name="email" id="email" className="form--control" {...register('email', { required: true })} />
           </div>
           <div className="form--group">
             <label htmlFor="password">Password</label>
             <input type="password" name="password" id="password" className="form--control" {...register('password', { required: true })} />
+          </div>
+          <div className="form--group">
+            <label htmlFor="password_confirmation">Confirm Password</label>
+            <input type="password" name="password_confirmation" id="password_confirmation" className="form--control" {...register('password_confirmation', { required: true })} />
           </div>
           <div className="form--group">
             <input type="submit" value="Sign up" className="submit--btn" />
