@@ -5,6 +5,7 @@ import SignUp from './pages/registrations/SignUp';
 import LogIn from './pages/registrations/LogIn';
 import CreatePerson from './pages/people/CreatePerson';
 import EditPerson from './pages/people/EditPerson';
+import EditCurrentUser from './pages/user/EditUser';
 import PersonInfo from './pages/people/Person';
 import Auth, { AuthRoute } from './components/Auth';
 
@@ -49,6 +50,14 @@ const App = () => (
           <AuthRoute>
             <LogIn />
           </AuthRoute>
+        }
+      />
+      <Route
+        path="/user/edit"
+        element={
+          <Auth>
+            <EditCurrentUser />
+          </Auth>
         }
       />
       <Route
