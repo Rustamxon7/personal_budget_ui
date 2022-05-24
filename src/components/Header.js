@@ -14,8 +14,6 @@ const Headers = () => {
 
   const currentUser = useSelector((state) => state.user.user);
 
-  console.log(currentUser);
-
   const handleHover = () => {
     const peopleMenu = document.querySelector('.persons--menu');
 
@@ -36,7 +34,7 @@ const Headers = () => {
         <ion-icon class="notification" name="notifications-outline" />
         {isAuthenticated.data.email ? <ion-icon class="profile--icon" name="person-circle-outline" onClick={handleHover} /> : <ion-icon class="profile--icon" name="person-outline" />}
       </div>
-      <div className="persons--menu">
+      <div className="persons--menu hidden">
         <div className="persons--menu__title">
           <span className="menu--user__name">{currentUser.name}</span>
           <span className="user--avatar">

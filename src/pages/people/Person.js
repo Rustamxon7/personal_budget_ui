@@ -20,7 +20,7 @@ const PersonInfo = () => {
       {person ? (
         <>
           <div className="dashboard">
-            <Sidebar />
+            <Sidebar id={person.id} />
             <Header />
             <div className="container">
               <div className="main">
