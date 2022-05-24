@@ -1,10 +1,20 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { loadCurrentUser } from '../redux/auth';
 import PeopleList from '../pages/people/PeopleList';
+import { fetchCurrentUser } from '../redux/users/currentUser';
 
 const Headers = () => {
   const isAuthenticated = useSelector(loadCurrentUser);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
+
+  const currentUser = useSelector((state) => state.user.user);
+
+  console.log(currentUser);
 
   const handleHover = () => {
     const peopleMenu = document.querySelector('.persons--menu');
@@ -26,8 +36,16 @@ const Headers = () => {
         <ion-icon class="notification" name="notifications-outline" />
         {isAuthenticated.data.email ? <ion-icon class="profile--icon" name="person-circle-outline" onClick={handleHover} /> : <ion-icon class="profile--icon" name="person-outline" />}
       </div>
-      <div className="persons--menu hidden">
-        <h3 className="persons--menu__title">All Persons list...</h3>
+      <div className="persons--menu">
+        <div className="persons--menu__title">
+          <span className="menu--user__name">{currentUser.name}</span>
+          <span className="user--avatar">
+            <ion-icon name="person-circle-outline" />
+          </span>
+          <NavLink to="/user/edit" className="edit--person">
+            <ion-icon name="create-outline" />
+          </NavLink>
+        </div>
         <PeopleList />
       </div>
     </header>
