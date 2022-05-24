@@ -8,16 +8,6 @@ import Header from '../../components/Header';
 import './main.css';
 
 const Home = () => (
-  // <div className="app">
-  //   <main>
-  //     <Sidebar />
-  //     <section className="section-dashboard">
-  //       <div className="container">
-  //         <div className="dashboard">test</div>
-  //       </div>
-  //     </section>
-  //   </main>
-  // </div>
   <div className="dashboard">
     <Sidebar />
     <Header />
