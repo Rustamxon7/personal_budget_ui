@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { fetchPeople } from '../../redux/people/loadPerson';
+import { fetchCurrentUser } from '../../redux/users/currentUser';
 import { deletePersonAction } from '../../redux/people/person';
 
 const PeopleList = () => {
@@ -9,6 +10,7 @@ const PeopleList = () => {
 
   useEffect(() => {
     dispatch(fetchPeople());
+    dispatch(fetchCurrentUser());
   }, [dispatch]);
 
   const people = useSelector((state) => state.persons.people);
