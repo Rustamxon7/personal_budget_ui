@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadCurrentUser, logout } from '../redux/auth';
 
-const Sidebar = (props) => {
-  const { id } = props;
+const Sidebar = () => {
+  const currentPerson = useLocation().pathname.split('/')[2];
 
   const isAuthenticated = useSelector(loadCurrentUser);
   const dispatch = useDispatch();
@@ -56,10 +56,9 @@ const Sidebar = (props) => {
               </NavLink>
             </li>
           ))}
-
-          {id && (
+          {currentPerson && (
             <li>
-              <NavLink activeclassname="active" to={`/people/${id}/edit`} exact="true">
+              <NavLink activeclassname="active" to={`/people/${currentPerson}/edit`} exact="true">
                 <ion-icon name="create-outline" />
                 <span>Edit Person</span>
               </NavLink>
