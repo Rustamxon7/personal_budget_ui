@@ -3,11 +3,15 @@ import thunk from 'redux-thunk';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import authReducer from './auth';
+import userReducer from './users/currentUser';
+import editUserReducer from './users/editUser';
 import peopleReducer from './people/person';
 import loadingPersons from './people/loadPerson';
 
 const reducer = combineReducers({
   auth: authReducer,
+  user: userReducer,
+  editUser: editUserReducer,
   people: peopleReducer,
   persons: loadingPersons,
 });
