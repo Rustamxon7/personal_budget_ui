@@ -1,6 +1,7 @@
 const CREATE_PERSON = 'CREATE_PERSON';
 const UPDATE_PERSON = 'UPDATE_PERSON';
 const DELETE_PERSON = 'DELETE_PERSON';
+const FETCH_PERSON = 'FETCH_PERSON';
 
 const END_POINT = 'https://personal-budget-plan.herokuapp.com/';
 const API_ROUTE = '/api/v1/';
@@ -16,6 +17,11 @@ export const createPerson = (person) => ({
   payload: person,
 });
 
+export const getPerson = (person) => ({
+  type: FETCH_PERSON,
+  payload: person,
+});
+
 export const updatePerson = (person) => ({
   type: UPDATE_PERSON,
   payload: person,
@@ -25,6 +31,21 @@ export const deletePerson = (id) => ({
   type: DELETE_PERSON,
   payload: id,
 });
+
+export const fetchPersons = () => async (dispatch) => {
+  try {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${END_POINT}${API_ROUTE}people`, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    });
+    const people = await response.json();
+    dispatch(getPerson(people));
+  } catch (error) {
+    dispatch(getPerson(error));
+  }
+};
 
 export const deletePersonAction = (id) => async (dispatch) => {
   try {
@@ -38,7 +59,7 @@ export const deletePersonAction = (id) => async (dispatch) => {
     const person = await response.json();
     dispatch(deletePerson(person.id));
   } catch (error) {
-    dispatch((error));
+    dispatch(error);
   }
 };
 
@@ -56,7 +77,7 @@ export const createPersonAction = (person) => async (dispatch) => {
     const newPerson = await response.json();
     dispatch(createPerson(newPerson));
   } catch (error) {
-    dispatch((error));
+    dispatch(error);
   }
 };
 
@@ -74,7 +95,7 @@ export const updatePersonAction = (person) => async (dispatch) => {
     const updatedPerson = await response.json();
     dispatch(updatePerson(updatedPerson));
   } catch (error) {
-    dispatch((error));
+    dispatch(error);
   }
 };
 
@@ -91,6 +112,11 @@ export default (state = initialState, action) => {
         people: action.payload,
       };
     case DELETE_PERSON:
+      return {
+        ...state,
+        people: action.payload,
+      };
+    case FETCH_PERSON:
       return {
         ...state,
         people: action.payload,

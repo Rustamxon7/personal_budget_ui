@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { fetchPerson } from '../../redux/people/loadPerson';
+import { fetchPersons } from '../../redux/people/person';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 
@@ -10,10 +10,12 @@ const PersonInfo = () => {
   const location = useLocation();
 
   useEffect(() => {
-    dispatch(fetchPerson(location.pathname.split('/')[2]));
+    dispatch(fetchPersons());
   }, [dispatch, location]);
 
-  const person = useSelector((state) => state.persons.people);
+  const persons = useSelector((state) => state.people.people);
+
+  const person = persons.find((person) => person.id === Number(location.pathname.split('/')[2]));
 
   return (
     <div className="app">

@@ -1,7 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable comma-dangle */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -30,38 +26,45 @@ function CreatePerson() {
     );
     setName('');
     setIcon('');
-    navigate('/');
-    window.location.reload();
+    setTimeout(() => {
+      navigate('/');
+      window.location.reload();
+    }, 1000);
   };
 
   const userImages = document.querySelectorAll('#user-image');
 
   const handleChange = (e) => {
     setIcon(e.target.dataset.userType);
-    userImages.forEach((img) => img.classList.remove('active'));
-    e.target.classList.add('active');
+    userImages.forEach((img) => img.classList.remove('active--person'));
+    e.target.classList.add('active--person');
   };
 
   return (
-    <div className="container container--center">
-      <div className="login">
-        <div className="login__header">
-          <h1 className="login__title">Add Other Person</h1>
+    <div className="contents">
+      <div className="content--right">
+        <div className="header">
+          <h1 className="sessions--title">Personal Budget</h1>
         </div>
-
-        <form action="" className="login__form" onSubmit={handleSubmit}>
-          <div>
+        <form action="#" method="post" className="form" onSubmit={handleSubmit}>
+          <h2 className="form--title">Create Person</h2>
+          <p className="sub--title">Please fill out the form below to create a new person.</p>
+          <div className="form--group">
             <label htmlFor="name">Name</label>
-            <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+            <input className="form--control" type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
           </div>
-          <div className="login__option" onClick={handleChange}>
+          <div className="form--group persons--choice" id="description" onClick={handleChange} role="button" tabIndex="0" onKeyDown={handleChange}>
             <img value={icon} id="user-image" src="img/icons/man.svg" alt="Man" data-user-type="man" />
             <img value={icon} id="user-image" src="img/icons/woman.svg" alt="Woman" data-user-type="woman" />
             <img value={icon} id="user-image" src="img/icons/child.svg" alt="Child" data-user-type="child" />
           </div>
-
-          <button type="submit">Add</button>
+          <div className="form--group">
+            <input type="submit" value="Sign in" className="submit--btn" />
+          </div>
         </form>
+      </div>
+      <div className="content--left">
+        <img src="img/success_factors.svg" alt="Success Factors" className="welcome--img" />
       </div>
     </div>
   );

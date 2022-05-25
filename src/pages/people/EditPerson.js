@@ -1,21 +1,19 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { loadCurrentUser } from '../../redux/auth';
-import { fetchPerson } from '../../redux/people/loadPerson';
-import { updatePersonAction } from '../../redux/people/person';
+import { updatePersonAction, fetchPersons } from '../../redux/people/person';
 
 function EditPerson() {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(loadCurrentUser);
   const location = useLocation();
 
-  const person = useSelector((state) => state.persons.people);
-  const loading = useSelector((state) => state.persons.loading);
+  const persons = useSelector((state) => state.people.people);
+  const person = persons.find((person) => person.id === Number(location.pathname.split('/')[2]));
 
   useEffect(() => {
-    dispatch(fetchPerson(location.pathname.split('/')[2]));
+    dispatch(fetchPersons(location.pathname.split('/')[2]));
   }, [dispatch, location]);
 
   const navigate = useNavigate();
@@ -31,12 +29,14 @@ function EditPerson() {
         name,
         icon,
         user_id: isAuthenticated.data.id,
-      }),
+      })
     );
     setName('');
     setIcon('');
-    navigate('/');
-    window.location.reload();
+    setTimeout(() => {
+      navigate('/');
+      window.location.reload();
+    }, 1000);
   };
 
   const userImages = document.querySelectorAll('#user-image');
@@ -50,10 +50,10 @@ function EditPerson() {
   const handleChange = (e) => {
     setIcon(e.target.dataset.userType);
     userImages.forEach((img) => {
-      img.classList.remove('active');
+      img.classList.remove('active--person');
       img.classList.remove('selected');
     });
-    e.target.classList.add('active');
+    e.target.classList.add('active--person');
   };
 
   const iconsList = (
@@ -64,26 +64,28 @@ function EditPerson() {
     </>
   );
   return (
-    <div className="container container--center">
-      <div className="login">
-        <div className="login__header">
-          <h1 className="login__title">Edit Person</h1>
+    <div className="contents">
+      <div className="content--right">
+        <div className="header">
+          <h1 className="sessions--title">Edit Person</h1>
         </div>
-
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <form action="" className="login__form" onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="name">Name</label>
-              <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder={person.name} />
-            </div>
-            <div className="login__option" onClick={handleChange} onKeyDown={handleChange} role="button" tabIndex="0">
-              {iconsList}
-            </div>
-            <button type="submit">Add</button>
-          </form>
-        )}
+        <form action="" className="form" onSubmit={handleSubmit}>
+          <h2 className="form--title">Edit Person</h2>
+          <p className="sub--title">Please fill out the form below to create a new person.</p>
+          <div className="form--group">
+            <label htmlFor="name">Name</label>
+            <input type="text" id="name" className="form--control" value={name} onChange={(e) => setName(e.target.value)} placeholder={person.name} />
+          </div>
+          <div className="form--group persons--choice" onClick={handleChange} onKeyDown={handleChange} role="button" tabIndex="0">
+            {iconsList}
+          </div>
+          <div className="form--group">
+            <input type="submit" value="Edit" className="submit--btn" />
+          </div>
+        </form>
+      </div>
+      <div className="content--left">
+        <img src="img/success_factors.svg" alt="Success Factors" className="welcome--img" />
       </div>
     </div>
   );
