@@ -2,7 +2,7 @@ const UPDATE_USER = 'UPDATE_USER';
 const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
 const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE';
 
-const END_POINT = 'http://localhost:3000/';
+const END_POINT = 'https://personal-budget-plan.herokuapp.com/';
 
 const initialState = {
   loading: true,

@@ -2,7 +2,7 @@ const GET_CURRENT_USER = 'GET_CURRENT_USER';
 const GET_CURRENT_USER_SUCCESS = 'GET_CURRENT_USER_SUCCESS';
 const GET_CURRENT_USER_FAILURE = 'GET_CURRENT_USER_FAILURE';
 
-const END_POINT = 'http://localhost:3000/';
+const END_POINT = 'https://personal-budget-plan.herokuapp.com/';
 
 const initialState = {
   loading: true,

@@ -6,14 +6,12 @@ import authReducer from './auth';
 import userReducer from './users/currentUser';
 import editUserReducer from './users/editUser';
 import peopleReducer from './people/person';
-import loadingPersons from './people/loadPerson';
 
 const reducer = combineReducers({
   auth: authReducer,
   user: userReducer,
   editUser: editUserReducer,
   people: peopleReducer,
-  persons: loadingPersons,
 });
 
 const persistConfig = {

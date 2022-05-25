@@ -1,5 +1,3 @@
-/* eslint-disable comma-dangle */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -13,7 +11,6 @@ function EditCurrentUser() {
   const location = useLocation();
 
   const currentUser = useSelector((state) => state.user.user);
-  const loading = useSelector((state) => state.user.loading);
 
   useEffect(() => {
     dispatch(fetchCurrentUser());
@@ -34,30 +31,40 @@ function EditCurrentUser() {
     );
     setName('');
     setEmail('');
-    navigate('/');
-    window.location.reload();
+    setTimeout(() => {
+      navigate('/');
+      window.location.reload();
+    }, 1000);
   };
 
   return (
-    <div className="container container--center">
-      <div className="login">
-        <div className="login__header">
-          <h1 className="login__title">Edit Person</h1>
+    <div className="contents">
+      <div className="content--right">
+        <div className="header">
+          <h1 className="sessions--title">Edit Person</h1>
         </div>
 
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <form action="" className="login__form" onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="name">Name</label>
-              <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder={currentUser.name} />
-              <label htmlFor="email">Email</label>
-              <input type="text" id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={currentUser.email} />
-            </div>
-            <button type="submit">Update</button>
-          </form>
-        )}
+        <form action="" className="form" onSubmit={handleSubmit}>
+          <h2 className="form--title">Edit Person</h2>
+          <p className="sub--title">Please fill out the form below to create a new person.</p>
+
+          <div className="form--group">
+            <label htmlFor="name">Name</label>
+            <input type="text" id="name" className="form--control" value={name} onChange={(e) => setName(e.target.value)} placeholder={currentUser.name} />
+          </div>
+
+          <div className="form--group">
+            <label htmlFor="name">Email</label>
+            <input type="text" id="email" className="form--control" value={email} onChange={(e) => setName(e.target.value)} placeholder={currentUser.email} />
+          </div>
+
+          <div className="form--group">
+            <input type="submit" value="Edit" className="submit--btn" />
+          </div>
+        </form>
+      </div>
+      <div className="content--left">
+        <img src="img/success_factors.svg" alt="Success Factors" className="welcome--img" />
       </div>
     </div>
   );

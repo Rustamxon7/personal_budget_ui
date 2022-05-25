@@ -46,7 +46,9 @@ const SignUp = () => {
             error && <p className="error">{error}</p>
           }
           <p className="link-to">
-            Already have an account? <Link to="/users/login">Login</Link>
+            Already have an account?
+            {' '}
+            <Link to="/users/login">Login</Link>
           </p>
         </form>
       </div>
