@@ -106,3 +106,32 @@
   color: #6c86a6;
   text-decoration: none;
 }
+
+.persons--choice {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #6c86a6;
+  text-decoration: none;
+  margin-top: 1.6rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.persons--choice img {
+  height: 4.4rem;
+  width: auto;
+  cursor: pointer;
+  filter: invert(1);
+  transition: all 0.3s ease-in-out;
+}
+
+.active--person {
+  height: 5.4rem !important;
+}
+
+.selected {
+  border: 1px solid #6c86a6;
+}
