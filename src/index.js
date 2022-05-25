@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import store, { persistor } from './redux/configureStore';
@@ -8,7 +8,9 @@ import App from './App';
 import './index.css';
 
 api.interceptors.request.use((config) => {
-  const { auth: { token } } = store.getState();
+  const {
+    auth: { token },
+  } = store.getState();
   const authConfig = { ...config };
   if (token) {
     authConfig.headers.Authorization = token;
@@ -16,18 +18,21 @@ api.interceptors.request.use((config) => {
   return authConfig;
 });
 
-api.interceptors.response.use((response) => response, (error) => {
-  if (error.response.status === 401) {
-    store.dispatch({ type: 'LOGOUT' });
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response.status === 401) {
+      store.dispatch({ type: 'LOGOUT' });
+    }
+    throw error;
   }
-  throw error;
-});
+);
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
-ReactDOM.render(
+root.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <App />
     </PersistGate>
-  </Provider>,
-  document.getElementById('root'),
+  </Provider>
 );

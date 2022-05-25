@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react/jsx-props-no-spreading */
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -48,9 +46,7 @@ const SignUp = () => {
             error && <p className="error">{error}</p>
           }
           <p className="link-to">
-            Already have an account?
-            {' '}
-            <Link to="/users/login">Login</Link>
+            Already have an account? <Link to="/users/login">Login</Link>
           </p>
         </form>
       </div>

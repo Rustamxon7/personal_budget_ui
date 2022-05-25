@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-wrap-multilines */
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/home/Home';
 import SignUp from './pages/registrations/SignUp';
@@ -14,59 +13,59 @@ const App = () => (
     <Routes>
       <Route
         path="/"
-        element={
+        element={(
           <Auth>
             <Home />
           </Auth>
-        }
+        )}
       />
       <Route
         path="/create_person"
-        element={
+        element={(
           <Auth>
             <CreatePerson />
           </Auth>
-        }
+        )}
       />
       <Route
         path="/people/:id"
-        element={
+        element={(
           <Auth>
             <PersonInfo />
           </Auth>
-        }
+        )}
       />
       <Route
         path="/people/:id/edit"
-        element={
+        element={(
           <Auth>
             <EditPerson />
           </Auth>
-        }
+        )}
       />
       <Route
         path="/users/login"
-        element={
+        element={(
           <AuthRoute>
             <LogIn />
           </AuthRoute>
-        }
+        )}
       />
       <Route
         path="/user/edit"
-        element={
+        element={(
           <Auth>
             <EditCurrentUser />
           </Auth>
-        }
+        )}
       />
       <Route
         path="/users/signup"
-        element={
+        element={(
           <AuthRoute>
             <SignUp />
           </AuthRoute>
-        }
+        )}
       />
       <Route path="*" element={<div>404</div>} />
     </Routes>

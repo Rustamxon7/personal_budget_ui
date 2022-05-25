@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -34,12 +32,6 @@ const Sidebar = () => {
       path: '/',
       text: 'Expenses',
       icon: 'wallet-outline',
-    },
-    {
-      id: 4,
-      path: '/people',
-      text: 'People',
-      icon: 'users',
     },
   ];
 
