@@ -1,4 +1,6 @@
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import {
+  HashRouter as Router, Route, Routes
+} from 'react-router-dom';
 import Home from './pages/home/Home';
 import SignUp from './pages/registrations/SignUp';
 import LogIn from './pages/registrations/LogIn';
@@ -6,6 +8,9 @@ import CreatePerson from './pages/people/CreatePerson';
 import EditPerson from './pages/people/EditPerson';
 import EditCurrentUser from './pages/user/EditUser';
 import PersonInfo from './pages/people/Person';
+import CreateCategory from './pages/categories/CreateCategory';
+import UpdateCategory from './pages/categories/UpdateCategory';
+import Category from './pages/categories/Category';
 import Auth, { AuthRoute } from './components/Auth';
 
 const App = () => (
@@ -16,6 +21,38 @@ const App = () => (
         element={(
           <Auth>
             <Home />
+          </Auth>
+        )}
+      />
+      <Route
+        path="/create-category"
+        element={(
+          <Auth>
+            <CreateCategory />
+          </Auth>
+        )}
+      />
+      <Route
+        path="/people/:id/create-category"
+        element={(
+          <Auth>
+            <CreateCategory />
+          </Auth>
+        )}
+      />
+      <Route
+        path="/categories/:id/edit"
+        element={(
+          <Auth>
+            <UpdateCategory />
+          </Auth>
+        )}
+      />
+      <Route
+        path="/categories/:id"
+        element={(
+          <Auth>
+            <Category />
           </Auth>
         )}
       />
