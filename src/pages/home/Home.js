@@ -1,10 +1,8 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable no-undef */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
+import Categories from '../categories/Categories';
 import './main.css';
 
 const Home = () => (
@@ -15,71 +13,12 @@ const Home = () => (
       <div className="main">
         <div className="main--title">
           <h2>Monthly Budget</h2>
-          <ion-icon name="add-outline" />
+          <NavLink to="/create-category">
+            <ion-icon name="add-outline" />
+          </NavLink>
         </div>
 
-        <div className="categories--cards">
-          <div className="card">
-            <ion-icon name="car-outline" />
-            <div className="card--info">
-              <h3>Shopping</h3>
-              <p>
-                <span>$</span>
-                <span>0</span>
-              </p>
-            </div>
-          </div>
-          <div className="card">
-            <ion-icon name="home-outline" />
-            <div className="card--info">
-              <h3>Shopping</h3>
-              <p>
-                <span>$</span>
-                <span>0</span>
-              </p>
-            </div>
-          </div>
-          <div className="card">
-            <ion-icon name="cart-outline" />
-            <div className="card--info">
-              <h3>Shopping</h3>
-              <p>
-                <span>$</span>
-                <span>0</span>
-              </p>
-            </div>
-          </div>
-          <div className="card">
-            <ion-icon name="construct-outline" />
-            <div className="card--info">
-              <h3>Shopping</h3>
-              <p>
-                <span>$</span>
-                <span>0</span>
-              </p>
-            </div>
-          </div>
-          <div className="card">
-            <ion-icon name="videocam-outline" />
-            <div className="card--info">
-              <h3>Shopping</h3>
-              <p>
-                <span>$</span>
-                <span>0</span>
-              </p>
-            </div>
-          </div>
-          <div className="card">
-            <ion-icon name="airplane" />
-            <div className="card--info">
-              <h3>Shopping</h3>
-              <p>
-                <span>$</span>
-                <span>0</span>
-              </p>
-            </div>
-          </div>
-        </div>
+        <Categories />
 
         <div className="main--chart" />
       </div>
