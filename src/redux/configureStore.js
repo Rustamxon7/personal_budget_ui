@@ -7,6 +7,7 @@ import userReducer from './users/currentUser';
 import editUserReducer from './users/editUser';
 import peopleReducer from './people/person';
 import categoriesReducer from './categories/categories';
+import fundsReducer from './funds/funds';
 
 const reducer = combineReducers({
   auth: authReducer,
@@ -14,6 +15,7 @@ const reducer = combineReducers({
   editUser: editUserReducer,
   people: peopleReducer,
   categories: categoriesReducer,
+  funds: fundsReducer,
 });
 
 const persistConfig = {
