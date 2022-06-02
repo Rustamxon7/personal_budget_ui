@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -26,14 +27,10 @@ const Headers = () => {
 
   return (
     <header className="header">
-      <div className="searchbar">
-        <ion-icon name="search-outline" class="searchbar--icon" />
-        <input type="text" placeholder="Search" className="searchbar--input" />
-      </div>
-      <div className="profile">
-        <ion-icon class="notification" name="notifications-outline" />
-        {isAuthenticated.data.email ? <ion-icon class="profile--icon" name="person-circle-outline" onClick={handleHover} /> : <ion-icon class="profile--icon" name="person-outline" />}
-      </div>
+      <ion-icon name="search" />
+      <input type="text" placeholder="Search" />
+      <ion-icon class="notification" name="notifications-outline" />
+      {isAuthenticated.data.email ? <ion-icon class="profile--icon header__profile-icon" name="person-circle-outline" onClick={handleHover} /> : <ion-icon class="profile--icon header__profile-icon" name="person-outline" />}
       <div className="persons--menu hidden">
         <div className="persons--menu__title">
           <span className="menu--user__name">{currentUser.name}</span>
