@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import { fetchCategory, updateCategoryAction } from '../../redux/categories/categories';
 import { fetchPersons } from '../../redux/people/person';
 import { loadCurrentUser } from '../../redux/auth';
-import { iconsList } from './lists';
+import { iconsList } from '../../lists/lists';
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().min(3, 'Too Short!').max(50, 'Too Long!').required('A title is required!'),
