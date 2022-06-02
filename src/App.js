@@ -1,16 +1,19 @@
-import {
-  HashRouter as Router, Route, Routes
-} from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/home/Home';
+import Receipts from './pages/home/Receipts';
+import Expences from './pages/home/Expences';
+
 import SignUp from './pages/registrations/SignUp';
 import LogIn from './pages/registrations/LogIn';
+
 import CreatePerson from './pages/people/CreatePerson';
 import EditPerson from './pages/people/EditPerson';
 import EditCurrentUser from './pages/user/EditUser';
 import PersonInfo from './pages/people/Person';
-import CreateCategory from './pages/categories/CreateCategory';
+
 import UpdateCategory from './pages/categories/UpdateCategory';
 import Category from './pages/categories/Category';
+
 import Auth, { AuthRoute } from './components/Auth';
 
 const App = () => (
@@ -25,18 +28,18 @@ const App = () => (
         )}
       />
       <Route
-        path="/create-category"
+        path="/incomes"
         element={(
           <Auth>
-            <CreateCategory />
+            <Receipts />
           </Auth>
         )}
       />
       <Route
-        path="/people/:id/create-category"
+        path="/expenses"
         element={(
           <Auth>
-            <CreateCategory />
+            <Expences />
           </Auth>
         )}
       />
@@ -69,6 +72,46 @@ const App = () => (
         element={(
           <Auth>
             <PersonInfo />
+          </Auth>
+        )}
+      />
+      <Route
+        path="/people/:id/incomes"
+        element={(
+          <Auth>
+            <Receipts />
+          </Auth>
+        )}
+      />
+      <Route
+        path="/people/:id/expenses"
+        element={(
+          <Auth>
+            <Expences />
+          </Auth>
+        )}
+      />
+      <Route
+        path="/people/:id/categories/:id"
+        element={(
+          <Auth>
+            <Category />
+          </Auth>
+        )}
+      />
+      <Route
+        path="/people/:id/incomes/:id"
+        element={(
+          <Auth>
+            <Category />
+          </Auth>
+        )}
+      />
+      <Route
+        path="/people/:id/expenses/:id"
+        element={(
+          <Auth>
+            <Category />
           </Auth>
         )}
       />
