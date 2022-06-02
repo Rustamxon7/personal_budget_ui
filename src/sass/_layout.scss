@@ -1,0 +1,110 @@
+// Dashboard
+.dashboard {
+  display: grid;
+  grid-template-columns: 26rem 1fr;
+  min-height: 100vh;
+
+  main {
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
+}
+
+// Sidebar
+.sidebar {
+  color: #f8fafc;
+  background-color: #353535;
+
+  .logo {
+    height: 3.6rem;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.6rem 2.4rem;
+
+    color: #f8fafc;
+    background-color: #252525;
+    font-size: 2.4rem;
+    font-weight: 500;
+  }
+
+  &__nav {
+    padding: 2.4rem;
+  }
+
+  &__nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  &__nav-link:link,
+  &__nav-link:visited {
+    color: #f8fafc;
+    border-radius: 5px;
+    padding: 1.6rem;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+
+    ion-icon {
+      font-size: 2.4rem;
+    }
+  }
+
+  &__nav-link:hover {
+    background-color: #252525;
+  }
+}
+
+// header
+.header {
+  color: #333;
+  background-color: #fff;
+  box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
+  height: 6.8rem;
+  padding: 0 2.4rem;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+
+  ion-icon {
+    font-size: 2.4rem;
+    color: #333;
+  }
+
+  &__profile-icon {
+    font-size: 3.2rem !important;
+  }
+
+  input {
+    font-size: 1.6rem;
+    font-family: inherit;
+    color: #333;
+    border: none;
+    margin-right: auto;
+  }
+
+  input:focus {
+    outline: none;
+  }
+}
+
+//** App
+.app {
+  background-color: #f3f4f6;
+  height: 100%;
+  padding: 4.8rem 0;
+}
+
+.app-container {
+  max-width: 102.4rem;
+  margin: 0 auto;
+  padding: 0 2.4rem;
+}
