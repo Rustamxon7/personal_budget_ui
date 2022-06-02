@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable indent */
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -14,59 +16,76 @@ const Sidebar = () => {
     dispatch(logout);
   };
 
-  const links = [
-    {
-      id: 1,
-      path: '/',
-      text: 'Home',
-      icon: 'home',
-    },
-    {
-      id: 2,
-      path: '/',
-      text: 'Receipts',
-      icon: 'cash-outline',
-    },
-    {
-      id: 3,
-      path: '/',
-      text: 'Expenses',
-      icon: 'wallet-outline',
-    },
-  ];
-
   return (
-    <nav className="left--sidebar">
-      <div className="sidebar--title">Personal Budget</div>
-      <div className="sidebar--menu">
-        <ul>
-          {links.map((link) => (
-            <li key={link.id}>
-              <NavLink activeclassname="active" to={link.path} exact="true">
-                <ion-icon name={link.icon} />
-                <span>{link.text}</span>
-              </NavLink>
-            </li>
-          ))}
+    <nav className="sidebar">
+      <div className="sidebar__title">
+        <img className="logo" src="img/beedget.svg" alt="Beedget logo" />
+        <span>beedget</span>
+      </div>
+      <nav className="sidebar__nav">
+        <ul className="sidebar__nav-list">
+          {!currentPerson && (
+            <>
+              <li>
+                <NavLink activeclassname="active" className="sidebar__nav-link" to="/" exact="true">
+                  <ion-icon name="home" />
+                  <span>Home</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink activeclassname="active" className="sidebar__nav-link" to="/incomes" exact="true">
+                  <ion-icon name="cash-outline" />
+                  <span>Receipts</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink activeclassname="active" className="sidebar__nav-link" to="/expenses" exact="true">
+                  <ion-icon name="wallet-outline" />
+                  <span>Expenses</span>
+                </NavLink>
+              </li>
+            </>
+          )}
+
           {currentPerson && (
-            <li>
-              <NavLink activeclassname="active" to={`/people/${currentPerson}/edit`} exact="true">
-                <ion-icon name="create-outline" />
-                <span>Edit Person</span>
-              </NavLink>
-            </li>
+            <>
+              <li>
+                <NavLink activeclassname="active" className="sidebar__nav-link" to={`/people/${currentPerson}`} exact="true">
+                  <ion-icon name="home" />
+                  <span>Home</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="sidebar__nav-link" activeclassname="active" to={`/people/${currentPerson}/incomes`} exact="true">
+                  <ion-icon name="cash-outline" />
+                  <span>Receipts</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="sidebar__nav-link" activeclassname="active" to={`/people/${currentPerson}/expenses`} exact="true">
+                  <ion-icon name="wallet-outline" />
+                  <span>Expences</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="sidebar__nav-link" activeclassname="active" to={`/people/${currentPerson}/edit`} exact="true">
+                  <ion-icon name="create-outline" />
+                  <span>Edit Person</span>
+                </NavLink>
+              </li>
+            </>
           )}
 
           {isAuthenticated && (
-            <li className="log-out">
-              <a href="/" className="" type="button" onClick={handleLogout}>
+            <li>
+              <NavLink className="sidebar__nav-link" type="button" onClick={handleLogout} to="/">
                 <ion-icon icon="log-out" />
                 <span>Log Out</span>
-              </a>
+              </NavLink>
             </li>
           )}
         </ul>
-      </div>
+      </nav>
     </nav>
   );
 };
