@@ -1,11 +1,16 @@
+/* eslint-disable max-len */
+/* eslint-disable react/jsx-indent */
 /* eslint-disable react/destructuring-assignment */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { fetchCategories } from '../../redux/categories/categories';
+import CreateCategory from './CreateCategory';
 
-const Categories = (person) => {
+const Categories = ({ type }) => {
   const dispatch = useDispatch();
+
+  const [open, setOpen] = useState('hidden');
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -13,42 +18,47 @@ const Categories = (person) => {
 
   const categories = useSelector((state) => state.categories.categories);
 
-  const navigationLink = (person) => {
-    if (person.id) {
-      const currentPersonLink = `/people/${person.id}/create-category`;
-      return currentPersonLink;
+  const handleCategoryType = (type) => {
+    // incomes, expenses or all
+    if (type === 'incomes') {
+      return categories.filter((category) => category.money === 'incomes');
     }
-    return '/create-category';
+    if (type === 'expenses') {
+      return categories.filter((category) => category.money === 'expenses');
+    }
+    return categories;
   };
 
   const categoriesList =
     categories.length > 0 ? (
-      categories.map((category) => (
-        <NavLink className="card" to={`/categories/${category.id}`} key={category.id}>
-          <ion-icon name={`${category.icon}-outline`} />
-          <div className="card--info">
-            <h3>{category.title}</h3>
-            <p>
-              <span>$</span>
-              <span>0</span>
-            </p>
-          </div>
+      handleCategoryType(type).map((category) => (
+        <NavLink className="category category--shopping" to={`/categories/${category.id}`} key={category.id}>
+          <ion-icon name={`${category.icon}-outline`} style={{ color: category.color }} />
+          <span className="category__name">{category.title}</span>
+          <span className="category__price">100$</span>
         </NavLink>
       ))
     ) : (
-      <NavLink className="card" to={navigationLink(person)} key={person.id}>
-        <ion-icon name="add-circle-outline" />
-        <div className="card--info">
-          <h3>Add Category</h3>
-          <p>
-            <span>$</span>
-            <span>0</span>
-          </p>
+      <>
+        <div className="category category--shopping" onClick={() => setOpen('')} onKeyDown={() => setOpen('')} role="button" tabIndex={0}>
+          <ion-icon name="add-circle-outline" />
+          <span className="category__name">Add category</span>
         </div>
-      </NavLink>
+      </>
     );
 
-  return <div className="categories--cards">{categoriesList}</div>;
+  return (
+    <div>
+      <div className="heading-tertiary">
+        <h3>Categories</h3>
+        <button type="button" className="btn" onClick={() => setOpen('')}>
+          Add
+        </button>
+      </div>
+      <div className="categories">{categoriesList}</div>
+      <CreateCategory open={open} setOpen={setOpen} />
+    </div>
+  );
 };
 
 export default Categories;
