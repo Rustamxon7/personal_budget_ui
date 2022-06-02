@@ -1,61 +1,102 @@
-import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+/* eslint-disable object-curly-newline */
+/* eslint-disable react/jsx-one-expression-per-line */
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { signup } from '../../redux/auth';
+import '../../sass/main.scss';
 
 const SignUp = () => {
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
 
-  const onSubmit = (data) => {
-    dispatch(signup(data));
-  };
-
-  const error = useSelector((state) => state.auth.error);
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required('Name is required!'),
+    email: Yup.string().email('Invalid email').required('Email is required!'),
+    password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required!'),
+    password_confirmation: Yup.string()
+      .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      .required('Password confirmation is required!'),
+  });
 
   return (
-    <div className="contents">
-      <div className="content--right">
-        <div className="header">
-          <h1 className="sessions--title">Personal Budget</h1>
-        </div>
-        <form action="#" method="post" className="form" onSubmit={handleSubmit(onSubmit)}>
-          <h2 className="form--title">Welcome</h2>
-          <p className="sub--title">Welcome! Please enter your details.</p>
-          <div className="form--group">
-            <label htmlFor="name">Username</label>
-            <input type="name" name="name" id="name" className="form--control" {...register('name', { required: true })} />
+    <Formik
+      initialValues={{
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
+      }}
+      validationSchema={validationSchema}
+      onSubmit={(values, { setSubmitting }) => {
+        setSubmitting(true);
+        dispatch(signup(values));
+        setSubmitting(false);
+      }}
+      className="form"
+    >
+      {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+        <>
+          <div className="login">
+            <div className="login__content-box">
+              <div className="login__logo">
+                <img className="logo" src="img/beedget.svg" alt="Beedget logo" />
+                <span>beedget</span>
+              </div>
+              <div className="login__box">
+                <div className="login__form" action="">
+                  <h1 className="heading-primary">Welcome to beedget!</h1>
+                  <h4 className="subheading">Please enter your details.</h4>
+                  <form onSubmit={handleSubmit}>
+                    <label className="login__label" htmlFor="name">
+                      Name
+                    </label>
+                    <input className="login__input" type="text" name="name" id="name" value={values.name} onChange={handleChange} onBlur={handleBlur} />
+                    {errors.name && touched.name && <div className="error">{errors.name}</div>}
+                    <br />
+
+                    <label className="login__label" htmlFor="email">
+                      Email
+                    </label>
+
+                    <input className="login__input" type="email" name="email" id="email" value={values.email} onChange={handleChange} onBlur={handleBlur} />
+                    {errors.email && touched.email && <div className="error">{errors.email}</div>}
+                    <br />
+
+                    <label className="login__label" htmlFor="password">
+                      Password
+                    </label>
+
+                    <input className="login__input" type="password" name="password" id="password" value={values.password} onChange={handleChange} onBlur={handleBlur} />
+                    {errors.password && touched.password && <div className="error">{errors.password}</div>}
+                    <br />
+
+                    <label className="login__label" htmlFor="password_confirmation">
+                      Password Confirmation
+                    </label>
+
+                    <input className="login__input" type="password" name="password_confirmation" id="password_confirmation" value={values.password_confirmation} onChange={handleChange} onBlur={handleBlur} />
+                    {errors.password_confirmation && touched.password_confirmation && <div className="error">{errors.password_confirmation}</div>}
+                    <br />
+
+                    <button className="btn" type="submit" disabled={isSubmitting}>
+                      Sign Up
+                    </button>
+                  </form>
+                  <p className="login__text">
+                    Already have an account?
+                    <strong>
+                      <Link to="/users/login">Login</Link>
+                    </strong>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="login__image-box">&nbsp;</div>
           </div>
-          <div className="form--group">
-            <label htmlFor="email">Email</label>
-            <input type="email" name="email" id="email" className="form--control" {...register('email', { required: true })} />
-          </div>
-          <div className="form--group">
-            <label htmlFor="password">Password</label>
-            <input type="password" name="password" id="password" className="form--control" {...register('password', { required: true })} />
-          </div>
-          <div className="form--group">
-            <label htmlFor="password_confirmation">Confirm Password</label>
-            <input type="password" name="password_confirmation" id="password_confirmation" className="form--control" {...register('password_confirmation', { required: true })} />
-          </div>
-          <div className="form--group">
-            <input type="submit" value="Sign up" className="submit--btn" />
-          </div>
-          {
-            // show error if there any error else show login
-            error && <p className="error">{error}</p>
-          }
-          <p className="link-to">
-            Already have an account?
-            {' '}
-            <Link to="/users/login">Login</Link>
-          </p>
-        </form>
-      </div>
-      <div className="content--left">
-        <img src="img/success_factors.svg" alt="Success Factors" className="welcome--img" />
-      </div>
-    </div>
+        </>
+      )}
+    </Formik>
   );
 };
 
