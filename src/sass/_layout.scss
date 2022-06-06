@@ -24,11 +24,10 @@
     align-items: center;
     gap: 1rem;
     padding: 1.6rem 2.4rem;
-
     color: #f8fafc;
     background-color: #252525;
     font-size: 2.4rem;
-    font-weight: 500;
+    font-weight: 400;
   }
 
   &__nav {
@@ -74,13 +73,21 @@
   align-items: center;
   gap: 1.2rem;
 
-  ion-icon {
+  .header--icon {
     font-size: 2.4rem;
     color: #333;
   }
 
+  .user--avatar__icon {
+    font-size: 4.4rem;
+  }
+
+  .profile--icon {
+    font-size: 3.2rem;
+  }
+
   &__profile-icon {
-    font-size: 3.2rem !important;
+    font-size: 3.2rem;
   }
 
   input {
@@ -104,7 +111,19 @@
 }
 
 .app-container {
-  max-width: 102.4rem;
+  max-width: 112.4rem;
   margin: 0 auto;
   padding: 0 2.4rem;
+}
+
+.app-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 4.2rem;
+}
+
+.chart {
+  background-color: #fff;
+  border-radius: 3px;
+  padding: 1.6rem;
 }
