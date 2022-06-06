@@ -24,16 +24,18 @@ const CreateCategory = ({ open, setOpen }) => {
   const location = useLocation();
 
   useEffect(() => {
-    dispatch(fetchPersons());
+    setTimeout(() => {
+      dispatch(fetchPersons());
+    }, 1000);
   }, [dispatch]);
 
-  const people = useSelector((state) => state.people.people);
+  const people = useSelector((state) => state.people.people) || [];
   const currentUser = useSelector(loadCurrentUser);
-  const currentPerson = people.find((person) => person.id === Number(location.pathname.split('/')[2]));
+  const currentPerson = people.find((person) => person.id === Number(location.pathname.split('/')[2])) || {};
 
   const validateCurrentPerson = () => {
     if (!currentPerson) {
-      return 'Please select one person!';
+      return location.pathname.split('/')[2];
     }
     return currentPerson.id;
   };
@@ -62,14 +64,14 @@ const CreateCategory = ({ open, setOpen }) => {
             setSubmitting(true);
             dispatch(addCategoryAction(values));
             setSubmitting(false);
+            window.location.reload();
             setTimeout(() => {
               // go back based on location
               if (location.pathname.includes('/categories/create')) {
                 navigate('/categories');
               } else {
-                navigate('/people/2');
+                navigate(`/people/${currentPerson.id}`);
               }
-              window.location.reload();
             }, 2000);
           }}
         >
@@ -90,11 +92,12 @@ const CreateCategory = ({ open, setOpen }) => {
                     <label htmlFor="person_id">Person</label>
                     <select name="person_id" id="person_id" onChange={handleChange} onBlur={handleBlur} value={values.person_id} className={touched.person_id && errors.person_id ? 'has-error' : null}>
                       <option value="">Select one person</option>
-                      {people.map((person) => (
-                        <option key={person.id} value={person.id}>
-                          {person.name}
-                        </option>
-                      ))}
+                      {currentPerson &&
+                        people.map((person) => (
+                          <option key={person.id} value={person.id}>
+                            {person.name}
+                          </option>
+                        ))}
                     </select>
                     {touched.person_id && errors.person_id && <div className="input-feedback">{errors.person_id}</div>}
                   </div>
@@ -124,7 +127,7 @@ const CreateCategory = ({ open, setOpen }) => {
                   </div>
 
                   <div className="form--group">
-                    <button type="submit" className="submit--btn" disabled={isSubmitting}>
+                    <button type="submit" className="btn" disabled={isSubmitting}>
                       Create
                     </button>
                   </div>
