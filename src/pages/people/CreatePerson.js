@@ -51,8 +51,8 @@ function CreatePerson() {
     <>
       <div className="overlay person--overlay hidden" onClick={closePopup} onKeyDown={closePopup} role="button" tabIndex="0" />
       <div className="popup person--popup hidden">
-        <form action="#" method="post" className="popup__form popup__form--one" onSubmit={handleSubmit}>
-          <div className="form-group">
+        <form action="#" className="popup__form popup__form--one" onSubmit={handleSubmit}>
+          <div className="form--group">
             <label htmlFor="name">Name</label>
             <input className="form--control" type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
           </div>
