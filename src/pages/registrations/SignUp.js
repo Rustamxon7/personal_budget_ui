@@ -3,12 +3,13 @@
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { signup } from '../../redux/auth';
 import '../../sass/main.scss';
 
 const SignUp = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Name is required!'),
@@ -32,6 +33,7 @@ const SignUp = () => {
         setSubmitting(true);
         dispatch(signup(values));
         setSubmitting(false);
+        navigate('/');
       }}
       className="form"
     >
