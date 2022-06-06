@@ -1,10 +1,8 @@
-/* eslint-disable max-len */
-/* eslint-disable react/jsx-indent */
-/* eslint-disable react/destructuring-assignment */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { fetchCategories } from '../../redux/categories/categories';
+
 import CreateCategory from './CreateCategory';
 
 const Categories = ({ type }) => {
@@ -17,25 +15,48 @@ const Categories = ({ type }) => {
   }, [dispatch]);
 
   const categories = useSelector((state) => state.categories.categories);
+  const loading = useSelector((state) => state.categories.loading);
 
   const handleCategoryType = (type) => {
     // incomes, expenses or all
-    if (type === 'incomes') {
-      return categories.filter((category) => category.money === 'incomes');
+    if (type === 'incomes' && categories.length > 0) {
+      return categories.filter((category) => category.money === 'incomes') || [];
     }
-    if (type === 'expenses') {
-      return categories.filter((category) => category.money === 'expenses');
+    if (type === 'expenses' && categories.length > 0) {
+      return categories.filter((category) => category.money === 'expenses') || [];
     }
-    return categories;
+    return categories && categories.length > 0 ? categories : [];
+  };
+
+  const handleClick = () => {
+    setOpen('');
+    let loading = false;
+    if (loading) {
+      return;
+    }
+    loading = true;
+    setTimeout(() => {
+      loading = false;
+    }, 1000);
+  };
+
+  const createComponent = (open, setOpen) => {
+    if (open === '') {
+      return <CreateCategory open={open} setOpen={setOpen} />;
+    }
+    return null;
   };
 
   const categoriesList =
-    categories.length > 0 ? (
+    handleCategoryType(type).length > 0 ? (
       handleCategoryType(type).map((category) => (
         <NavLink className="category category--shopping" to={`/categories/${category.id}`} key={category.id}>
           <ion-icon name={`${category.icon}-outline`} style={{ color: category.color }} />
           <span className="category__name">{category.title}</span>
-          <span className="category__price">100$</span>
+          <span className="category__price">
+            $
+            {category.sum_funds}
+          </span>
         </NavLink>
       ))
     ) : (
@@ -47,16 +68,20 @@ const Categories = ({ type }) => {
       </>
     );
 
-  return (
+  return !loading ? (
+    <div className="app category-page loader--container">
+      <img className="loader" src="img/loader.svg" alt="Loading" />
+    </div>
+  ) : (
     <div>
       <div className="heading-tertiary">
         <h3>Categories</h3>
-        <button type="button" className="btn" onClick={() => setOpen('')}>
+        <button type="button" className="btn" onClick={handleClick}>
           Add
         </button>
       </div>
       <div className="categories">{categoriesList}</div>
-      <CreateCategory open={open} setOpen={setOpen} />
+      {createComponent(open, setOpen)}
     </div>
   );
 };
