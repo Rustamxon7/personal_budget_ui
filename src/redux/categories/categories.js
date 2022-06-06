@@ -1,5 +1,10 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable camelcase */
 /* eslint-disable max-len */
+import { END_POINT, API_ROUTE } from '../../api/api';
+
 const GET_CATEGORIES = 'GET_CATEGORIES';
+const GET_TOTAL_MONEY = 'GET_TOTAL_MONEY';
 const GET_CATEGORY = 'GET_CATEGORY';
 const CATEGORY_ADD = 'CATEGORY_ADD';
 const CATEGORY_REMOVE = 'CATEGORY_REMOVE';
@@ -7,19 +12,22 @@ const CATEGORY_UPDATE = 'CATEGORY_UPDATE';
 const CREATE_CATEGORY_ALL_PERSONS = 'CREATE_CATEGORY_ALL_PERSONS';
 const LOADING = 'LOADING';
 
-const END_POINT = 'https://personal-budget-plan.herokuapp.com/';
-const API_ROUTE = 'api/v1/';
-
 const initialState = {
-  loading: true,
+  loading: false,
   categories: [],
   category: [],
+  total_money: [],
   error: null,
 };
 
 export const getCategories = (categories) => ({
   type: GET_CATEGORIES,
   payload: categories,
+});
+
+export const getTotalMoney = (totalMoney) => ({
+  type: GET_TOTAL_MONEY,
+  payload: totalMoney,
 });
 
 export const getCategory = (category) => ({
@@ -60,10 +68,28 @@ export const fetchCategories = () => async (dispatch) => {
         Authorization: `${token}`,
       },
     });
-    const categories = await response.json();
+    const categoriesList = await response.json();
+    const { categories } = categoriesList;
     dispatch(getCategories(categories));
   } catch (error) {
     dispatch(getCategories(error));
+  }
+};
+
+export const fetchTotalMoney = () => async (dispatch) => {
+  try {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${END_POINT}${API_ROUTE}categories`, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    });
+    const categoriesList = await response.json();
+    const { total } = categoriesList;
+
+    dispatch(getTotalMoney(total));
+  } catch (error) {
+    dispatch(getTotalMoney(error));
   }
 };
 
@@ -134,47 +160,54 @@ export const updateCategoryAction = (category) => async (dispatch) => {
   }
 };
 
-export const loadingAction = (loading) => ({
-  type: LOADING,
-  payload: loading,
-});
-
 export default (state = initialState, action) => {
   switch (action.type) {
+    case LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
     case GET_CATEGORIES:
       return {
         ...state,
+        loading: true,
         categories: action.payload,
+      };
+    case GET_TOTAL_MONEY:
+      return {
+        ...state,
+        loading: false,
+        total_money: action.payload,
       };
     case GET_CATEGORY:
       return {
         ...state,
+        loading: false,
         category: action.payload,
       };
     case CATEGORY_ADD:
       return {
         ...state,
+        loading: false,
         categories: [...state.categories, action.payload],
       };
     case CATEGORY_REMOVE:
       return {
         ...state,
+        loading: false,
         categories: state.categories.filter((category) => category.id !== action.payload),
       };
     case CATEGORY_UPDATE:
       return {
         ...state,
+        loading: false,
         categories: state.categories.map((category) => (category.id === action.payload.id ? action.payload : category)),
       };
     case CREATE_CATEGORY_ALL_PERSONS:
       return {
         ...state,
+        loading: false,
         categories: [...state.categories, action.payload],
-      };
-    case LOADING:
-      return {
-        ...state,
-        loading: action.payload,
       };
     default:
       return state;
