@@ -19,7 +19,7 @@
   font-size: 1.6rem;
   font-weight: 500;
   color: #262626;
-  background-color: #f5f5f5;
+  background-color: #929292;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,7 +30,7 @@
   box-shadow: 0.1px 0.1px 10px rgba(0, 0, 0, 0.1);
 }
 
-.menu--user__name {
+.menu--user__header {
   font-size: 1.8rem;
   font-weight: 500;
   color: #262626;
@@ -39,15 +39,19 @@
   padding: 1.5rem;
   padding-bottom: 4.5rem;
   text-align: center;
-  background-color: #9ea5a8;
+  background-color: #3b3b3b;
 }
 
 .user--avatar {
-  font-size: 5.4rem;
   margin-top: -2.4rem;
-  background-color: #f5f5f5;
+  padding: 0.8rem 0.9rem;
+  background-color: #d3d2d2;
   border-radius: 50%;
   position: relative;
+}
+
+.user--avatar__icon {
+  font-size: 4.4rem !important;
 }
 
 .edit--person {
@@ -57,7 +61,7 @@
   display: inline-block;
 }
 
-.edit--person ion-icon {
+.edit--icon {
   rotate: 40deg !important;
 }
 
@@ -65,14 +69,16 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  width: 18rem;
-  padding: 1.2rem 2.4rem 2.4rem 0.4rem;
+  justify-content: center;
+  width: 22rem;
+  padding: 1.2rem;
+  background-color: #fff;
 }
 
 .persons--menu ul li {
   font-size: 1.4rem;
   color: #262626;
-  padding: 0.6rem 0.6rem;
+  padding: 0.8rem 0.6rem;
   transition: all 0.2s ease-in-out;
 }
 
@@ -83,6 +89,7 @@
 .persons--menu ul li a {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 1.2rem;
 }
 
@@ -92,6 +99,10 @@
 }
 
 .persons--menu ul li a span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
   font-size: 1.4rem;
   color: #262626;
 }
