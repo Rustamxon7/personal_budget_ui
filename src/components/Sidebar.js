@@ -8,20 +8,40 @@ import { loadCurrentUser, logout } from '../redux/auth';
 const Sidebar = () => {
   const currentPerson = useLocation().pathname.split('/')[2];
 
+  const validateCurrentPerson = localStorage.getItem('currentPerson');
+
   const isAuthenticated = useSelector(loadCurrentUser);
   const dispatch = useDispatch();
 
+  const location = useLocation();
+
+  const homeLocation = location.pathname.split('/')[1];
+
   const handleLogout = () => {
-    localStorage.clear();
     dispatch(logout);
+    localStorage.clear();
+    window.location.reload();
+  };
+
+  const handleClick = () => {
+    const overlay = document.querySelector('.edit--person__overlay');
+    const popUp = document.querySelector('.edit--person__popup');
+
+    if (overlay.classList.contains('hidden')) {
+      overlay.classList.remove('hidden');
+      popUp.classList.remove('hidden');
+    } else {
+      overlay.classList.add('hidden');
+      popUp.classList.add('hidden');
+    }
   };
 
   return (
     <nav className="sidebar">
-      <div className="sidebar__title">
+      <NavLink className="sidebar__title" to="/">
         <img className="logo" src="img/beedget.svg" alt="Beedget logo" />
         <span>beedget</span>
-      </div>
+      </NavLink>
       <nav className="sidebar__nav">
         <ul className="sidebar__nav-list">
           {!currentPerson && (
@@ -50,7 +70,7 @@ const Sidebar = () => {
           {currentPerson && (
             <>
               <li>
-                <NavLink activeclassname="active" className="sidebar__nav-link" to={`/people/${currentPerson}`} exact="true">
+                <NavLink activeclassname="active" className="sidebar__nav-link" to={`/people/${validateCurrentPerson}`} exact="true">
                   <ion-icon name="home" />
                   <span>Home</span>
                 </NavLink>
@@ -67,16 +87,18 @@ const Sidebar = () => {
                   <span>Expences</span>
                 </NavLink>
               </li>
-              <li>
-                <NavLink className="sidebar__nav-link" activeclassname="active" to={`/people/${currentPerson}/edit`} exact="true">
-                  <ion-icon name="create-outline" />
-                  <span>Edit Person</span>
-                </NavLink>
-              </li>
+              {validateCurrentPerson === currentPerson && (
+                <li>
+                  <NavLink className="sidebar__nav-link" onClick={handleClick} to="#">
+                    <ion-icon name="create-outline" />
+                    <span>Edit Person</span>
+                  </NavLink>
+                </li>
+              )}
             </>
           )}
 
-          {isAuthenticated && (
+          {isAuthenticated && !homeLocation && (
             <li>
               <NavLink className="sidebar__nav-link" type="button" onClick={handleLogout} to="/">
                 <ion-icon icon="log-out" />
