@@ -1,8 +1,9 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/destructuring-assignment */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
-import { fetchCategories } from '../../redux/categories/categories';
+import { fetchCategories, fetchTotalMoney } from '../../redux/categories/categories';
 import CreateCategory from './CreateCategory';
 
 const CurrentPersonCategories = ({ type }) => {
@@ -15,9 +16,11 @@ const CurrentPersonCategories = ({ type }) => {
 
   useEffect(() => {
     dispatch(fetchCategories());
+    dispatch(fetchTotalMoney());
   }, [dispatch]);
 
   const categories = useSelector((state) => state.categories.categories);
+  const loading = useSelector((state) => state.categories.loading);
 
   const currentPersonsCategories = categories.filter((category) => {
     if (category.persons_array.includes(currentPerson)) {
@@ -29,20 +32,21 @@ const CurrentPersonCategories = ({ type }) => {
   const handleCategoryType = (type) => {
     // incomes, expenses or all
     if (type === 'incomes') {
-      return currentPersonsCategories.filter((category) => category.money === 'incomes');
+      return currentPersonsCategories.filter((category) => category.money === 'incomes') || [];
     }
     if (type === 'expenses') {
-      return currentPersonsCategories.filter((category) => category.money === 'expenses');
+      return currentPersonsCategories.filter((category) => category.money === 'expenses') || [];
     }
-    return currentPersonsCategories;
+    return currentPersonsCategories || [];
   };
 
   const currentPersonCategoriesList =
     currentPersonsCategories.length > 0 ? (
       handleCategoryType(type).map((category) => (
-        <NavLink className="category category--shopping" to={type ? `/people/${currentPerson}/${type}/${category.id}` : `/people/${currentPerson}/categories/${category.id}`} key={category.id}>
+        <NavLink className="category category--shopping" to={`/people/${currentPerson}/categories/${category.id}`} key={category.id}>
           <ion-icon name={`${category.icon}-outline`} style={{ color: category.color }} />
           <span className="category__name">{category.title}</span>
+          <span className="category__price">${category.sum_funds}</span>
         </NavLink>
       ))
     ) : (
@@ -54,7 +58,11 @@ const CurrentPersonCategories = ({ type }) => {
       </>
     );
 
-  return (
+  return !loading ? (
+    <div className="app category-page loader--container">
+      <img className="loader" src="img/loader.svg" alt="Loading" />
+    </div>
+  ) : (
     <div>
       <div className="heading-tertiary">
         <h3>Categories</h3>
