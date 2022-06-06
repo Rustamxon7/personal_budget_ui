@@ -1,3 +1,4 @@
+import React from 'react';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/home/Home';
 import Receipts from './pages/home/Receipts';
@@ -24,7 +25,7 @@ const App = () => (
           <Auth>
             <Home />
           </Auth>
-          )}
+        )}
       />
       <Route
         path="/incomes"
@@ -32,7 +33,7 @@ const App = () => (
           <Auth>
             <Receipts />
           </Auth>
-          )}
+        )}
       />
       <Route
         path="/expenses"
@@ -40,7 +41,7 @@ const App = () => (
           <Auth>
             <Expences />
           </Auth>
-          )}
+        )}
       />
       <Route
         path="/categories/:id/edit"
@@ -48,7 +49,7 @@ const App = () => (
           <Auth>
             <UpdateCategory />
           </Auth>
-          )}
+        )}
       />
       <Route
         path="/categories/:id"
@@ -56,7 +57,7 @@ const App = () => (
           <Auth>
             <Category />
           </Auth>
-          )}
+        )}
       />
       <Route
         path="/create_person"
@@ -64,7 +65,7 @@ const App = () => (
           <Auth>
             <CreatePerson />
           </Auth>
-          )}
+        )}
       />
       <Route
         path="/people/:id"
@@ -72,7 +73,7 @@ const App = () => (
           <Auth>
             <PersonInfo />
           </Auth>
-          )}
+        )}
       />
       <Route
         path="/people/:id/incomes"
@@ -80,7 +81,7 @@ const App = () => (
           <Auth>
             <Receipts />
           </Auth>
-          )}
+        )}
       />
       <Route
         path="/people/:id/expenses"
@@ -88,7 +89,7 @@ const App = () => (
           <Auth>
             <Expences />
           </Auth>
-          )}
+        )}
       />
       <Route
         path="/people/:id/categories/:id"
@@ -96,7 +97,7 @@ const App = () => (
           <Auth>
             <Category />
           </Auth>
-          )}
+        )}
       />
       <Route
         path="/people/:id/incomes/:id"
@@ -104,7 +105,7 @@ const App = () => (
           <Auth>
             <Category />
           </Auth>
-          )}
+        )}
       />
       <Route
         path="/people/:id/expenses/:id"
@@ -112,7 +113,7 @@ const App = () => (
           <Auth>
             <Category />
           </Auth>
-          )}
+        )}
       />
       <Route
         path="/people/:id/edit"
@@ -120,7 +121,7 @@ const App = () => (
           <Auth>
             <EditPerson />
           </Auth>
-          )}
+        )}
       />
       <Route
         path="/users/login"
@@ -128,7 +129,7 @@ const App = () => (
           <AuthRoute>
             <LogIn />
           </AuthRoute>
-          )}
+        )}
       />
       <Route
         path="/users/signup"
@@ -136,7 +137,7 @@ const App = () => (
           <AuthRoute>
             <SignUp />
           </AuthRoute>
-          )}
+        )}
       />
       <Route path="*" element={<div>404</div>} />
     </Routes>

@@ -10,6 +10,13 @@ const Sidebar = () => {
 
   const validateCurrentPerson = localStorage.getItem('currentPerson');
 
+  const currentPersonValidate = () => {
+    if (currentPerson === validateCurrentPerson) {
+      return true;
+    }
+    return false;
+  };
+
   const isAuthenticated = useSelector(loadCurrentUser);
   const dispatch = useDispatch();
 
@@ -67,7 +74,7 @@ const Sidebar = () => {
             </>
           )}
 
-          {currentPerson && (
+          {currentPersonValidate() && (
             <>
               <li>
                 <NavLink activeclassname="active" className="sidebar__nav-link" to={`/people/${validateCurrentPerson}`} exact="true">
@@ -76,13 +83,13 @@ const Sidebar = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink className="sidebar__nav-link" activeclassname="active" to={`/people/${currentPerson}/incomes`} exact="true">
+                <NavLink className="sidebar__nav-link" activeclassname="active" to={`/people/${validateCurrentPerson}/incomes`} exact="true">
                   <ion-icon name="cash-outline" />
                   <span>Receipts</span>
                 </NavLink>
               </li>
               <li>
-                <NavLink className="sidebar__nav-link" activeclassname="active" to={`/people/${currentPerson}/expenses`} exact="true">
+                <NavLink className="sidebar__nav-link" activeclassname="active" to={`/people/${validateCurrentPerson}/expenses`} exact="true">
                   <ion-icon name="wallet-outline" />
                   <span>Expences</span>
                 </NavLink>
