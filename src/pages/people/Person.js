@@ -1,64 +1,54 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, NavLink } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { fetchPersons } from '../../redux/people/person';
 import Sidebar from '../../components/Sidebar';
+import Chart from '../../components/chart';
 import Header from '../../components/Header';
 import CurrentPersonCategories from '../categories/CurrentPersonCategories';
+import Transactions from '../../components/Transactions';
+import CreatePerson from './CreatePerson';
+import EditPerson from './EditPerson';
+import { fetchFunds } from '../../redux/funds/funds';
 
 const PersonInfo = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
+  localStorage.setItem('currentPerson', location.pathname.split('/')[2]);
+
   useEffect(() => {
     dispatch(fetchPersons());
+    dispatch(fetchFunds(1));
   }, [dispatch, location]);
 
   const persons = useSelector((state) => state.people.people);
 
   const person = persons.find((person) => person.id === Number(location.pathname.split('/')[2]));
 
+  const funds = useSelector((state) => state.funds.funds.funds);
+
   return (
-    <div className="app">
+    <div className="dashboard">
       {person ? (
         <>
-          <div className="dashboard">
-            <Sidebar id={person.id} />
+          <Sidebar personId={person.id} />
+          <main>
             <Header />
-            <div className="container">
-              <div className="main">
-                <div className="main--title">
-                  <h2>Monthly Budget</h2>
-                  <NavLink to={`/people/${person.id}/create-category`}>
-                    <ion-icon name="add-outline" />
-                  </NavLink>
+            <div className="app main">
+              <div className="app-container grid grid--1-3cols">
+                <div className="app-flex">
+                  <CurrentPersonCategories type={person.id} />
+                  <Chart />
+                  <CreatePerson />
+                  <EditPerson person={person} />
                 </div>
-
-                <CurrentPersonCategories id={person.id} />
-
-                <div className="main--chart" />
-              </div>
-              <div className="right--sidebar">
-                <div className="right--sidebar__title">
-                  <h2>This week</h2>
-                  <span className="transactions">-$2400</span>
-                </div>
-
-                <div className="transactions--cards">
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
+                <div>
+                  <Transactions data={funds} />
                 </div>
               </div>
             </div>
-          </div>
+          </main>
         </>
       ) : (
         <p>No person found</p>
