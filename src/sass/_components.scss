@@ -9,6 +9,11 @@
   grid-template-columns: 2fr 1fr;
 }
 
+// utils
+.margin-left--auto {
+  margin-left: auto;
+}
+
 //** Flex
 .one-row {
   display: flex;
@@ -18,11 +23,17 @@
 
 //** Heading
 .heading-primary {
+  display: flex;
+  align-items: center;
   font-size: 3.6rem;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.2;
   color: #333;
   margin-bottom: 1.6rem;
+
+  ion-icon {
+    font-size: 2.4rem;
+  }
 }
 
 .heading-secondary {
@@ -59,16 +70,25 @@
   line-height: 1.2;
   text-decoration: none;
   border-radius: 0.8rem;
-  border: none;
-  color: #fff;
+  border: 2px solid #353535;
+  color: #353535;
   cursor: pointer;
-  background-color: #333;
+  background-color: #fff;
   transition: all 0.3s ease-in-out;
 }
 
 .btn:hover,
 .btn:focus {
-  background-color: #444;
+  background-color: #353535;
+  border-color: #eab308;
+  color: #eab308;
+}
+
+.btn--small {
+  padding: 0.6rem 1.2rem;
+  font-size: 1.4rem;
+  display: block;
+  width: 100%;
 }
 
 //** Table
@@ -76,6 +96,10 @@
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
+
+  ion-icon:hover {
+    cursor: pointer;
+  }
 }
 
 .table__heading {
@@ -84,6 +108,31 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.6rem;
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+
+    ion-icon {
+      font-size: 2.4rem;
+    }
+
+    // date input
+    input {
+      font-size: 1.6rem;
+      font-family: inherit;
+      color: #333;
+      border: 1px solid #eab208b5;
+      border-radius: 0.8rem;
+      margin-right: auto;
+    }
+
+    input:focus {
+      outline: none;
+    }
+  }
 }
 
 .table__header {
@@ -111,18 +160,23 @@
 
 .table__row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.6rem;
+  grid-template-columns: 1fr 1fr 1fr auto auto;
+  align-items: center;
+  gap: 0 1.6rem;
   font-size: 1.4rem;
   font-weight: 500;
   color: #262626;
-  padding: 1.2rem;
+  // padding: 1.2rem;
   border: 1px solid #eaecee;
   border-radius: 3px;
+
+  ion-icon {
+    font-size: 2.4rem;
+  }
 }
 
-.table__row div {
-  width: 30%;
+.table__cell:hover {
+  cursor: pointer;
 }
 
 //**
@@ -201,7 +255,7 @@
   &__icon {
     font-size: 1.8rem;
     color: #ef4444;
-    background: #ff000036;
+    border: 1.5px solid;
     padding: 0.6rem;
     border-radius: 50%;
   }
@@ -216,9 +270,6 @@
     cursor: pointer;
     transition: transform 0.1s ease-in-out;
 
-    ion-icon {
-    }
-
     &:hover {
       transform: scale(1.02);
       box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
@@ -228,6 +279,14 @@
 
 //** Popup
 .hidden {
+  visibility: hidden;
+}
+
+.disabled {
+  visibility: hidden;
+}
+
+.closed {
   visibility: hidden;
 }
 
@@ -259,6 +318,7 @@
   &__form {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    column-gap: 1.6rem;
 
     .right-side {
       // label {
@@ -327,8 +387,54 @@
       margin-bottom: 1.2rem;
     }
 
+    textarea {
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: #262626;
+      padding: 0.2rem 0.4rem;
+      width: 100%;
+      margin-bottom: 1.2rem;
+      min-height: 10rem;
+    }
+
     .btn {
       margin-top: 1.2rem;
     }
   }
+}
+
+// loader
+.loader {
+  height: 12rem;
+}
+
+.loader--container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.table__cell {
+  padding: 1.2rem;
+}
+
+// note
+.note {
+  grid-column: 1 / -1;
+  padding: 0.8rem 2.4rem;
+  color: #fff;
+  font-weight: 400;
+  font-size: 1.4rem;
+  background: #353535;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.note__content {
+  display: flex;
+  // flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
