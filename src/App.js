@@ -8,7 +8,6 @@ import LogIn from './pages/registrations/LogIn';
 
 import CreatePerson from './pages/people/CreatePerson';
 import EditPerson from './pages/people/EditPerson';
-import EditCurrentUser from './pages/user/EditUser';
 import PersonInfo from './pages/people/Person';
 
 import UpdateCategory from './pages/categories/UpdateCategory';
@@ -120,14 +119,6 @@ const App = () => (
         element={(
           <Auth>
             <EditPerson />
-          </Auth>
-          )}
-      />
-      <Route
-        path="/user/edit"
-        element={(
-          <Auth>
-            <EditCurrentUser />
           </Auth>
           )}
       />
