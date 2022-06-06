@@ -11,12 +11,8 @@ export const setCurrentUser = (payload) => ({
 });
 
 export const login = (payload) => async (dispatch) => {
-  try {
-    const response = await api.login(payload);
-    dispatch(setCurrentUser(response));
-  } catch (error) {
-    dispatch(setCurrentUser(null));
-  }
+  const response = await api.login(payload);
+  dispatch(setCurrentUser(response));
 };
 
 export const logout = () => async (dispatch) => {
