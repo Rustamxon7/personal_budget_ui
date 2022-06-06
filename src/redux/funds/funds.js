@@ -6,8 +6,8 @@ const LOADING = 'LOADING';
 const GET_FUND = 'GET_FUND';
 const GET_FUND_IMG = 'GET_FUND_IMG';
 
-const END_POINT = 'http://localhost:3000/';
-const API_ROUTE = 'api/v1/categories/';
+const END_POINT = 'https://personal-budget-plan.herokuapp.com/';
+const API_ROUTE = 'api/v1/';
 
 const initialState = {
   loading: false,
@@ -54,7 +54,7 @@ export const loading = (loading) => ({
 export const fetchFunds = (categoryId) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${END_POINT}${API_ROUTE}${categoryId}/funds`, {
+    const response = await fetch(`${END_POINT}${API_ROUTE}categories/${categoryId}/funds`, {
       headers: {
         Authorization: `${token}`,
       },
@@ -86,7 +86,7 @@ export const fetchFund = (id) => async (dispatch) => {
 export const addFundAction = (fund, categoryUrl) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${END_POINT}${API_ROUTE}${categoryUrl}/funds`, {
+    const response = await fetch(`${END_POINT}${API_ROUTE}categories/${categoryUrl}/funds`, {
       method: 'POST',
       headers: {
         Authorization: `${token}`,
@@ -101,10 +101,10 @@ export const addFundAction = (fund, categoryUrl) => async (dispatch) => {
   }
 };
 
-export const removeFundFromAllPersons = (id) => async (dispatch) => {
+export const removeFundFromAllPersons = (categoryId, fundId) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${END_POINT}${API_ROUTE}funds/${id}`, {
+    const response = await fetch(`${END_POINT}${API_ROUTE}categories/${categoryId}/funds/${fundId}`, {
       method: 'DELETE',
       headers: {
         Authorization: `${token}`,
@@ -117,10 +117,10 @@ export const removeFundFromAllPersons = (id) => async (dispatch) => {
   }
 };
 
-export const updateFundFromAllPersons = (fund) => async (dispatch) => {
+export const updateFundFromAllPersons = (fund, categoryId, fundId) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${END_POINT}${API_ROUTE}funds/${fund.id}`, {
+    const response = await fetch(`${END_POINT}${API_ROUTE}categories/${categoryId}/funds/${fundId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -141,7 +141,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         funds: action.payload,
-        loading: false,
+        loading: true,
       };
     case GET_FUND:
       return {
