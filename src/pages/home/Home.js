@@ -1,48 +1,43 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+/* eslint-disable react/button-has-type */
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import Categories from '../categories/Categories';
+import Chart from '../../components/chart';
+import Transactions from '../../components/Transactions';
+import CreatePerson from '../people/CreatePerson';
+import { fetchFunds } from '../../redux/funds/funds';
+
 import './main.css';
 
-const Home = () => (
-  <div className="dashboard">
-    <Sidebar />
-    <Header />
-    <div className="container">
-      <div className="main">
-        <div className="main--title">
-          <h2>Monthly Budget</h2>
-          <NavLink to="/create-category">
-            <ion-icon name="add-outline" />
-          </NavLink>
-        </div>
+const Home = () => {
+  const dispatch = useDispatch();
 
-        <Categories />
+  useEffect(() => {
+    dispatch(fetchFunds(1));
+  }, [dispatch]);
 
-        <div className="main--chart" />
-      </div>
-      <div className="right--sidebar">
-        <div className="right--sidebar__title">
-          <h2>This week</h2>
-          <span className="transactions">-$2400</span>
-        </div>
+  const funds = useSelector((state) => state.funds.funds.funds);
 
-        <div className="transactions--cards">
-          <div className="transaction--card" />
-          <div className="transaction--card" />
-          <div className="transaction--card" />
-          <div className="transaction--card" />
-          <div className="transaction--card" />
-          <div className="transaction--card" />
-          <div className="transaction--card" />
-          <div className="transaction--card" />
-          <div className="transaction--card" />
-          <div className="transaction--card" />
+  return (
+    <div className="dashboard">
+      <Sidebar home />
+      <main>
+        <Header />
+        <div className="app main">
+          <div className="app-container grid grid--1-3cols">
+            <div className="app-flex">
+              <Categories />
+              <Chart />
+              <CreatePerson />
+            </div>
+            <Transactions data={funds} />
+          </div>
         </div>
-      </div>
+      </main>
     </div>
-  </div>
-);
+  );
+};
 
 export default Home;
