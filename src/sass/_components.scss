@@ -387,6 +387,12 @@
       margin-bottom: 1.2rem;
     }
 
+    // change input type checkbox
+    input[type='checkbox'] {
+      width: auto;
+      margin-left: auto;
+    }
+
     textarea {
       font-size: 1.6rem;
       font-weight: 500;
@@ -437,4 +443,14 @@
   // flex-direction: column;
   align-items: center;
   justify-content: space-between;
+}
+
+// utils
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex--center {
+  align-items: center;
 }

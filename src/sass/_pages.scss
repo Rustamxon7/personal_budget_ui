@@ -8,7 +8,11 @@
 
   &__header {
     background-image: url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     height: 30rem;
+    box-shadow: inset 0 -12px 24px rgba(0, 0, 0, 0.5);
   }
 }
 

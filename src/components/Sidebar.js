@@ -49,7 +49,7 @@ const Sidebar = () => {
               <li>
                 <NavLink activeclassname="active" className="sidebar__nav-link" to="/" exact="true">
                   <ion-icon name="home" />
-                  <span>Homee</span>
+                  <span>Home</span>
                 </NavLink>
               </li>
               <li>

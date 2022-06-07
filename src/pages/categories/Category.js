@@ -15,6 +15,7 @@ import Funds from '../funds/Funds';
 import AddFund from '../funds/AddFund';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
+import { iconsList } from '../../lists/lists';
 
 const Category = () => {
   const dispatch = useDispatch();
@@ -85,11 +86,12 @@ const Category = () => {
           <>
             <EditCategory open={openEdit} setOpen={setOpenEdit} category={category.id} />
             <div className="app category-page">
-              <div className="category-page__header">
-                <div className="category-page__header-left" onClick={handleRemove} onKeyPress={handleRemove} role="button" tabIndex={0}>
-                  <ion-icon name="close-circle-outline" />
-                </div>
-              </div>
+              <div
+                className="category-page__header"
+                style={{
+                  backgroundImage: `url(${iconsList.find((icon) => icon.name === category.icon).img})`,
+                }}
+              />
               <div className="app-container">
                 <h1 className="heading-primary">
                   {category.title} | ${fundsAmount} | {fundsCount} |{' '}

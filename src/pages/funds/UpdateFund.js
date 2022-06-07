@@ -71,7 +71,7 @@ const UpdateFund = ({ open, setOpen, category }) => {
                 <input type="number" name="amount" id="amount" placeholder="Amount" onChange={handleChange} onBlur={handleBlur} value={values.amount} />
                 {errors.amount && touched.amount && <div className="input-feedback">{errors.amount}</div>}
               </div>
-              <div className="form-group">
+              <div className="form-group flex flex--center">
                 <label htmlFor="type_operation">Would you change it?</label>
                 <input type="checkbox" name="type_operation" id="type_operation" onChange={handleChange} onBlur={handleBlur} value={values.type_operation === 'important'} className={`form-control ${errors.type_operation && touched.type_operation && 'is-invalid'}`} />
               </div>
