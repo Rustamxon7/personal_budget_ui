@@ -34,13 +34,6 @@ const CreateCategory = ({ open, setOpen }) => {
   const currentUser = useSelector(loadCurrentUser);
   const currentPerson = people.find((person) => person.id === Number(location.pathname.split('/')[2])) || {};
 
-  const validateCurrentPerson = () => {
-    if (!currentPerson) {
-      return location.pathname.split('/')[2];
-    }
-    return currentPerson.id;
-  };
-
   const setForAllPersons = () => {
     const selectedPersons = people.map((person) => person.id);
     return selectedPersons;
@@ -64,7 +57,7 @@ const CreateCategory = ({ open, setOpen }) => {
               user_id: currentUser.data.id,
               color: '',
               money: '',
-              person_id: validateCurrentPerson(),
+              person_id: '',
               persons_array: [],
             }}
             validationSchema={validationSchema}
