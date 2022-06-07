@@ -75,7 +75,7 @@ const AddFund = ({ open, setOpen, category }) => {
               </div>
               <div className="form-group">
                 <label htmlFor="type_operation">Would you like to make it important?</label>
-                <input type="checkbox" name="type_operation" id="type_operation" onChange={handleChange} onBlur={handleBlur} value={values.type_operation === 'important'} className={`form-control ${errors.type_operation && touched.type_operation && 'is-invalid'}`} checked={values.type_operation === 't'} />
+                <input type="checkbox" name="type_operation" id="type_operation" onChange={handleChange} onBlur={handleBlur} value={values.type_operation === 'important'} className={`form-control ${errors.type_operation && touched.type_operation && 'is-invalid'}`} />
               </div>
 
               <div className="form-group">
