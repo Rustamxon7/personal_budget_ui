@@ -27,7 +27,7 @@ export const getCurrentUserFailure = (error) => ({
 export const fetchCurrentUser = () => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${END_POINT}current_user`, {
+    const response = await fetch(`${END_POINT}/current_user`, {
       headers: {
         Authorization: `${token}`,
       },

@@ -44,30 +44,30 @@ const Sidebar = () => {
       </NavLink>
       <nav className="sidebar__nav">
         <ul className="sidebar__nav-list">
-          {!currentPerson && (
+          {currentPerson !== 'people' && homeLocation !== 'people' && (
             <>
               <li>
                 <NavLink activeclassname="active" className="sidebar__nav-link" to="/" exact="true">
                   <ion-icon name="home" />
-                  <span>Home</span>
+                  <span>Homee</span>
                 </NavLink>
               </li>
               <li>
                 <NavLink activeclassname="active" className="sidebar__nav-link" to="/incomes" exact="true">
                   <ion-icon name="cash-outline" />
-                  <span>Receipts</span>
+                  <span>Receiptss</span>
                 </NavLink>
               </li>
               <li>
                 <NavLink activeclassname="active" className="sidebar__nav-link" to="/expenses" exact="true">
                   <ion-icon name="wallet-outline" />
-                  <span>Expenses</span>
+                  <span>Expensess</span>
                 </NavLink>
               </li>
             </>
           )}
 
-          {currentPerson && (
+          {homeLocation === 'people' && (
             <>
               <li>
                 <NavLink activeclassname="active" className="sidebar__nav-link" to={`/people/${currentPerson}`} exact="true">

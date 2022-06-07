@@ -6,8 +6,8 @@ const LOADING = 'LOADING';
 const GET_FUND = 'GET_FUND';
 const GET_FUND_IMG = 'GET_FUND_IMG';
 
-const END_POINT = 'https://personal-budget-plan.herokuapp.com/';
-const API_ROUTE = 'api/v1/';
+const END_POINT = 'https://personal-budget-plan.herokuapp.com';
+const API_ROUTE = '/api/v1/';
 
 const initialState = {
   loading: false,
