@@ -80,7 +80,7 @@ const CreateCategory = ({ open, setOpen }) => {
                 } else {
                   navigate(`/people/${currentPerson.id}`);
                 }
-              }, 2000);
+              }, 1000);
             }}
           >
             {({
