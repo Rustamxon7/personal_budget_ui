@@ -64,7 +64,7 @@ const CreateCategory = ({ open, setOpen }) => {
               user_id: currentUser.data.id,
               color: '',
               money: '',
-              person_id: validateCurrentPerson(),
+              person_id: validateCurrentPerson() || '',
               persons_array: [],
             }}
             validationSchema={validationSchema}
