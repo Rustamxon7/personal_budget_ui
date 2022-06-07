@@ -1,10 +1,11 @@
-/* eslint-disable react/jsx-wrap-multilines */
-import {
-  HashRouter as Router, Route, Routes,
-} from 'react-router-dom';
-import Home from './pages/Home';
-import SignUp from './pages/SignUp';
-import LogIn from './pages/LogIn';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './pages/home/Home';
+import SignUp from './pages/registrations/SignUp';
+import LogIn from './pages/registrations/LogIn';
+import CreatePerson from './pages/people/CreatePerson';
+import EditPerson from './pages/people/EditPerson';
+import EditCurrentUser from './pages/user/EditUser';
+import PersonInfo from './pages/people/Person';
 import Auth, { AuthRoute } from './components/Auth';
 
 const App = () => (
@@ -12,28 +13,61 @@ const App = () => (
     <Routes>
       <Route
         path="/"
-        element={
+        element={(
           <Auth>
             <Home />
           </Auth>
-        }
+        )}
+      />
+      <Route
+        path="/create_person"
+        element={(
+          <Auth>
+            <CreatePerson />
+          </Auth>
+        )}
+      />
+      <Route
+        path="/people/:id"
+        element={(
+          <Auth>
+            <PersonInfo />
+          </Auth>
+        )}
+      />
+      <Route
+        path="/people/:id/edit"
+        element={(
+          <Auth>
+            <EditPerson />
+          </Auth>
+        )}
       />
       <Route
         path="/users/login"
-        element={
+        element={(
           <AuthRoute>
             <LogIn />
           </AuthRoute>
-        }
+        )}
+      />
+      <Route
+        path="/user/edit"
+        element={(
+          <Auth>
+            <EditCurrentUser />
+          </Auth>
+        )}
       />
       <Route
         path="/users/signup"
-        element={
+        element={(
           <AuthRoute>
             <SignUp />
           </AuthRoute>
-        }
+        )}
       />
+      <Route path="*" element={<div>404</div>} />
     </Routes>
   </Router>
 );

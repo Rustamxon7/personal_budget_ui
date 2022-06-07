@@ -4,7 +4,9 @@
   "rules": {
     "at-rule-no-unknown": null,
     "scss/at-rule-no-unknown": true,
-    "csstree/validator": true
+    "csstree/validator": true,
+    "selector-type-no-unknown": [true, { "ignoreTypes": ["ion-icon"] }],
+    "no-descending-specificity": null
   },
   "ignoreFiles": ["build/**", "dist/**", "**/reset*.css", "**/bootstrap*.css", "**/*.js", "**/*.jsx"]
 }
