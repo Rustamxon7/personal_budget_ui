@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import dateFormat from 'dateformat';
 import UpdateFund from './UpdateFund';
 
@@ -11,6 +12,7 @@ const Funds = ({ funds, startDate, endDate }) => {
   const [open, setOpen] = useState('disabled');
   const [selectedFund, setSelectedFund] = useState('');
   const [openNote, setOpenNote] = useState('');
+  const navigate = useNavigate();
 
   const filteredFunds = funds.filter((fund) => {
     if (startDate && endDate) {
@@ -23,7 +25,10 @@ const Funds = ({ funds, startDate, endDate }) => {
 
   const handleRemove = (categoryId, fundId) => {
     dispatch(removeFundFromAllPersons(categoryId, fundId));
-    window.location.reload();
+    setTimeout(() => {
+      navigate(-1);
+      window.location.reload();
+    }, 1000);
   };
 
   const handleClick = (fund) => {
@@ -43,7 +48,7 @@ const Funds = ({ funds, startDate, endDate }) => {
             <div className="table__cell table__cell--first">{fund.title}</div>
             <div className="table__cell">{fund.amount}</div>
             <div className="table__cell">{dateFormat(fund.date, 'ddd mmm dd yyyy', true)}</div>
-            <ion-icon name="close-circle-outline" onClick={() => handleRemove(fund.category_id, fund.id)} />
+            <ion-icon name="close-circle-outline" onMouseDown={() => handleRemove(fund.category_id, fund.id)} />
             {openNote === fund.id ? (
               <>
                 <div className="note">
