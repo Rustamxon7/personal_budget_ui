@@ -7,7 +7,7 @@ const DELETE_PERSON = 'DELETE_PERSON';
 const FETCH_PERSON = 'FETCH_PERSON';
 
 const initialState = {
-  loading: true,
+  loading: false,
   people: [],
   error: null,
 };
@@ -127,7 +127,7 @@ export default (state = initialState, action) => {
     case FETCH_PERSON:
       return {
         ...state,
-        loading: false,
+        loading: true,
         people: action.payload,
       };
     default:
