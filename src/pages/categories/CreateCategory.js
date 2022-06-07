@@ -7,7 +7,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { addCategoryAction } from '../../redux/categories/categories';
 import { fetchPersons } from '../../redux/people/person';
 import { iconsList, fonds } from '../../lists/lists';
-import { loadCurrentUser } from '../../redux/auth';
 
 import './registrations.css';
 
@@ -31,7 +30,6 @@ const CreateCategory = ({ open, setOpen }) => {
   const people = useSelector((state) => state.people.people) || [];
   const loading = useSelector((state) => state.people.loading);
 
-  const currentUser = useSelector(loadCurrentUser);
   const currentPerson = parseInt(localStorage.getItem('currentPerson'), 10) || '';
 
   const setForAllPersons = () => {
@@ -54,8 +52,6 @@ const CreateCategory = ({ open, setOpen }) => {
             initialValues={{
               title: '',
               icon: '',
-              user_id: currentUser.data.id,
-              color: '',
               money: '',
               person_id: currentPerson,
               persons_array: [],
@@ -161,7 +157,6 @@ const CreateCategory = ({ open, setOpen }) => {
                         <label htmlFor={icon.name} className="icons--label" title={icon.name}>
                           <ion-icon name={`${icon.name}-outline`} style={{ color: icon.color }} />
                         </label>
-                        <input type="hidden" name="color" id="color" onChange={handleChange} onBlur={handleBlur} value={values.color} />
                       </div>
                     ))}
                   </div>

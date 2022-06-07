@@ -16,6 +16,7 @@ const Categories = ({ type }) => {
   }, [dispatch]);
 
   const categories = useSelector((state) => state.categories.categories);
+
   const loading = useSelector((state) => state.categories.loading);
 
   const handleCategoryType = (type) => {
