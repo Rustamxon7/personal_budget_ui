@@ -30,7 +30,14 @@ const CreateCategory = ({ open, setOpen }) => {
   const people = useSelector((state) => state.people.people) || [];
   const loading = useSelector((state) => state.people.loading);
 
-  const currentPerson = parseInt(localStorage.getItem('currentPerson'), 10) || '';
+  const currentPersonLocation = location.pathname.split('/')[2];
+
+  const currentPerson = () => {
+    if (currentPersonLocation === parseInt(localStorage.getItem('currentPerson'), 10)) {
+      return parseInt(localStorage.getItem('currentPerson'), 10);
+    }
+    return parseInt(currentPersonLocation, 10);
+  };
 
   const setForAllPersons = () => {
     const selectedPersons = people.map((person) => person.id);
@@ -53,7 +60,7 @@ const CreateCategory = ({ open, setOpen }) => {
               title: '',
               icon: '',
               money: '',
-              person_id: currentPerson,
+              person_id: currentPerson() || '',
               persons_array: [],
             }}
             validationSchema={validationSchema}
@@ -91,12 +98,11 @@ const CreateCategory = ({ open, setOpen }) => {
                       <label htmlFor="person_id">Person</label>
                       <select name="person_id" id="person_id" onChange={handleChange} onBlur={handleBlur} value={values.person_id} className={touched.person_id && errors.person_id ? 'has-error' : null}>
                         <option value="">Select one person</option>
-                        {currentPerson &&
-                          people.map((person) => (
-                            <option key={person.id} value={person.id}>
-                              {person.name}
-                            </option>
-                          ))}
+                        {people.map((person) => (
+                          <option key={person.id} value={person.id}>
+                            {person.name}
+                          </option>
+                        ))}
                       </select>
                       {touched.person_id && errors.person_id && <div className="input-feedback">{errors.person_id}</div>}
                     </div>
