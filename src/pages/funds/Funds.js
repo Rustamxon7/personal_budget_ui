@@ -1,12 +1,11 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import dateFormat from 'dateformat';
-import UpdateFund from './UpdateFund';
 
 import { removeFundFromAllPersons } from '../../redux/funds/funds';
+
+import UpdateFund from './UpdateFund';
 
 const Funds = ({ funds, startDate, endDate }) => {
   const [open, setOpen] = useState('disabled');
@@ -44,7 +43,7 @@ const Funds = ({ funds, startDate, endDate }) => {
     <>
       {filteredFunds.map((fund) => (
         <>
-          <div className="table__row" key={fund.id} onClick={() => handleClick(fund.id)} style={fund.type_operation === 't' ? { backgroundColor: '#eab208b5' } : {}}>
+          <div className="table__row" key={fund.id} onClick={() => handleClick(fund.id)} style={fund.type_operation === 't' ? { backgroundColor: '#eab208b5' } : {}} onKeyPress={() => handleClick(fund.id)} role="button" tabIndex="0">
             <div className="table__cell table__cell--first">{fund.title}</div>
             <div className="table__cell">{fund.amount}</div>
             <div className="table__cell">{dateFormat(fund.date, 'ddd mmm dd yyyy', true)}</div>

@@ -1,21 +1,16 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable max-len */
-/* eslint-disable react/jsx-key */
-/* eslint-disable react/jsx-one-expression-per-line */
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import { fetchCategory, removeCategoryAction } from '../../redux/categories/categories';
 import { fetchFunds } from '../../redux/funds/funds';
-import EditCategory from './UpdateCategory';
+import { iconsList } from '../../lists/lists';
+
 import Funds from '../funds/Funds';
 import AddFund from '../funds/AddFund';
-import Sidebar from '../../components/Sidebar';
+import EditCategory from './UpdateCategory';
 import Header from '../../components/Header';
-import { iconsList } from '../../lists/lists';
+import Sidebar from '../../components/Sidebar';
 
 const Category = () => {
   const dispatch = useDispatch();
@@ -94,10 +89,20 @@ const Category = () => {
               />
               <div className="app-container">
                 <h1 className="heading-primary">
-                  {category.title} | ${fundsAmount} | {fundsCount} |{' '}
-                  <div className="category-page__link" onClick={() => setOpenEdit('')}>
+                  {category.title}
+                  {' '}
+                  | $
+                  {fundsAmount}
+                  {' '}
+                  |
+                  {' '}
+                  {fundsCount}
+                  {' '}
+                  |
+                  {' '}
+                  <div className="category-page__link" onClick={() => setOpenEdit('')} onKeyDown={() => setOpenEdit('')} role="button" tabIndex={0}>
                     <ion-icon name="create-outline" />
-                  </div>{' '}
+                  </div>
                   |
                   <ion-icon name="trash-outline" onClick={handleRemove} onKeyPress={handleRemove} role="button" tabIndex={0} />
                 </h1>

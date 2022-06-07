@@ -1,10 +1,9 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { createPersonAction } from '../../redux/people/person';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { loadCurrentUser } from '../../redux/auth';
+import { createPersonAction } from '../../redux/people/person';
 
 function CreatePerson() {
   const dispatch = useDispatch();
@@ -49,7 +48,7 @@ function CreatePerson() {
 
   return (
     <>
-      <div className="overlay person--overlay hidden" onClick={closePopup} onKeyDown={closePopup} role="button" tabIndex="0" />
+      <div className="overlay person--overlay hidden" onClick={closePopup} onKeyDown={closePopup} role="button" tabIndex="0" aria-label="overlay" />
       <div className="popup person--popup hidden">
         <form action="#" className="popup__form popup__form--one" onSubmit={handleSubmit}>
           <div className="form--group">

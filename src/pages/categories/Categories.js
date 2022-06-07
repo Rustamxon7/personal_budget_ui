@@ -1,6 +1,7 @@
+import { NavLink } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+
 import { fetchCategories } from '../../redux/categories/categories';
 
 import CreateCategory from './CreateCategory';

@@ -1,10 +1,9 @@
-/* eslint-disable object-curly-newline */
-/* eslint-disable max-len */
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+
 import { login } from '../../redux/auth';
 import '../../sass/main.scss';
 
@@ -32,7 +31,9 @@ const LogIn = () => {
       }}
       className="form"
     >
-      {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+      {({
+        values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting
+      }) => (
         <>
           <div className="login">
             <div className="login__content-box">

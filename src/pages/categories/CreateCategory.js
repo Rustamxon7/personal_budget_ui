@@ -1,16 +1,14 @@
-/* eslint-disable max-len */
-/* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable object-curly-newline */
-/* eslint-disable no-param-reassign */
-import React, { useEffect } from 'react';
-import { Formik } from 'formik';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
+import { Formik } from 'formik';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useLocation } from 'react-router-dom';
+
 import { addCategoryAction } from '../../redux/categories/categories';
 import { fetchPersons } from '../../redux/people/person';
-import { loadCurrentUser } from '../../redux/auth';
 import { iconsList, fonds } from '../../lists/lists';
+import { loadCurrentUser } from '../../redux/auth';
+
 import './registrations.css';
 
 const validationSchema = Yup.object().shape({
@@ -50,7 +48,7 @@ const CreateCategory = ({ open, setOpen }) => {
 
   return (
     <>
-      <div className={`overlay ${open}`} onClick={() => setOpen('hidden')} onKeyDown={() => setOpen('hdden')} role="button" tabIndex="0" />
+      <div className={`overlay ${open}`} onClick={() => setOpen('hidden')} onKeyDown={() => setOpen('hdden')} role="button" tabIndex="0" aria-label="overlay" />
       <div className={`popup ${open}`}>
         {!loading ? (
           <div className="popup__form">
@@ -85,7 +83,9 @@ const CreateCategory = ({ open, setOpen }) => {
               }, 2000);
             }}
           >
-            {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+            {({
+              values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting
+            }) => (
               <div className="popup__form">
                 <div className="right-side">
                   <form onSubmit={handleSubmit}>
@@ -157,14 +157,13 @@ const CreateCategory = ({ open, setOpen }) => {
                           onBlur={handleBlur}
                           checked={values.icon === icon.name}
                           onClick={() => {
-                            values.color = icon.color;
+                            values.icon = icon.name;
                             handleChange(values);
                           }}
                         />
                         <label htmlFor={icon.name} className="icons--label" title={icon.name}>
                           <ion-icon name={`${icon.name}-outline`} style={{ color: icon.color }} />
                         </label>
-                        {/* set values.color === icon.color */}
                         <input type="hidden" name="color" id="color" onChange={handleChange} onBlur={handleBlur} value={values.color} />
                       </div>
                     ))}

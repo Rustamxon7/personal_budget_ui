@@ -1,15 +1,19 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { fetchFunds } from '../../redux/funds/funds';
 import { fetchPersons } from '../../redux/people/person';
-import Sidebar from '../../components/Sidebar';
+
+import EditPerson from './EditPerson';
+import CreatePerson from './CreatePerson';
+import CurrentPersonCategories from '../categories/CurrentPersonCategories';
+
 import Chart from '../../components/chart';
 import Header from '../../components/Header';
-import CurrentPersonCategories from '../categories/CurrentPersonCategories';
+import Sidebar from '../../components/Sidebar';
+
 import Transactions from '../../components/Transactions';
-import CreatePerson from './CreatePerson';
-import EditPerson from './EditPerson';
-import { fetchFunds } from '../../redux/funds/funds';
 
 const PersonInfo = () => {
   const dispatch = useDispatch();

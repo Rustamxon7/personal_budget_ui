@@ -1,12 +1,9 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable no-restricted-globals */
-/* eslint-disable no-undef */
-/* eslint-disable object-curly-newline */
 import React from 'react';
-import { Formik } from 'formik';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
+import { Formik } from 'formik';
+import { useDispatch } from 'react-redux';
+import { useNavigate, useLocation } from 'react-router-dom';
+
 import { addFundAction } from '../../redux/funds/funds';
 
 const validationSchema = Yup.object().shape({
@@ -24,7 +21,7 @@ const AddFund = ({ open, setOpen, category }) => {
 
   return (
     <>
-      <div className={`overlay ${open}`} onClick={() => setOpen('hidden')} onKeyDown={() => setOpen('hdden')} role="button" tabIndex="0" />
+      <div className={`overlay ${open}`} onClick={() => setOpen('hidden')} onKeyDown={() => setOpen('hidden')} role="button" tabIndex="0" aria-label="overlay" />
       <div className={`popup ${open}`}>
         <Formik
           initialValues={{
@@ -53,7 +50,9 @@ const AddFund = ({ open, setOpen, category }) => {
             }, 1000);
           }}
         >
-          {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+          {({
+            values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting
+          }) => (
             <form onSubmit={handleSubmit} className="popup__form popup__form--one">
               <label htmlFor="title">
                 Category:

@@ -1,17 +1,18 @@
-/* eslint-disable react/button-has-type */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
-import Sidebar from '../../components/Sidebar';
+import { fetchFunds } from '../../redux/funds/funds';
+
+import Chart from '../../components/chart';
 import Header from '../../components/Header';
+import Sidebar from '../../components/Sidebar';
+import Transactions from '../../components/Transactions';
+
+import EditPerson from '../people/EditPerson';
+import CreatePerson from '../people/CreatePerson';
 import Categories from '../categories/Categories';
 import CurrentPersonCategories from '../categories/CurrentPersonCategories';
-import CreatePerson from '../people/CreatePerson';
-import EditPerson from '../people/EditPerson';
-import Transactions from '../../components/Transactions';
-import Chart from '../../components/chart';
-import { fetchFunds } from '../../redux/funds/funds';
 
 import './main.css';
 

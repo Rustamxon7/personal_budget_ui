@@ -1,20 +1,15 @@
-/* eslint-disable max-len */
-/* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable no-restricted-globals */
-/* eslint-disable no-undef */
-/* eslint-disable object-curly-newline */
 import React from 'react';
-import { Formik } from 'formik';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
+import { Formik } from 'formik';
+import { useDispatch } from 'react-redux';
+import { useNavigate, useLocation } from 'react-router-dom';
+
 import { updateFundFromAllPersons } from '../../redux/funds/funds';
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().min(3, 'Too Short!').max(50, 'Too Long!').required('A title is required!'),
   amount: Yup.number().min(1, 'Too Low!').max(999999, 'Too High!').required('An amount is required!'),
-  // date: Yup.string().required('Select one date'),
-  // note: Yup.string().min(3, 'Too Short!').max(50, 'Too Long!'),
+  note: Yup.string().required('A note is required!').min(3, 'Too Short!').max(50, 'Too Long!'),
 });
 
 const UpdateFund = ({ open, setOpen, category }) => {
@@ -24,7 +19,7 @@ const UpdateFund = ({ open, setOpen, category }) => {
 
   return (
     <>
-      <div className={`overlay ${open}`} onClick={() => setOpen('hidden')} onKeyDown={() => setOpen('hdden')} role="button" tabIndex="0" />
+      <div className={`overlay ${open}`} onClick={() => setOpen('hidden')} onKeyDown={() => setOpen('hdden')} role="button" tabIndex="0" aria-label="overlay" />
       <div className={`popup person--popup ${open}`}>
         <Formik
           initialValues={{
@@ -58,7 +53,6 @@ const UpdateFund = ({ open, setOpen, category }) => {
             handleBlur,
             handleSubmit,
             isSubmitting,
-            /* and other goodies */
           }) => (
             <form className="popup__form popup__form--one" onSubmit={handleSubmit}>
               <div className="form-group">

@@ -1,8 +1,7 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
+
 import { loadCurrentUser } from '../../redux/auth';
 import { updatePersonAction, fetchPersons } from '../../redux/people/person';
 
@@ -78,7 +77,7 @@ function EditPerson() {
   );
   return (
     <>
-      <div className="overlay hidden edit--person__overlay" onClick={handleClick} />
+      <div className="overlay hidden edit--person__overlay" onClick={handleClick} onKeyDown={handleClick} role="button" tabIndex="0" aria-label="overlay" />
       <div className="popup hidden person--popup edit--person__popup">
         <form action="" className="popup__form popup__form--one" onSubmit={handleSubmit}>
           <div className="form--group">

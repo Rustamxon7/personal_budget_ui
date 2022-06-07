@@ -1,14 +1,12 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable object-curly-newline */
-/* eslint-disable no-param-reassign */
-import React, { useEffect } from 'react';
+import * as Yup from 'yup';
 import { Formik } from 'formik';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import * as Yup from 'yup';
-import { fetchCategory, updateCategoryAction } from '../../redux/categories/categories';
-import { fetchPersons } from '../../redux/people/person';
+
 import { iconsList } from '../../lists/lists';
+import { fetchPersons } from '../../redux/people/person';
+import { fetchCategory, updateCategoryAction } from '../../redux/categories/categories';
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().min(3, 'Too Short!').max(50, 'Too Long!').required('A title is required!'),
@@ -43,7 +41,7 @@ const UpdateCategory = ({ open, setOpen }) => {
 
   return (
     <>
-      <div className={`overlay ${open}`} onClick={() => setOpen('disabled')} onKeyDown={() => setOpen('disabled')} role="button" tabIndex="0" />
+      <div className={`overlay ${open}`} onClick={() => setOpen('disabled')} onKeyDown={() => setOpen('disabled')} role="button" tabIndex="0" aria-label="overlay" />
       <div className={`popup ${open}`}>
         <Formik
           initialValues={{
@@ -65,7 +63,9 @@ const UpdateCategory = ({ open, setOpen }) => {
             }, 1000);
           }}
         >
-          {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+          {({
+            values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting
+          }) => (
             <div className="popup__form">
               <div className="right-side">
                 <form onSubmit={handleSubmit}>

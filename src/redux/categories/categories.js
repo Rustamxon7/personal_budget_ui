@@ -1,33 +1,23 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable camelcase */
-/* eslint-disable max-len */
 import { END_POINT, API_ROUTE } from '../../api/api';
 
 const GET_CATEGORIES = 'GET_CATEGORIES';
-const GET_TOTAL_MONEY = 'GET_TOTAL_MONEY';
 const GET_CATEGORY = 'GET_CATEGORY';
+
 const CATEGORY_ADD = 'CATEGORY_ADD';
 const CATEGORY_REMOVE = 'CATEGORY_REMOVE';
 const CATEGORY_UPDATE = 'CATEGORY_UPDATE';
-const CREATE_CATEGORY_ALL_PERSONS = 'CREATE_CATEGORY_ALL_PERSONS';
 const LOADING = 'LOADING';
 
 const initialState = {
   loading: false,
   categories: [],
   category: [],
-  total_money: [],
   error: null,
 };
 
 export const getCategories = (categories) => ({
   type: GET_CATEGORIES,
   payload: categories,
-});
-
-export const getTotalMoney = (totalMoney) => ({
-  type: GET_TOTAL_MONEY,
-  payload: totalMoney,
 });
 
 export const getCategory = (category) => ({
@@ -37,11 +27,6 @@ export const getCategory = (category) => ({
 
 export const addCategory = (category) => ({
   type: CATEGORY_ADD,
-  payload: category,
-});
-
-export const addCategoryFromAllPersons = (category) => ({
-  type: CREATE_CATEGORY_ALL_PERSONS,
   payload: category,
 });
 
@@ -73,23 +58,6 @@ export const fetchCategories = () => async (dispatch) => {
     dispatch(getCategories(categories));
   } catch (error) {
     dispatch(getCategories(error));
-  }
-};
-
-export const fetchTotalMoney = () => async (dispatch) => {
-  try {
-    const token = localStorage.getItem('token');
-    const response = await fetch(`${END_POINT}${API_ROUTE}categories`, {
-      headers: {
-        Authorization: `${token}`,
-      },
-    });
-    const categoriesList = await response.json();
-    const { total } = categoriesList;
-
-    dispatch(getTotalMoney(total));
-  } catch (error) {
-    dispatch(getTotalMoney(error));
   }
 };
 
@@ -173,12 +141,6 @@ export default (state = initialState, action) => {
         loading: true,
         categories: action.payload,
       };
-    case GET_TOTAL_MONEY:
-      return {
-        ...state,
-        loading: false,
-        total_money: action.payload,
-      };
     case GET_CATEGORY:
       return {
         ...state,
@@ -202,12 +164,6 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         categories: state.categories.map((category) => (category.id === action.payload.id ? action.payload : category)),
-      };
-    case CREATE_CATEGORY_ALL_PERSONS:
-      return {
-        ...state,
-        loading: false,
-        categories: [...state.categories, action.payload],
       };
     default:
       return state;

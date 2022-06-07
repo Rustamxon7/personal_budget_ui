@@ -1,13 +1,15 @@
-/* eslint-disable react/button-has-type */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Sidebar from '../../components/Sidebar';
-import Header from '../../components/Header';
-import Categories from '../categories/Categories';
-import Chart from '../../components/chart';
-import Transactions from '../../components/Transactions';
-import CreatePerson from '../people/CreatePerson';
+
 import { fetchFunds } from '../../redux/funds/funds';
+
+import Chart from '../../components/chart';
+import Header from '../../components/Header';
+import Sidebar from '../../components/Sidebar';
+import Transactions from '../../components/Transactions';
+
+import CreatePerson from '../people/CreatePerson';
+import Categories from '../categories/Categories';
 
 import './main.css';
 

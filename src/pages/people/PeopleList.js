@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { fetchPersons, deletePersonAction } from '../../redux/people/person';
+
 import { fetchCurrentUser } from '../../redux/users/currentUser';
+import { fetchPersons, deletePersonAction } from '../../redux/people/person';
 
 const PeopleList = () => {
   const dispatch = useDispatch();
