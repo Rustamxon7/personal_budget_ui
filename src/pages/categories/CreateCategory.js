@@ -32,14 +32,7 @@ const CreateCategory = ({ open, setOpen }) => {
   const loading = useSelector((state) => state.people.loading);
 
   const currentUser = useSelector(loadCurrentUser);
-  const currentPerson = people.find((person) => person.id === Number(location.pathname.split('/')[2])) || {};
-
-  const validateCurrentPerson = () => {
-    if (!currentPerson) {
-      return location.pathname.split('/')[2];
-    }
-    return currentPerson.id;
-  };
+  const currentPerson = parseInt(localStorage.getItem('currentPerson'), 10) || '';
 
   const setForAllPersons = () => {
     const selectedPersons = people.map((person) => person.id);
@@ -64,7 +57,7 @@ const CreateCategory = ({ open, setOpen }) => {
               user_id: currentUser.data.id,
               color: '',
               money: '',
-              person_id: validateCurrentPerson() || '',
+              person_id: currentPerson,
               persons_array: [],
             }}
             validationSchema={validationSchema}
@@ -156,10 +149,14 @@ const CreateCategory = ({ open, setOpen }) => {
                           onChange={handleChange}
                           onBlur={handleBlur}
                           checked={values.icon === icon.name}
-                          onClick={() => {
-                            values.icon = icon.name;
-                            handleChange(values);
-                          }}
+                          onClick={
+                            values.icon === icon.name
+                              ? null
+                              : () => {
+                                values.icon = icon.name;
+                                handleChange(values);
+                              }
+                          }
                         />
                         <label htmlFor={icon.name} className="icons--label" title={icon.name}>
                           <ion-icon name={`${icon.name}-outline`} style={{ color: icon.color }} />

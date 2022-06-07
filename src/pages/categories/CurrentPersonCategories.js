@@ -17,8 +17,8 @@ const CurrentPersonCategories = ({ type }) => {
     dispatch(fetchCategories());
   }, [dispatch]);
 
-  const categories = useSelector((state) => state.categories.categories);
-  const loading = useSelector((state) => state.categories.loading);
+  const categories = useSelector((state) => state.categories.categories) || [];
+  const loading = useSelector((state) => state.categories.loading) || false;
 
   const currentPersonsCategories = categories.filter((category) => {
     if (category.persons_array.includes(currentPerson)) {
