@@ -83,9 +83,7 @@ const CreateCategory = ({ open, setOpen }) => {
               }, 1000);
             }}
           >
-            {({
-              values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting
-            }) => (
+            {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
               <div className="popup__form">
                 <div className="right-side">
                   <form onSubmit={handleSubmit}>
