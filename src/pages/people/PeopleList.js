@@ -5,7 +5,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { fetchCurrentUser } from '../../redux/users/currentUser';
 import { fetchPersons, deletePersonAction } from '../../redux/people/person';
 
-const PeopleList = ({ currentUser, isHover, setIsHover }) => {
+const PeopleList = ({ currentUser, isHover }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -16,6 +16,16 @@ const PeopleList = ({ currentUser, isHover, setIsHover }) => {
   const people = useSelector((state) => state.people.people);
 
   const navigate = useNavigate();
+
+  const handleHover = () => {
+    const personOverlay = document.querySelector('.person--overlay');
+    const personPopup = document.querySelector('.person--popup');
+
+    if (personOverlay.classList.contains('hidden')) {
+      personOverlay.classList.remove('hidden');
+      personPopup.classList.remove('hidden');
+    }
+  };
 
   const deletePerson = (id) => {
     dispatch(deletePersonAction(id));
@@ -53,7 +63,7 @@ const PeopleList = ({ currentUser, isHover, setIsHover }) => {
         <ul>
           {peopleList}
           <li>
-            <button type="button" className="btn btn--small add--person" onClick={() => setIsHover('')}>
+            <button type="button" className="btn btn--small add--person" onClick={handleHover}>
               Add
             </button>
           </li>
