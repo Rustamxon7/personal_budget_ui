@@ -5,7 +5,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { fetchCurrentUser } from '../../redux/users/currentUser';
 import { fetchPersons, deletePersonAction } from '../../redux/people/person';
 
-const PeopleList = () => {
+const PeopleList = ({ currentUser, isHover, setIsHover }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -14,13 +14,6 @@ const PeopleList = () => {
   }, [dispatch]);
 
   const people = useSelector((state) => state.people.people);
-
-  const handleCreatePerson = () => {
-    const overlay = document.querySelector('.person--overlay');
-    overlay.classList.remove('hidden');
-    const popup = document.querySelector('.person--popup');
-    popup.classList.remove('hidden');
-  };
 
   const navigate = useNavigate();
 
@@ -32,33 +25,40 @@ const PeopleList = () => {
     }, 1000);
   };
 
-  const peopleList =
-    people.length > 0 ? (
-      people.map((person) => (
-        <li className="sidebar__user" key={person.id}>
-          <NavLink to={`/people/${person.id}`}>
-            <span>
-              <img className="person--profile__icon" src={`img/icons/${person.icon}.svg`} alt="Profile" />
-              {person.name}
-            </span>
-            <ion-icon class="trash--icon" name="trash-outline" onClick={() => deletePerson(person.id)} />
-          </NavLink>
-        </li>
-      ))
-    ) : (
-      <span>No people yet</span>
-    );
+  const peopleList = people.length ? (
+    people.map((person) => (
+      <li className="sidebar__user" key={person.id}>
+        <NavLink to={`/people/${person.id}`}>
+          <span>
+            <img className="person--profile__icon" src={`img/icons/${person.icon}.svg`} alt="Profile" />
+            {person.name}
+          </span>
+          <ion-icon class="trash--icon" name="trash-outline" onClick={() => deletePerson(person.id)} />
+        </NavLink>
+      </li>
+    ))
+  ) : (
+    <span>No people yet</span>
+  );
 
   return (
     <>
-      <ul>
-        {peopleList}
-        <li>
-          <button type="button" className="btn btn--small add--person" onClick={handleCreatePerson}>
-            Add
-          </button>
-        </li>
-      </ul>
+      <div className={`persons--menu ${isHover}`}>
+        <div className="persons--menu__title">
+          <span className="menu--user__header">{currentUser.name}</span>
+          <span className="user--avatar">
+            <ion-icon name="person-circle-outline" class="user--avatar__icon" />
+          </span>
+        </div>
+        <ul>
+          {peopleList}
+          <li>
+            <button type="button" className="btn btn--small add--person" onClick={() => setIsHover('')}>
+              Add
+            </button>
+          </li>
+        </ul>
+      </div>
     </>
   );
 };
