@@ -20,7 +20,7 @@ const Home = () => {
     dispatch(fetchFunds(1));
   }, [dispatch]);
 
-  const funds = useSelector((state) => state.funds.funds.funds);
+  const funds = useSelector((state) => state.funds.funds.recent);
 
   return (
     <div className="dashboard">

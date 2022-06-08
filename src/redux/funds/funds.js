@@ -1,4 +1,4 @@
-import { END_POINT } from '../../api/api';
+import { END_POINT, API_ROUTE } from '../../api/api';
 
 const GET_FUNDS = 'GET_FUNDS';
 const ADD_FUND = 'ADD_FUND';
@@ -7,8 +7,6 @@ const UPDATE_FUND = 'UPDATE_FUND';
 const LOADING = 'LOADING';
 const GET_FUND = 'GET_FUND';
 const GET_FUND_IMG = 'GET_FUND_IMG';
-
-const API_ROUTE = '/api/v1/';
 
 const initialState = {
   loading: false,

@@ -10,8 +10,8 @@ const Transactions = ({ data }) => {
             <span className="small-list__name">{fund.title}</span>
             <span className="small-list__date">{fund.date}</span>
           </div>
-          <span className="small-list__price" style={fund.type_declaration === 'expenses' ? { color: 'green' } : { color: 'red' }}>
-            {fund.type_declaration === 'expenses' ? `+ $ ${fund.amount}` : `- $ ${fund.amount}`}
+          <span className="small-list__price" style={fund.type_declaration === 'incomes' ? { color: 'green' } : { color: 'red' }}>
+            {fund.type_declaration === 'incomes' ? `+ $ ${fund.amount}` : `- $ ${fund.amount}`}
           </span>
         </div>
       ))
