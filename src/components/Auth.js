@@ -1,3 +1,4 @@
+import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { loadCurrentUser } from '../redux/auth';
@@ -18,7 +19,7 @@ export const AuthRoute = ({ children }) => {
   const isAuthenticated = useSelector(loadCurrentUser);
 
   if (isAuthenticated) {
-    const from = location.state?.from || { pathname: '/' };
+    const from = location.state ? location.state.from : '/';
     return <Navigate to={from} />;
   }
 
