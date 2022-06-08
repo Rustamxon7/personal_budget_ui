@@ -67,6 +67,9 @@ const CreateCategory = ({ open, setOpen }) => {
               dispatch(addCategoryAction(values));
               setSubmitting(false);
               navigate('/');
+              setTimeout(() => {
+                window.location.reload();
+              }, 1000);
             }}
           >
             {({
