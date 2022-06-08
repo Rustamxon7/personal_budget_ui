@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -19,19 +19,22 @@ import './main.css';
 const Receipts = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+
+  const [open, setOpen] = useState('hidden');
+
   const currentLocation = location.pathname.split('/')[3];
   const mainLocation = location.pathname.split('/')[1];
   const person = location.pathname.split('/')[2];
 
   useEffect(() => {
-    dispatch(fetchFunds(1));
+    dispatch(fetchFunds());
   }, [dispatch]);
 
   const incomes = useSelector((state) => state.funds.funds.incomes);
 
   return (
     <div className="dashboard">
-      <Sidebar />
+      <Sidebar setOpen={setOpen} />
       <main>
         <Header />
 
@@ -42,7 +45,7 @@ const Receipts = () => {
                 <>
                   <CurrentPersonCategories type={currentLocation} person={person} />
                   <CreatePerson />
-                  <EditPerson person={person} />
+                  <EditPerson open={open} setOpen={setOpen} />
                 </>
               ) : (
                 <>
