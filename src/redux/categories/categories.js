@@ -1,17 +1,15 @@
-/* eslint-disable max-len */
+import { END_POINT, API_ROUTE } from '../../api/api';
+
 const GET_CATEGORIES = 'GET_CATEGORIES';
 const GET_CATEGORY = 'GET_CATEGORY';
+
 const CATEGORY_ADD = 'CATEGORY_ADD';
 const CATEGORY_REMOVE = 'CATEGORY_REMOVE';
 const CATEGORY_UPDATE = 'CATEGORY_UPDATE';
-const CREATE_CATEGORY_ALL_PERSONS = 'CREATE_CATEGORY_ALL_PERSONS';
 const LOADING = 'LOADING';
 
-const END_POINT = 'https://personal-budget-plan.herokuapp.com/';
-const API_ROUTE = 'api/v1/';
-
 const initialState = {
-  loading: true,
+  loading: false,
   categories: [],
   category: [],
   error: null,
@@ -29,11 +27,6 @@ export const getCategory = (category) => ({
 
 export const addCategory = (category) => ({
   type: CATEGORY_ADD,
-  payload: category,
-});
-
-export const addCategoryFromAllPersons = (category) => ({
-  type: CREATE_CATEGORY_ALL_PERSONS,
   payload: category,
 });
 
@@ -60,7 +53,8 @@ export const fetchCategories = () => async (dispatch) => {
         Authorization: `${token}`,
       },
     });
-    const categories = await response.json();
+    const categoriesList = await response.json();
+    const { categories } = categoriesList;
     dispatch(getCategories(categories));
   } catch (error) {
     dispatch(getCategories(error));
@@ -134,47 +128,42 @@ export const updateCategoryAction = (category) => async (dispatch) => {
   }
 };
 
-export const loadingAction = (loading) => ({
-  type: LOADING,
-  payload: loading,
-});
-
 export default (state = initialState, action) => {
   switch (action.type) {
+    case LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
     case GET_CATEGORIES:
       return {
         ...state,
+        loading: true,
         categories: action.payload,
       };
     case GET_CATEGORY:
       return {
         ...state,
+        loading: false,
         category: action.payload,
       };
     case CATEGORY_ADD:
       return {
         ...state,
+        loading: false,
         categories: [...state.categories, action.payload],
       };
     case CATEGORY_REMOVE:
       return {
         ...state,
+        loading: false,
         categories: state.categories.filter((category) => category.id !== action.payload),
       };
     case CATEGORY_UPDATE:
       return {
         ...state,
+        loading: false,
         categories: state.categories.map((category) => (category.id === action.payload.id ? action.payload : category)),
-      };
-    case CREATE_CATEGORY_ALL_PERSONS:
-      return {
-        ...state,
-        categories: [...state.categories, action.payload],
-      };
-    case LOADING:
-      return {
-        ...state,
-        loading: action.payload,
       };
     default:
       return state;

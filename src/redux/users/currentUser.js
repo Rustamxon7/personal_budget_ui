@@ -1,8 +1,8 @@
+import { END_POINT } from '../../api/api';
+
 const GET_CURRENT_USER = 'GET_CURRENT_USER';
 const GET_CURRENT_USER_SUCCESS = 'GET_CURRENT_USER_SUCCESS';
 const GET_CURRENT_USER_FAILURE = 'GET_CURRENT_USER_FAILURE';
-
-const END_POINT = 'https://personal-budget-plan.herokuapp.com/';
 
 const initialState = {
   loading: true,
@@ -27,7 +27,7 @@ export const getCurrentUserFailure = (error) => ({
 export const fetchCurrentUser = () => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${END_POINT}current_user`, {
+    const response = await fetch(`${END_POINT}/current_user`, {
       headers: {
         Authorization: `${token}`,
       },
