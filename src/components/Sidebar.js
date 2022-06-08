@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable indent */
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,67 +8,106 @@ import { loadCurrentUser, logout } from '../redux/auth';
 const Sidebar = () => {
   const currentPerson = useLocation().pathname.split('/')[2];
 
+  const validateCurrentPerson = localStorage.getItem('currentPerson');
+
   const isAuthenticated = useSelector(loadCurrentUser);
   const dispatch = useDispatch();
 
+  const location = useLocation();
+
+  const homeLocation = location.pathname.split('/')[1];
+
   const handleLogout = () => {
-    localStorage.clear();
     dispatch(logout);
+    localStorage.clear();
+    window.location.reload();
   };
 
-  const links = [
-    {
-      id: 1,
-      path: '/',
-      text: 'Home',
-      icon: 'home',
-    },
-    {
-      id: 2,
-      path: '/',
-      text: 'Receipts',
-      icon: 'cash-outline',
-    },
-    {
-      id: 3,
-      path: '/',
-      text: 'Expenses',
-      icon: 'wallet-outline',
-    },
-  ];
+  const handleClick = () => {
+    const overlay = document.querySelector('.edit--person__overlay');
+    const popUp = document.querySelector('.edit--person__popup');
+
+    if (overlay.classList.contains('hidden')) {
+      overlay.classList.remove('hidden');
+      popUp.classList.remove('hidden');
+    } else {
+      overlay.classList.add('hidden');
+      popUp.classList.add('hidden');
+    }
+  };
 
   return (
-    <nav className="left--sidebar">
-      <div className="sidebar--title">Personal Budget</div>
-      <div className="sidebar--menu">
-        <ul>
-          {links.map((link) => (
-            <li key={link.id}>
-              <NavLink activeclassname="active" to={link.path} exact="true">
-                <ion-icon name={link.icon} />
-                <span>{link.text}</span>
-              </NavLink>
-            </li>
-          ))}
-          {currentPerson && (
-            <li>
-              <NavLink activeclassname="active" to={`/people/${currentPerson}/edit`} exact="true">
-                <ion-icon name="create-outline" />
-                <span>Edit Person</span>
-              </NavLink>
-            </li>
+    <nav className="sidebar">
+      <NavLink className="sidebar__title" to="/">
+        <img className="logo" src="img/beedget.svg" alt="Beedget logo" />
+        <span>beedget</span>
+      </NavLink>
+      <nav className="sidebar__nav">
+        <ul className="sidebar__nav-list">
+          {currentPerson !== 'people' && homeLocation !== 'people' && (
+            <>
+              <li>
+                <NavLink activeclassname="active" className="sidebar__nav-link" to="/" exact="true">
+                  <ion-icon name="home" />
+                  <span>Home</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink activeclassname="active" className="sidebar__nav-link" to="/incomes" exact="true">
+                  <ion-icon name="cash-outline" />
+                  <span>Receiptss</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink activeclassname="active" className="sidebar__nav-link" to="/expenses" exact="true">
+                  <ion-icon name="wallet-outline" />
+                  <span>Expensess</span>
+                </NavLink>
+              </li>
+            </>
           )}
 
-          {isAuthenticated && (
-            <li className="log-out">
-              <a href="/" className="" type="button" onClick={handleLogout}>
+          {homeLocation === 'people' && (
+            <>
+              <li>
+                <NavLink activeclassname="active" className="sidebar__nav-link" to={`/people/${currentPerson}`} exact="true">
+                  <ion-icon name="home" />
+                  <span>Home</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="sidebar__nav-link" activeclassname="active" to={`/people/${currentPerson}/incomes`} exact="true">
+                  <ion-icon name="cash-outline" />
+                  <span>Receipts</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="sidebar__nav-link" activeclassname="active" to={`/people/${currentPerson}/expenses`} exact="true">
+                  <ion-icon name="wallet-outline" />
+                  <span>Expences</span>
+                </NavLink>
+              </li>
+              {validateCurrentPerson === currentPerson && (
+                <li>
+                  <NavLink className="sidebar__nav-link" onClick={handleClick} to="#">
+                    <ion-icon name="create-outline" />
+                    <span>Edit Person</span>
+                  </NavLink>
+                </li>
+              )}
+            </>
+          )}
+
+          {isAuthenticated && !homeLocation && (
+            <li>
+              <NavLink className="sidebar__nav-link" type="button" onClick={handleLogout} to="/">
                 <ion-icon icon="log-out" />
                 <span>Log Out</span>
-              </a>
+              </NavLink>
             </li>
           )}
         </ul>
-      </div>
+      </nav>
     </nav>
   );
 };
