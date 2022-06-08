@@ -1,5 +1,6 @@
 import store from '../redux/configureStore';
 import { api } from './api';
+import logoutActionCreator from '../redux/auth/actionCreator';
 
 const apiInterceptions = () => {
   api.interceptors.request.use((config) => {
@@ -17,7 +18,7 @@ const apiInterceptions = () => {
     (response) => response,
     (error) => {
       if (error.response.status === 401) {
-        store.dispatch({ type: 'LOGOUT' });
+        store.dispatch(logoutActionCreator());
       }
       throw error;
     }

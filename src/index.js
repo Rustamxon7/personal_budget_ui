@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import store, { persistor } from './redux/configureStore';
 
-import apiInterceptions from './api/apiHook';
+import apiInterceptions from './api/jwtInterceptor';
 import App from './App';
 import './index.css';
 
