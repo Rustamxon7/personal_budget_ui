@@ -243,7 +243,7 @@ a {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1.6rem;
   height: 14rem;
   transition: all 0.2s ease-in-out;
 }

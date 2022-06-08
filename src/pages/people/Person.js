@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, NavLink } from 'react-router-dom';
 import { fetchPersons } from '../../redux/people/person';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
+import CurrentPersonCategories from '../categories/CurrentPersonCategories';
 
 const PersonInfo = () => {
   const dispatch = useDispatch();
@@ -28,71 +29,12 @@ const PersonInfo = () => {
               <div className="main">
                 <div className="main--title">
                   <h2>Monthly Budget</h2>
-                  <ion-icon name="add-outline" />
+                  <NavLink to={`/people/${person.id}/create-category`}>
+                    <ion-icon name="add-outline" />
+                  </NavLink>
                 </div>
 
-                <div className="categories--cards">
-                  <div className="card">
-                    <ion-icon name="car-outline" />
-                    <div className="card--info">
-                      <h3>Shopping</h3>
-                      <p>
-                        <span>$</span>
-                        <span>0</span>
-                      </p>
-                    </div>
-                  </div>
-                  <div className="card">
-                    <ion-icon name="home-outline" />
-                    <div className="card--info">
-                      <h3>Shopping</h3>
-                      <p>
-                        <span>$</span>
-                        <span>0</span>
-                      </p>
-                    </div>
-                  </div>
-                  <div className="card">
-                    <ion-icon name="cart-outline" />
-                    <div className="card--info">
-                      <h3>Shopping</h3>
-                      <p>
-                        <span>$</span>
-                        <span>0</span>
-                      </p>
-                    </div>
-                  </div>
-                  <div className="card">
-                    <ion-icon name="construct-outline" />
-                    <div className="card--info">
-                      <h3>Shopping</h3>
-                      <p>
-                        <span>$</span>
-                        <span>0</span>
-                      </p>
-                    </div>
-                  </div>
-                  <div className="card">
-                    <ion-icon name="videocam-outline" />
-                    <div className="card--info">
-                      <h3>Shopping</h3>
-                      <p>
-                        <span>$</span>
-                        <span>0</span>
-                      </p>
-                    </div>
-                  </div>
-                  <div className="card">
-                    <ion-icon name="airplane" />
-                    <div className="card--info">
-                      <h3>Shopping</h3>
-                      <p>
-                        <span>$</span>
-                        <span>0</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <CurrentPersonCategories id={person.id} />
 
                 <div className="main--chart" />
               </div>

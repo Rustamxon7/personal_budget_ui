@@ -6,12 +6,14 @@ import authReducer from './auth';
 import userReducer from './users/currentUser';
 import editUserReducer from './users/editUser';
 import peopleReducer from './people/person';
+import categoriesReducer from './categories/categories';
 
 const reducer = combineReducers({
   auth: authReducer,
   user: userReducer,
   editUser: editUserReducer,
   people: peopleReducer,
+  categories: categoriesReducer,
 });
 
 const persistConfig = {
