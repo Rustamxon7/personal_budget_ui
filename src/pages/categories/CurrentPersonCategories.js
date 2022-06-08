@@ -39,7 +39,7 @@ const CurrentPersonCategories = ({ type }) => {
   };
 
   const currentPersonCategoriesList =
-    currentPersonsCategories.length > 0 ? (
+    currentPersonsCategories.length ? (
       handleCategoryType(type).map((category) => (
         <NavLink className="category category--shopping" to={`/people/${currentPerson}/categories/${category.id}`} key={category.id}>
           <ion-icon name={`${category.icon}-outline`} style={{ color: category.color }} />
