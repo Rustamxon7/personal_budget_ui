@@ -3,23 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.2.0",
-    "@testing-library/user-event": "^13.5.0",
+    "@testing-library/react": "^12.1.5",
     "axios": "^0.27.2",
+    "dateformat": "^5.0.3",
     "formik": "^2.2.9",
     "history": "^5.3.0",
     "node-sass": "^7.0.1",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "react-hook-form": "^7.31.1",
     "react-redux": "^8.0.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
+    "react-tinder-card": "^1.4.5",
+    "recharts": "^2.1.10",
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1",
-    "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },
   "scripts": {
@@ -62,6 +62,7 @@
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^21.0.0",
     "stylelint-csstree-validator": "^1.9.0",
-    "stylelint-scss": "^3.21.0"
+    "stylelint-scss": "^3.21.0",
+    "web-vitals": "^2.1.4"
   }
 }
