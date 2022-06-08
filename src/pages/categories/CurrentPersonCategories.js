@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 
 import CreateCategory from './CreateCategory';
+import { iconsList } from '../../lists/lists';
 import { fetchCategories } from '../../redux/categories/categories';
 
 const CurrentPersonCategories = ({ type }) => {
@@ -38,26 +39,25 @@ const CurrentPersonCategories = ({ type }) => {
     return currentPersonsCategories || [];
   };
 
-  const currentPersonCategoriesList =
-    currentPersonsCategories.length ? (
-      handleCategoryType(type).map((category) => (
-        <NavLink className="category category--shopping" to={`/people/${currentPerson}/categories/${category.id}`} key={category.id}>
-          <ion-icon name={`${category.icon}-outline`} style={{ color: category.color }} />
-          <span className="category__name">{category.title}</span>
-          <span className="category__price">
-            $
-            {category.sum_funds}
-          </span>
-        </NavLink>
-      ))
-    ) : (
-      <>
-        <div className="category category--shopping" onClick={() => setOpen('')} onKeyDown={() => setOpen('')} role="button" tabIndex={0}>
-          <ion-icon name="add-circle-outline" />
-          <span className="category__name">Add category</span>
-        </div>
-      </>
-    );
+  const currentPersonCategoriesList = currentPersonsCategories.length ? (
+    handleCategoryType(type).map((category) => (
+      <NavLink className="category category--shopping" to={`/people/${currentPerson}/categories/${category.id}`} key={category.id}>
+        <ion-icon name={`${category.icon}-outline`} style={{ color: iconsList.find((icon) => icon.name === category.icon).color }} />
+        <span className="category__name">{category.title}</span>
+        <span className="category__price">
+          $
+          {category.sum_funds}
+        </span>
+      </NavLink>
+    ))
+  ) : (
+    <>
+      <div className="category category--shopping" onClick={() => setOpen('')} onKeyDown={() => setOpen('')} role="button" tabIndex={0}>
+        <ion-icon name="add-circle-outline" />
+        <span className="category__name">Add category</span>
+      </div>
+    </>
+  );
 
   return !loading ? (
     <div className="app category-page loader--container">
