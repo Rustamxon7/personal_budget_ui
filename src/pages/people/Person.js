@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+/* eslint-disable func-names */
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -21,9 +22,11 @@ const PersonInfo = () => {
 
   localStorage.setItem('currentPerson', location.pathname.split('/')[2]);
 
+  const [open, setOpen] = useState('hidden');
+
   useEffect(() => {
     dispatch(fetchPersons());
-    dispatch(fetchFunds(1));
+    dispatch(fetchFunds());
   }, [dispatch, location]);
 
   const persons = useSelector((state) => state.people.people);
@@ -36,7 +39,7 @@ const PersonInfo = () => {
     <div className="dashboard">
       {person ? (
         <>
-          <Sidebar personId={person.id} />
+          <Sidebar setOpen={setOpen} />
           <main>
             <Header />
             <div className="app main">
@@ -45,7 +48,7 @@ const PersonInfo = () => {
                   <CurrentPersonCategories type={person.id} />
                   <Chart />
                   <CreatePerson />
-                  <EditPerson person={person} />
+                  <EditPerson open={open} setOpen={setOpen} />
                 </div>
                 <div>
                   <Transactions data={funds} />
