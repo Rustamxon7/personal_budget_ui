@@ -5,7 +5,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadCurrentUser, logout } from '../redux/auth';
 
-const Sidebar = () => {
+const Sidebar = ({ setOpen }) => {
   const currentPerson = useLocation().pathname.split('/')[2];
 
   const validateCurrentPerson = localStorage.getItem('currentPerson');
@@ -24,16 +24,7 @@ const Sidebar = () => {
   };
 
   const handleClick = () => {
-    const overlay = document.querySelector('.edit--person__overlay');
-    const popUp = document.querySelector('.edit--person__popup');
-
-    if (overlay.classList.contains('hidden')) {
-      overlay.classList.remove('hidden');
-      popUp.classList.remove('hidden');
-    } else {
-      overlay.classList.add('hidden');
-      popUp.classList.add('hidden');
-    }
+    setOpen('');
   };
 
   return (
@@ -110,10 +101,6 @@ const Sidebar = () => {
       </nav>
     </nav>
   );
-};
-
-Sidebar.defaultProps = {
-  name: '',
 };
 
 export default Sidebar;
