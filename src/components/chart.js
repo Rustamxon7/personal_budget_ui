@@ -1,12 +1,11 @@
-/* eslint-disable max-len */
-/* eslint-disable object-curly-newline */
 import React, { useEffect } from 'react';
 
-import { AreaChart, Area, Legend, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import {
+  AreaChart, Area, Legend, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
+} from 'recharts';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { fetchFunds } from '../redux/funds/funds';
-import { fetchCategories } from '../redux/categories/categories';
 
 const Chart = () => {
   const dispatch = useDispatch();
@@ -16,11 +15,8 @@ const Chart = () => {
   const incomes = useSelector((state) => state.funds.funds.incomes);
   const expenses = useSelector((state) => state.funds.funds.expenses);
 
-  // const categories = useSelector((state) => state.categories.categories);
-
   useEffect(() => {
-    dispatch(fetchFunds(1));
-    dispatch(fetchCategories());
+    dispatch(fetchFunds());
   }, [dispatch]);
 
   const fundsLocation = (location) => {
@@ -39,7 +35,7 @@ const Chart = () => {
     return funds || [];
   };
 
-  const data2 = fundsLocation(location).map((fund) => ({
+  const transaction = fundsLocation(location).map((fund) => ({
     name: fund.title,
     expenses: fund.type_declaration === 'expenses' ? fund.amount : 0,
     incomes: fund.type_declaration === 'incomes' ? fund.amount : 0,
@@ -49,7 +45,14 @@ const Chart = () => {
   return (
     <div style={{ width: '100%', height: 340 }} className="chart">
       <ResponsiveContainer>
-        <AreaChart width={430} height={250} data={data2} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+        <AreaChart
+          width={430}
+          height={250}
+          data={transaction}
+          margin={{
+            top: 10, right: 30, left: 0, bottom: 0
+          }}
+        >
           <defs>
             <linearGradient id="colorincomes" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
