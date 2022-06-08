@@ -1,109 +1,45 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable no-undef */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/img-redundant-alt */
-import React from 'react';
-import Sidebar from '../../components/Sidebar';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { fetchFunds } from '../../redux/funds/funds';
+
+import Chart from '../../components/chart';
 import Header from '../../components/Header';
+import Sidebar from '../../components/Sidebar';
+import Transactions from '../../components/Transactions';
+
+import CreatePerson from '../people/CreatePerson';
+import Categories from '../categories/Categories';
+
 import './main.css';
 
-const Home = () => (
-  <div className="dashboard">
-    <Sidebar />
-    <Header />
-    <div className="container">
-      <div className="main">
-        <div className="main--title">
-          <h2>Monthly Budget</h2>
-          <ion-icon name="add-outline" />
-        </div>
+const Home = () => {
+  const dispatch = useDispatch();
 
-        <div className="categories--cards">
-          <div className="card">
-            <ion-icon name="car-outline" />
-            <div className="card--info">
-              <h3>Shopping</h3>
-              <p>
-                <span>$</span>
-                <span>0</span>
-              </p>
-            </div>
-          </div>
-          <div className="card">
-            <ion-icon name="home-outline" />
-            <div className="card--info">
-              <h3>Shopping</h3>
-              <p>
-                <span>$</span>
-                <span>0</span>
-              </p>
-            </div>
-          </div>
-          <div className="card">
-            <ion-icon name="cart-outline" />
-            <div className="card--info">
-              <h3>Shopping</h3>
-              <p>
-                <span>$</span>
-                <span>0</span>
-              </p>
-            </div>
-          </div>
-          <div className="card">
-            <ion-icon name="construct-outline" />
-            <div className="card--info">
-              <h3>Shopping</h3>
-              <p>
-                <span>$</span>
-                <span>0</span>
-              </p>
-            </div>
-          </div>
-          <div className="card">
-            <ion-icon name="videocam-outline" />
-            <div className="card--info">
-              <h3>Shopping</h3>
-              <p>
-                <span>$</span>
-                <span>0</span>
-              </p>
-            </div>
-          </div>
-          <div className="card">
-            <ion-icon name="airplane" />
-            <div className="card--info">
-              <h3>Shopping</h3>
-              <p>
-                <span>$</span>
-                <span>0</span>
-              </p>
-            </div>
-          </div>
-        </div>
+  useEffect(() => {
+    dispatch(fetchFunds(1));
+  }, [dispatch]);
 
-        <div className="main--chart" />
-      </div>
-      <div className="right--sidebar">
-        <div className="right--sidebar__title">
-          <h2>This week</h2>
-          <span className="transactions">-$2400</span>
-        </div>
+  const funds = useSelector((state) => state.funds.funds.recent);
 
-        <div className="transactions--cards">
-          <div className="transaction--card" />
-          <div className="transaction--card" />
-          <div className="transaction--card" />
-          <div className="transaction--card" />
-          <div className="transaction--card" />
-          <div className="transaction--card" />
-          <div className="transaction--card" />
-          <div className="transaction--card" />
-          <div className="transaction--card" />
-          <div className="transaction--card" />
+  return (
+    <div className="dashboard">
+      <Sidebar home />
+      <main>
+        <Header />
+        <div className="app main">
+          <div className="app-container grid grid--1-3cols">
+            <div className="app-flex">
+              <Categories />
+              <Chart />
+              <CreatePerson />
+            </div>
+            <Transactions data={funds} />
+          </div>
         </div>
-      </div>
+      </main>
     </div>
-  </div>
-);
+  );
+};
 
 export default Home;

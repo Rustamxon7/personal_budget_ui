@@ -1,122 +1,58 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { fetchFunds } from '../../redux/funds/funds';
 import { fetchPersons } from '../../redux/people/person';
-import Sidebar from '../../components/Sidebar';
+
+import EditPerson from './EditPerson';
+import CreatePerson from './CreatePerson';
+import CurrentPersonCategories from '../categories/CurrentPersonCategories';
+
+import Chart from '../../components/chart';
 import Header from '../../components/Header';
+import Sidebar from '../../components/Sidebar';
+
+import Transactions from '../../components/Transactions';
 
 const PersonInfo = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
+  localStorage.setItem('currentPerson', location.pathname.split('/')[2]);
+
   useEffect(() => {
     dispatch(fetchPersons());
+    dispatch(fetchFunds(1));
   }, [dispatch, location]);
 
   const persons = useSelector((state) => state.people.people);
 
   const person = persons.find((person) => person.id === Number(location.pathname.split('/')[2]));
 
+  const funds = useSelector((state) => state.funds.funds.funds);
+
   return (
-    <div className="app">
+    <div className="dashboard">
       {person ? (
         <>
-          <div className="dashboard">
-            <Sidebar id={person.id} />
+          <Sidebar personId={person.id} />
+          <main>
             <Header />
-            <div className="container">
-              <div className="main">
-                <div className="main--title">
-                  <h2>Monthly Budget</h2>
-                  <ion-icon name="add-outline" />
+            <div className="app main">
+              <div className="app-container grid grid--1-3cols">
+                <div className="app-flex">
+                  <CurrentPersonCategories type={person.id} />
+                  <Chart />
+                  <CreatePerson />
+                  <EditPerson person={person} />
                 </div>
-
-                <div className="categories--cards">
-                  <div className="card">
-                    <ion-icon name="car-outline" />
-                    <div className="card--info">
-                      <h3>Shopping</h3>
-                      <p>
-                        <span>$</span>
-                        <span>0</span>
-                      </p>
-                    </div>
-                  </div>
-                  <div className="card">
-                    <ion-icon name="home-outline" />
-                    <div className="card--info">
-                      <h3>Shopping</h3>
-                      <p>
-                        <span>$</span>
-                        <span>0</span>
-                      </p>
-                    </div>
-                  </div>
-                  <div className="card">
-                    <ion-icon name="cart-outline" />
-                    <div className="card--info">
-                      <h3>Shopping</h3>
-                      <p>
-                        <span>$</span>
-                        <span>0</span>
-                      </p>
-                    </div>
-                  </div>
-                  <div className="card">
-                    <ion-icon name="construct-outline" />
-                    <div className="card--info">
-                      <h3>Shopping</h3>
-                      <p>
-                        <span>$</span>
-                        <span>0</span>
-                      </p>
-                    </div>
-                  </div>
-                  <div className="card">
-                    <ion-icon name="videocam-outline" />
-                    <div className="card--info">
-                      <h3>Shopping</h3>
-                      <p>
-                        <span>$</span>
-                        <span>0</span>
-                      </p>
-                    </div>
-                  </div>
-                  <div className="card">
-                    <ion-icon name="airplane" />
-                    <div className="card--info">
-                      <h3>Shopping</h3>
-                      <p>
-                        <span>$</span>
-                        <span>0</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="main--chart" />
-              </div>
-              <div className="right--sidebar">
-                <div className="right--sidebar__title">
-                  <h2>This week</h2>
-                  <span className="transactions">-$2400</span>
-                </div>
-
-                <div className="transactions--cards">
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
+                <div>
+                  <Transactions data={funds} />
                 </div>
               </div>
             </div>
-          </div>
+          </main>
         </>
       ) : (
         <p>No person found</p>

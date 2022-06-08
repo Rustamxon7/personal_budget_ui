@@ -1,13 +1,13 @@
+import { END_POINT, API_ROUTE } from '../../api/api';
+
+const LOADING = 'LOADING';
 const CREATE_PERSON = 'CREATE_PERSON';
 const UPDATE_PERSON = 'UPDATE_PERSON';
 const DELETE_PERSON = 'DELETE_PERSON';
 const FETCH_PERSON = 'FETCH_PERSON';
 
-const END_POINT = 'https://personal-budget-plan.herokuapp.com/';
-const API_ROUTE = '/api/v1/';
-
 const initialState = {
-  loading: true,
+  loading: false,
   people: [],
   error: null,
 };
@@ -101,24 +101,33 @@ export const updatePersonAction = (person) => async (dispatch) => {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
     case CREATE_PERSON:
       return {
         ...state,
+        loading: false,
         people: [...state.people, action.payload],
       };
     case UPDATE_PERSON:
       return {
         ...state,
+        loading: false,
         people: action.payload,
       };
     case DELETE_PERSON:
       return {
         ...state,
+        loading: false,
         people: action.payload,
       };
     case FETCH_PERSON:
       return {
         ...state,
+        loading: true,
         people: action.payload,
       };
     default:
