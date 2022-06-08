@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import { addCategoryAction } from '../../redux/categories/categories';
 import { fetchPersons } from '../../redux/people/person';
@@ -18,6 +18,7 @@ const validationSchema = Yup.object().shape({
 
 const CreateCategory = ({ open, setOpen }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
@@ -65,9 +66,7 @@ const CreateCategory = ({ open, setOpen }) => {
               setSubmitting(true);
               dispatch(addCategoryAction(values));
               setSubmitting(false);
-              setTimeout(() => {
-                window.location.reload();
-              }, 2000);
+              navigate('/');
             }}
           >
             {({
