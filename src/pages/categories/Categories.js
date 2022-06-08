@@ -20,37 +20,18 @@ const Categories = ({ type }) => {
   const loading = useSelector((state) => state.categories.loading);
 
   const handleCategoryType = (type) => {
-    // incomes, expenses or all
-    if (type === 'incomes' && categories.length > 0) {
-      return categories.filter((category) => category.money === 'incomes') || [];
+    switch (type) {
+      case 'incomes':
+        return categories.filter((category) => category.money === 'incomes') || [];
+      case 'expenses':
+        return categories.filter((category) => category.money === 'expenses') || [];
+      default:
+        return categories && categories.length ? categories : [];
     }
-    if (type === 'expenses' && categories.length > 0) {
-      return categories.filter((category) => category.money === 'expenses') || [];
-    }
-    return categories && categories.length > 0 ? categories : [];
-  };
-
-  const handleClick = () => {
-    setOpen('');
-    let loading = false;
-    if (loading) {
-      return;
-    }
-    loading = true;
-    setTimeout(() => {
-      loading = false;
-    }, 1000);
-  };
-
-  const createComponent = (open, setOpen) => {
-    if (open === '') {
-      return <CreateCategory open={open} setOpen={setOpen} />;
-    }
-    return null;
   };
 
   const categoriesList =
-    handleCategoryType(type).length > 0 ? (
+    handleCategoryType(type).length ? (
       handleCategoryType(type).map((category) => (
         <NavLink className="category category--shopping" to={`/categories/${category.id}`} key={category.id}>
           <ion-icon name={`${category.icon}-outline`} style={{ color: category.color }} />
@@ -78,12 +59,12 @@ const Categories = ({ type }) => {
     <div>
       <div className="heading-tertiary">
         <h3>Categories</h3>
-        <button type="button" className="btn" onClick={handleClick}>
+        <button type="button" className="btn" onClick={() => setOpen('')}>
           Add
         </button>
       </div>
       <div className="categories">{categoriesList}</div>
-      {createComponent(open, setOpen)}
+      <CreateCategory open={open} setOpen={setOpen} />
     </div>
   );
 };
