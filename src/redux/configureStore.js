@@ -5,6 +5,7 @@ import storage from 'redux-persist/lib/storage';
 
 import authReducer from './auth';
 import fundsReducer from './funds/funds';
+import transactionsReducer from './funds/transactions';
 import peopleReducer from './people/person';
 import userReducer from './users/currentUser';
 import editUserReducer from './users/editUser';
@@ -17,6 +18,7 @@ const reducer = combineReducers({
   people: peopleReducer,
   categories: categoriesReducer,
   funds: fundsReducer,
+  transactions: transactionsReducer,
 });
 
 const persistConfig = {
