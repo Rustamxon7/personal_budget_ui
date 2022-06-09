@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchFunds } from '../../redux/funds/funds';
+import { fetchTransactions } from '../../redux/funds/transactions';
 
 import Chart from '../../components/chart';
 import Header from '../../components/Header';
@@ -27,10 +27,10 @@ const Receipts = () => {
   const person = location.pathname.split('/')[2];
 
   useEffect(() => {
-    dispatch(fetchFunds());
+    dispatch(fetchTransactions());
   }, [dispatch]);
 
-  const incomes = useSelector((state) => state.funds.funds.incomes);
+  const incomes = useSelector((state) => state.transactions.transactions.incomes);
 
   return (
     <div className="dashboard">

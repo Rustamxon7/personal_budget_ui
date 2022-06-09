@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchFunds } from '../../redux/funds/funds';
+import { fetchTransactions } from '../../redux/funds/transactions';
 
 import Chart from '../../components/chart';
 import Header from '../../components/Header';
@@ -17,10 +17,10 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchFunds(1));
+    dispatch(fetchTransactions());
   }, [dispatch]);
 
-  const funds = useSelector((state) => state.funds.funds.recent);
+  const transactions = useSelector((state) => state.transactions.transactions.transactions);
 
   return (
     <div className="dashboard">
@@ -34,7 +34,7 @@ const Home = () => {
               <Chart />
               <CreatePerson />
             </div>
-            <Transactions data={funds} />
+            <Transactions data={transactions} />
           </div>
         </div>
       </main>
