@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchFunds } from '../../redux/funds/funds';
+import { fetchTransactions } from '../../redux/funds/transactions';
 import { fetchPersons } from '../../redux/people/person';
 
 import EditPerson from './EditPerson';
@@ -26,14 +26,14 @@ const PersonInfo = () => {
 
   useEffect(() => {
     dispatch(fetchPersons());
-    dispatch(fetchFunds());
+    dispatch(fetchTransactions());
   }, [dispatch, location]);
 
   const persons = useSelector((state) => state.people.people);
 
   const person = persons.find((person) => person.id === Number(location.pathname.split('/')[2]));
 
-  const funds = useSelector((state) => state.funds.funds.funds);
+  const transactions = useSelector((state) => state.transactions.transactions.transactions);
 
   return (
     <div className="dashboard">
@@ -51,7 +51,7 @@ const PersonInfo = () => {
                   <EditPerson open={open} setOpen={setOpen} />
                 </div>
                 <div>
-                  <Transactions data={funds} />
+                  <Transactions data={transactions} />
                 </div>
               </div>
             </div>
