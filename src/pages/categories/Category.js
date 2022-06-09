@@ -56,7 +56,7 @@ const Category = () => {
   const fundsCount = filterdFunds.length;
 
   const selectByDate = () => {
-    if (startDate !== '' && endDate !== '') {
+    if (startDate && endDate) {
       return funds.filter((fund) => {
         const date = new Date(fund.date);
         const start = new Date(startDate);
