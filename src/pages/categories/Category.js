@@ -4,7 +4,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import { fetchCategory, removeCategoryAction } from '../../redux/categories/categories';
 import { fetchFunds } from '../../redux/funds/funds';
-import { iconsList } from '../../lists/lists';
 
 import Funds from '../funds/Funds';
 import AddFund from '../funds/AddFund';
@@ -38,8 +37,8 @@ const Category = () => {
   const loading = useSelector((state) => state.categories.loading);
 
   useEffect(() => {
-    dispatch(fetchCategory(validateCurrentPerson(), location.pathname.split('/')[3]));
-    dispatch(fetchFunds(validateCurrentPerson()));
+    dispatch(fetchCategory(validateCurrentPerson()));
+    dispatch(fetchFunds());
   }, [dispatch]);
 
   const handleRemove = () => {
@@ -48,7 +47,7 @@ const Category = () => {
     window.location.reload();
   };
 
-  const funds = useSelector((state) => state.funds.funds.funds);
+  const funds = useSelector((state) => state.funds.funds);
 
   const filterdFunds = funds.filter((fund) => fund.category_id === category.id) || [];
 
@@ -83,9 +82,6 @@ const Category = () => {
             <div className="app category-page">
               <div
                 className="category-page__header"
-                style={{
-                  backgroundImage: `url(${iconsList.find((icon) => icon.name === category.icon).img})`,
-                }}
               />
               <div className="app-container">
                 <h1 className="heading-primary">
