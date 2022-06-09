@@ -54,7 +54,7 @@ export const fetchCategories = () => async (dispatch) => {
       },
     });
     const categoriesList = await response.json();
-    const { categories } = categoriesList;
+    const categories = categoriesList;
     dispatch(getCategories(categories));
   } catch (error) {
     dispatch(getCategories(error));
