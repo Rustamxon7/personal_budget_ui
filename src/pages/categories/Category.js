@@ -10,6 +10,7 @@ import AddFund from '../funds/AddFund';
 import EditCategory from './UpdateCategory';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
+import Loader from '../../components/Loader';
 
 const Category = () => {
   const dispatch = useDispatch();
@@ -23,9 +24,9 @@ const Category = () => {
 
   const validateCurrentPerson = () => {
     if (currentLocation === 'people') {
-      return parseInt(location.pathname.split('/')[4], 10);
+      return Number(location.pathname.split('/')[4]);
     }
-    return parseInt(location.pathname.split('/')[2], 10);
+    return Number(location.pathname.split('/')[2]);
   };
 
   // select by date startDate endDate
@@ -73,9 +74,7 @@ const Category = () => {
       <main>
         <Header />
         {loading ? (
-          <div className="app category-page loader--container">
-            <img className="loader" src="img/loader.svg" alt="Loading" />
-          </div>
+          <Loader />
         ) : (
           <>
             <EditCategory open={openEdit} setOpen={setOpenEdit} category={category.id} />

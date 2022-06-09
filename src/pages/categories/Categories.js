@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategories } from '../../redux/categories/categories';
 
 import CreateCategory from './CreateCategory';
+import Loader from '../../components/Loader';
 
 const Categories = ({ type }) => {
   const dispatch = useDispatch();
@@ -50,9 +51,7 @@ const Categories = ({ type }) => {
   );
 
   return !loading ? (
-    <div className="app category-page loader--container">
-      <img className="loader" src="img/loader.svg" alt="Loading" />
-    </div>
+    <Loader />
   ) : (
     <div>
       <div className="heading-tertiary">

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 
 import CreateCategory from './CreateCategory';
+import Loader from '../../components/Loader';
 import { fetchCategories } from '../../redux/categories/categories';
 
 const CurrentPersonCategories = ({ type }) => {
@@ -59,9 +60,7 @@ const CurrentPersonCategories = ({ type }) => {
   );
 
   return !loading ? (
-    <div className="app category-page loader--container">
-      <img className="loader" src="img/loader.svg" alt="Loading" />
-    </div>
+    <Loader />
   ) : (
     <div>
       <div className="heading-tertiary">

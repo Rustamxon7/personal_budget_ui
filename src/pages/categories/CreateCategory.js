@@ -9,6 +9,7 @@ import { fetchPersons } from '../../redux/people/person';
 import { iconsList, fonds } from '../../lists/lists';
 
 import './registrations.css';
+import Loader from '../../components/Loader';
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().min(3, 'Too Short!').max(50, 'Too Long!').required('A title is required!'),
@@ -47,11 +48,7 @@ const CreateCategory = ({ open, setOpen }) => {
       <div className={`overlay ${open}`} onClick={() => setOpen('hidden')} onKeyDown={() => setOpen('hdden')} role="button" tabIndex="0" aria-label="overlay" />
       <div className={`popup ${open}`}>
         {!loading ? (
-          <div className="popup__form">
-            <div className="right-side">
-              <div className="loader" />
-            </div>
-          </div>
+          <Loader />
         ) : (
           <Formik
             initialValues={{
