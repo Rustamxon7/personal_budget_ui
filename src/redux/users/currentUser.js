@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { END_POINT } from '../../api/api';
 
 const GET_CURRENT_USER = 'GET_CURRENT_USER';
@@ -27,12 +28,12 @@ export const getCurrentUserFailure = (error) => ({
 export const fetchCurrentUser = () => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${END_POINT}/current_user`, {
+    const response = await axios.get(`${END_POINT}/current_user`, {
       headers: {
         Authorization: `${token}`,
       },
     });
-    const user = await response.json();
+    const user = response.data;
     dispatch(getCurrentUserSuccess(user));
   } catch (error) {
     dispatch(getCurrentUserFailure(error));
