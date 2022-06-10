@@ -14,10 +14,6 @@ const CurrentPersonCategories = ({ type }) => {
 
   const [open, setOpen] = useState('hidden');
 
-  useEffect(() => {
-    dispatch(fetchCategories());
-  }, [dispatch]);
-
   const categories = useSelector((state) => state.categories.categories) || [];
   const loading = useSelector((state) => state.categories.loading) || false;
 
@@ -29,15 +25,19 @@ const CurrentPersonCategories = ({ type }) => {
   });
 
   const handleCategoryType = (type) => {
-    // incomes, expenses or all
-    if (type === 'incomes') {
-      return currentPersonsCategories.filter((category) => category.money === 'incomes') || [];
+    switch (type) {
+      case 'incomes':
+        return currentPersonsCategories.filter((category) => category.money === 'incomes') || [];
+      case 'expenses':
+        return currentPersonsCategories.filter((category) => category.money === 'expenses') || [];
+      default:
+        return currentPersonsCategories && currentPersonsCategories.length ? currentPersonsCategories : [];
     }
-    if (type === 'expenses') {
-      return currentPersonsCategories.filter((category) => category.money === 'expenses') || [];
-    }
-    return currentPersonsCategories || [];
   };
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
 
   const currentPersonCategoriesList = currentPersonsCategories.length ? (
     handleCategoryType(type).map((category) => (
