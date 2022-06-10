@@ -38,15 +38,6 @@ const CreateCategory = ({ open, setOpen }) => {
     return selectedPersons;
   };
 
-  //   onClick={
-  //   values.icon === icon.name
-  //     ? null
-  //     : () => {
-  //         values.icon = icon.name;
-  //         handleChange(values);
-  //       }
-  // }
-
   const handleIconClick = (values, icon, handleChange) => {
     values.icon = icon.name;
     handleChange(values);

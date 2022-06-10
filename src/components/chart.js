@@ -5,18 +5,18 @@ import {
 } from 'recharts';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { fetchFunds } from '../redux/funds/funds';
+import { fetchTransactions } from '../redux/funds/transactions';
 
 const Chart = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const funds = useSelector((state) => state.funds.funds.funds);
-  const incomes = useSelector((state) => state.funds.funds.incomes);
-  const expenses = useSelector((state) => state.funds.funds.expenses);
+  const funds = useSelector((state) => state.transactions.transactions.transactions);
+  const incomes = useSelector((state) => state.transactions.transactions.incomes);
+  const expenses = useSelector((state) => state.transactions.transactions.expenses);
 
   useEffect(() => {
-    dispatch(fetchFunds());
+    dispatch(fetchTransactions());
   }, [dispatch]);
 
   const fundsLocation = (location) => {
