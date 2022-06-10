@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { END_POINT, API_ROUTE } from '../../api/api';
 
 const GET_CATEGORIES = 'GET_CATEGORIES';
@@ -48,12 +49,12 @@ export const loading = (loading) => ({
 export const fetchCategories = () => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${END_POINT}${API_ROUTE}categories`, {
+    const response = await axios.get(`${END_POINT}${API_ROUTE}categories`, {
       headers: {
         Authorization: `${token}`,
       },
     });
-    const categoriesList = await response.json();
+    const categoriesList = await response.data;
     const categories = categoriesList;
     dispatch(getCategories(categories));
   } catch (error) {
@@ -64,12 +65,12 @@ export const fetchCategories = () => async (dispatch) => {
 export const fetchCategory = (id) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${END_POINT}${API_ROUTE}categories/${id}`, {
+    const response = await axios.get(`${END_POINT}${API_ROUTE}categories/${id}`, {
       headers: {
         Authorization: `${token}`,
       },
     });
-    const category = await response.json();
+    const category = await response.data;
     dispatch(getCategory(category));
   } catch (error) {
     dispatch(getCategory(error));
@@ -79,15 +80,13 @@ export const fetchCategory = (id) => async (dispatch) => {
 export const addCategoryAction = (category) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${END_POINT}${API_ROUTE}categories`, {
-      method: 'POST',
+    const response = await axios.post(`${END_POINT}${API_ROUTE}categories`, category, {
       headers: {
         Authorization: `${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(category),
     });
-    const categoryData = await response.json();
+    const categoryData = await response.data;
     dispatch(addCategory(categoryData));
   } catch (error) {
     dispatch(addCategory(error));
@@ -97,13 +96,12 @@ export const addCategoryAction = (category) => async (dispatch) => {
 export const removeCategoryAction = (id) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${END_POINT}${API_ROUTE}categories/${id}`, {
-      method: 'DELETE',
+    const response = await axios.delete(`${END_POINT}${API_ROUTE}categories/${id}`, {
       headers: {
         Authorization: `${token}`,
       },
     });
-    const category = await response.json();
+    const category = await response.data;
     dispatch(removeCategory(category.id));
   } catch (error) {
     dispatch(removeCategory(error));
@@ -113,15 +111,13 @@ export const removeCategoryAction = (id) => async (dispatch) => {
 export const updateCategoryAction = (category) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${END_POINT}${API_ROUTE}categories/${category.id}`, {
-      method: 'PUT',
+    const response = await axios.put(`${END_POINT}${API_ROUTE}categories/${category.id}`, category, {
       headers: {
         Authorization: `${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(category),
     });
-    const categoryData = await response.json();
+    const categoryData = await response.data;
     dispatch(updateCategory(categoryData));
   } catch (error) {
     dispatch(updateCategory(error));
