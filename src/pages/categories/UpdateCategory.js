@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { iconsList } from '../../lists/lists';
+import Reloader from '../../components/Reload';
 import { fetchPersons } from '../../redux/people/person';
 import { fetchCategory, updateCategoryAction } from '../../redux/categories/categories';
 
@@ -19,16 +20,11 @@ const UpdateCategory = ({ open, setOpen }) => {
 
   const currentLocation = location.pathname.split('/')[1];
 
-  const validateCurrentPerson = () => {
-    if (currentLocation === 'people') {
-      return parseInt(location.pathname.split('/')[4], 10);
-    }
-    return parseInt(location.pathname.split('/')[2], 10);
-  };
+  const validateCurrentPerson = currentLocation === 'people' ? Number(location.pathname.split('/')[4]) : Number(location.pathname.split('/')[2]);
 
   useEffect(() => {
     dispatch(fetchPersons());
-    dispatch(fetchCategory(validateCurrentPerson()));
+    dispatch(fetchCategory(validateCurrentPerson));
   }, [dispatch]);
 
   const people = useSelector((state) => state.people.people);
@@ -56,11 +52,7 @@ const UpdateCategory = ({ open, setOpen }) => {
             setSubmitting(true);
             dispatch(updateCategoryAction(values));
             setSubmitting(false);
-            setTimeout(() => {
-              // go back
-              window.history.back();
-              window.location.reload();
-            }, 1000);
+            Reloader(1000);
           }}
         >
           {({
@@ -136,7 +128,6 @@ const UpdateCategory = ({ open, setOpen }) => {
                       <label htmlFor={icon.name} className="icons--label" title={icon.name}>
                         <ion-icon name={`${icon.name}-outline`} style={{ color: icon.color }} />
                       </label>
-                      {/* set values.color === icon.color */}
                       <input type="hidden" name="color" id="color" onChange={handleChange} onBlur={handleBlur} value={values.color} />
                     </div>
                   ))}
