@@ -2,9 +2,9 @@ import React from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';
-import { useNavigate, useLocation } from 'react-router-dom';
 
 import { addFundAction } from '../../redux/funds/funds';
+import onSubmitReusable from '../../components/onSubmitReusable';
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().min(3, 'Too Short!').max(50, 'Too Long!').required('A title is required!'),
@@ -16,8 +16,6 @@ const validationSchema = Yup.object().shape({
 
 const AddFund = ({ open, setOpen, category }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
 
   return (
     <>
@@ -36,18 +34,8 @@ const AddFund = ({ open, setOpen, category }) => {
           }}
           validationSchema={validationSchema}
           onSubmit={(values, { setSubmitting }) => {
-            setSubmitting(true);
             dispatch(addFundAction(values, values.category_id));
-            setSubmitting(false);
-            setTimeout(() => {
-              // go back based on location
-              if (location.pathname.split('/')[1] === 'categories') {
-                navigate(`/categories/${location.pathname.split('/')[2]}`);
-              } else {
-                navigate(`/people/${location.pathname.split('/')[2]}`);
-              }
-              window.location.reload();
-            }, 1000);
+            onSubmitReusable({ setSubmitting });
           }}
         >
           {({
