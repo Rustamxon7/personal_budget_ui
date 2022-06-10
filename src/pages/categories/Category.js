@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { fetchCategory, removeCategoryAction } from '../../redux/categories/categories';
 import { fetchFunds } from '../../redux/funds/funds';
@@ -15,19 +15,13 @@ import Loader from '../../components/Loader';
 const Category = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const navigate = useNavigate();
 
   const [open, setOpen] = useState('hidden');
   const [openEdit, setOpenEdit] = useState('disabled');
 
   const currentLocation = location.pathname.split('/')[1];
 
-  const validateCurrentPerson = () => {
-    if (currentLocation === 'people') {
-      return Number(location.pathname.split('/')[4]);
-    }
-    return Number(location.pathname.split('/')[2]);
-  };
+  const validateCurrentPerson = currentLocation === 'people' ? Number(location.pathname.split('/')[4]) : Number(location.pathname.split('/')[2]);
 
   // select by date startDate endDate
 
@@ -38,13 +32,12 @@ const Category = () => {
   const loading = useSelector((state) => state.categories.loading);
 
   useEffect(() => {
-    dispatch(fetchCategory(validateCurrentPerson()));
+    dispatch(fetchCategory(validateCurrentPerson));
     dispatch(fetchFunds());
   }, [dispatch]);
 
   const handleRemove = () => {
-    dispatch(removeCategoryAction(validateCurrentPerson()));
-    navigate('/');
+    dispatch(removeCategoryAction(validateCurrentPerson));
     window.location.reload();
   };
 
