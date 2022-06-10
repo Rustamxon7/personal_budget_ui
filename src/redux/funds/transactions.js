@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { END_POINT, API_ROUTE } from '../../api/api';
 
 const GET_TRANSACTIONS = 'GET_TRANSACTIONS';
@@ -28,13 +29,12 @@ export const getTransactionsError = (error) => ({
 export const fetchTransactions = () => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${END_POINT}${API_ROUTE}transactions`, {
+    const response = await axios.get(`${END_POINT}${API_ROUTE}transactions`, {
       headers: {
         Authorization: `${token}`,
       },
     });
-    const transactionsList = await response.json();
-    const transactions = transactionsList;
+    const transactions = await response.data;
     dispatch(getTransactions(transactions));
   } catch (error) {
     dispatch(getTransactionsError(error));
