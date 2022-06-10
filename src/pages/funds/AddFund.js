@@ -8,7 +8,7 @@ import onSubmitReusable from '../../components/onSubmitReusable';
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().min(3, 'Too Short!').max(50, 'Too Long!').required('A title is required!'),
-  amount: Yup.number().min(1, 'Too Low!').max(999999, 'Too High!').required('An amount is required!'),
+  amount: Yup.number().min(1, 'Too Low!').max(999999999, 'Too High!').required('An amount is required!'),
   category_id: Yup.number().required('Select one category'),
   date: Yup.string().required('Select one date'),
   note: Yup.string().required('A note is required!').min(3, 'Too Short!').max(50, 'Too Long!'),
