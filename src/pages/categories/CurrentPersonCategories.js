@@ -4,6 +4,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 
 import CreateCategory from './CreateCategory';
 import Loader from '../../components/Loader';
+import { iconsList } from '../../lists/lists';
 import { fetchCategories } from '../../redux/categories/categories';
 
 const CurrentPersonCategories = ({ type }) => {
@@ -42,7 +43,7 @@ const CurrentPersonCategories = ({ type }) => {
   const currentPersonCategoriesList = currentPersonsCategories.length ? (
     handleCategoryType(type).map((category) => (
       <NavLink className="category category--shopping" to={`/people/${currentPerson}/categories/${category.id}`} key={category.id}>
-        <ion-icon name={`${category.icon}-outline`} />
+        <ion-icon name={`${category.icon}-outline`} style={{ color: `${iconsList.find((icon) => icon.name === category.icon).color}` }} />
         <span className="category__name">{category.title}</span>
         <span className="category__price">
           $

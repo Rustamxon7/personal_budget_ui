@@ -38,6 +38,20 @@ const CreateCategory = ({ open, setOpen }) => {
     return selectedPersons;
   };
 
+  //   onClick={
+  //   values.icon === icon.name
+  //     ? null
+  //     : () => {
+  //         values.icon = icon.name;
+  //         handleChange(values);
+  //       }
+  // }
+
+  const handleIconClick = (values, icon, handleChange) => {
+    values.icon = icon.name;
+    handleChange(values);
+  };
+
   useEffect(() => {
     dispatch(fetchPersons());
   }, [dispatch]);
@@ -125,24 +139,7 @@ const CreateCategory = ({ open, setOpen }) => {
                   <div className="icons">
                     {iconsList.map((icon) => (
                       <div className="icons--item" key={icon.name}>
-                        <input
-                          className="radio--button"
-                          type="radio"
-                          name="icon"
-                          id={icon.name}
-                          value={icon.name}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          checked={values.icon === icon.name}
-                          onClick={
-                            values.icon === icon.name
-                              ? null
-                              : () => {
-                                  values.icon = icon.name;
-                                  handleChange(values);
-                                }
-                          }
-                        />
+                        <input className="radio--button" type="radio" name="icon" id={icon.name} value={icon.name} onChange={handleChange} onBlur={handleBlur} checked={values.icon === icon.name} onClick={handleIconClick} />
                         <label htmlFor={icon.name} className="icons--label" title={icon.name}>
                           <ion-icon name={`${icon.name}-outline`} style={{ color: icon.color }} />
                         </label>
