@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { END_POINT, API_ROUTE } from '../../api/api';
 
 const LOADING = 'LOADING';
@@ -35,12 +36,12 @@ export const deletePerson = (id) => ({
 export const fetchPersons = () => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${END_POINT}${API_ROUTE}people`, {
+    const response = await axios.get(`${END_POINT}${API_ROUTE}people`, {
       headers: {
         Authorization: `${token}`,
       },
     });
-    const people = await response.json();
+    const people = await response.data;
     dispatch(getPerson(people));
   } catch (error) {
     dispatch(getPerson(error));
@@ -50,13 +51,12 @@ export const fetchPersons = () => async (dispatch) => {
 export const deletePersonAction = (id) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${END_POINT}${API_ROUTE}people/${id}`, {
-      method: 'DELETE',
+    const response = await axios.delete(`${END_POINT}${API_ROUTE}people/${id}`, {
       headers: {
         Authorization: `${token}`,
       },
     });
-    const person = await response.json();
+    const person = await response.data;
     dispatch(deletePerson(person.id));
   } catch (error) {
     dispatch(error);
@@ -66,15 +66,13 @@ export const deletePersonAction = (id) => async (dispatch) => {
 export const createPersonAction = (person) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${END_POINT}${API_ROUTE}people`, {
-      method: 'POST',
+    const response = await axios.post(`${END_POINT}${API_ROUTE}people`, person, {
       headers: {
         Authorization: `${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(person),
     });
-    const newPerson = await response.json();
+    const newPerson = await response.data;
     dispatch(createPerson(newPerson));
   } catch (error) {
     dispatch(error);
@@ -84,15 +82,13 @@ export const createPersonAction = (person) => async (dispatch) => {
 export const updatePersonAction = (person) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${END_POINT}${API_ROUTE}people/${person.id}`, {
-      method: 'PUT',
+    const response = await axios.put(`${END_POINT}${API_ROUTE}people/${person.id}`, person, {
       headers: {
         Authorization: `${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(person),
     });
-    const updatedPerson = await response.json();
+    const updatedPerson = await response.data;
     dispatch(updatePerson(updatedPerson));
   } catch (error) {
     dispatch(error);
