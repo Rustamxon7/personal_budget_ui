@@ -6,7 +6,6 @@ import { fetchCategories } from '../../redux/categories/categories';
 
 import CreateCategory from './CreateCategory';
 import Loader from '../../components/Loader';
-import { iconsList } from '../../lists/lists';
 
 const Categories = ({ type }) => {
   const dispatch = useDispatch();
@@ -38,7 +37,7 @@ const Categories = ({ type }) => {
         to={`/categories/${category.id}`}
         key={category.id}
       >
-        <ion-icon name={`${category.icon}-outline`} style={{ color: `${iconsList.find((icon) => icon.name === category.icon).color}` }} />
+        <ion-icon name={`${category.icon}-outline`} />
         <span className="category__name">{category.title}</span>
         <span className="category__price">
           $

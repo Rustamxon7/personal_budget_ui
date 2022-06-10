@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import { fetchCategory, removeCategoryAction } from '../../redux/categories/categories';
 import { fetchFunds } from '../../redux/funds/funds';
@@ -16,6 +16,7 @@ import { iconsList } from '../../lists/lists';
 const Category = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [open, setOpen] = useState('hidden');
   const [openEdit, setOpenEdit] = useState('disabled');
@@ -39,6 +40,7 @@ const Category = () => {
 
   const handleRemove = () => {
     dispatch(removeCategoryAction(validateCurrentPerson));
+    navigate('/');
     window.location.reload();
   };
 
