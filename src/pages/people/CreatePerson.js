@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Reloader from '../../components/Reload';
+import { closePopup } from '../../components/handleEvents';
 import { loadCurrentUser } from '../../redux/auth';
 import { createPersonAction } from '../../redux/people/person';
 
@@ -12,13 +13,6 @@ function CreatePerson() {
 
   const [name, setName] = useState('');
   const [icon, setIcon] = useState('');
-
-  const closePopup = () => {
-    const overlay = document.querySelector('.person--overlay');
-    overlay.classList.add('hidden');
-    const popup = document.querySelector('.person--popup');
-    popup.classList.add('hidden');
-  };
 
   const navigate = useNavigate();
 

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import Reloader from '../../components/Reload';
-import handleHover from '../../components/handleEvents';
+import { handleHover } from '../../components/handleEvents';
 import { fetchCurrentUser } from '../../redux/users/currentUser';
 import { fetchPersons, deletePersonAction } from '../../redux/people/person';
 
