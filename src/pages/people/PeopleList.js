@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-import Reloader from '../../components/Reload';
 import { handleHover } from '../../components/handleEvents';
 import { fetchCurrentUser } from '../../redux/users/currentUser';
 import { fetchPersons, deletePersonAction } from '../../redux/people/person';
@@ -21,8 +20,10 @@ const PeopleList = ({ currentUser, isHover }) => {
 
   const deletePerson = (id) => {
     dispatch(deletePersonAction(id));
-    navigate('/');
-    Reloader(1000);
+    setTimeout(() => {
+      navigate('/');
+      window.location.reload();
+    }, 1000);
   };
 
   const peopleList = people.length ? (

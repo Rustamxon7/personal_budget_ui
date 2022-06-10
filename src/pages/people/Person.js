@@ -24,16 +24,16 @@ const PersonInfo = () => {
 
   const [open, setOpen] = useState('hidden');
 
-  useEffect(() => {
-    dispatch(fetchPersons());
-    dispatch(fetchTransactions());
-  }, [dispatch, location]);
-
   const persons = useSelector((state) => state.people.people);
 
   const person = persons.find((person) => person.id === Number(location.pathname.split('/')[2]));
 
   const transactions = useSelector((state) => state.transactions.transactions.transactions);
+
+  useEffect(() => {
+    dispatch(fetchPersons());
+    dispatch(fetchTransactions());
+  }, [dispatch, location]);
 
   return (
     <div className="dashboard">
