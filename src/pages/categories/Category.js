@@ -11,6 +11,7 @@ import EditCategory from './UpdateCategory';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import Loader from '../../components/Loader';
+import { iconsList } from '../../lists/lists';
 
 const Category = () => {
   const dispatch = useDispatch();
@@ -72,9 +73,7 @@ const Category = () => {
           <>
             <EditCategory open={openEdit} setOpen={setOpenEdit} category={category.id} />
             <div className="app category-page">
-              <div
-                className="category-page__header"
-              />
+              <div className="category-page__header" style={{ backgroundImage: `url(${iconsList.find((icon) => icon.name === category.icon).img})` }} />
               <div className="app-container">
                 <h1 className="heading-primary">
                   {category.title}
