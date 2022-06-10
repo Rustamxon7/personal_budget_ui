@@ -1,3 +1,6 @@
+/* eslint-disable react/jsx-props-no-multi-spaces */
+/* eslint-disable indent */
+/* eslint-disable object-curly-newline */
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import React, { useEffect } from 'react';
@@ -10,6 +13,7 @@ import { iconsList, fonds } from '../../lists/lists';
 
 import './registrations.css';
 import Loader from '../../components/Loader';
+import onSubmitReusable from '../../components/onSubmitReusable';
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().min(3, 'Too Short!').max(50, 'Too Long!').required('A title is required!'),
@@ -22,26 +26,21 @@ const CreateCategory = ({ open, setOpen }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    dispatch(fetchPersons());
-  }, [dispatch]);
-
   const people = useSelector((state) => state.people.people) || [];
   const loading = useSelector((state) => state.people.loading);
 
   const currentPersonLocation = location.pathname.split('/')[2];
 
-  const currentPerson = () => {
-    if (currentPersonLocation === parseInt(localStorage.getItem('currentPerson'), 10)) {
-      return parseInt(localStorage.getItem('currentPerson'), 10);
-    }
-    return parseInt(currentPersonLocation, 10);
-  };
+  const currentPerson = currentPersonLocation === Number(localStorage.getItem('currentPerson')) ? Number(localStorage.getItem('currentPerson')) : Number(currentPersonLocation);
 
   const setForAllPersons = () => {
     const selectedPersons = people.map((person) => person.id);
     return selectedPersons;
   };
+
+  useEffect(() => {
+    dispatch(fetchPersons());
+  }, [dispatch]);
 
   return (
     <>
@@ -55,23 +54,17 @@ const CreateCategory = ({ open, setOpen }) => {
               title: '',
               icon: '',
               money: '',
-              person_id: currentPerson() || '',
+              person_id: currentPerson || '',
               persons_array: [],
             }}
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {
-              setSubmitting(true);
               dispatch(addCategoryAction(values));
-              setSubmitting(false);
+              onSubmitReusable({ setSubmitting });
               navigate('/');
-              setTimeout(() => {
-                window.location.reload();
-              }, 1000);
             }}
           >
-            {({
-              values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting
-            }) => (
+            {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
               <div className="popup__form">
                 <div className="right-side">
                   <form onSubmit={handleSubmit}>
@@ -145,9 +138,9 @@ const CreateCategory = ({ open, setOpen }) => {
                             values.icon === icon.name
                               ? null
                               : () => {
-                                values.icon = icon.name;
-                                handleChange(values);
-                              }
+                                  values.icon = icon.name;
+                                  handleChange(values);
+                                }
                           }
                         />
                         <label htmlFor={icon.name} className="icons--label" title={icon.name}>
