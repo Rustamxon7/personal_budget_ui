@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Reloader from '../../components/Reload';
 import { loadCurrentUser } from '../../redux/auth';
 import { createPersonAction } from '../../redux/people/person';
 
@@ -32,10 +33,8 @@ function CreatePerson() {
     );
     setName('');
     setIcon('');
-    setTimeout(() => {
-      navigate('/');
-      window.location.reload();
-    }, 1000);
+    Reloader(1000);
+    navigate('/');
   };
 
   const userImages = document.querySelectorAll('#user-image');

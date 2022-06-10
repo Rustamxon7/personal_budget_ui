@@ -5,6 +5,7 @@ import dateFormat from 'dateformat';
 
 import { removeFundFromAllPersons } from '../../redux/funds/funds';
 
+import Reloader from '../../components/Reload';
 import UpdateFund from './UpdateFund';
 
 const Funds = ({ funds, startDate, endDate }) => {
@@ -24,10 +25,8 @@ const Funds = ({ funds, startDate, endDate }) => {
 
   const handleRemove = (categoryId, fundId) => {
     dispatch(removeFundFromAllPersons(categoryId, fundId));
-    setTimeout(() => {
-      navigate(-1);
-      window.location.reload();
-    }, 1000);
+    Reloader(1000);
+    navigate(-1);
   };
 
   const handleClick = (fund) => {
