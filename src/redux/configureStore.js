@@ -8,13 +8,11 @@ import fundsReducer from './funds/funds';
 import transactionsReducer from './funds/transactions';
 import peopleReducer from './people/person';
 import userReducer from './users/currentUser';
-import editUserReducer from './users/editUser';
 import categoriesReducer from './categories/categories';
 
 const reducer = combineReducers({
   auth: authReducer,
   user: userReducer,
-  editUser: editUserReducer,
   people: peopleReducer,
   categories: categoriesReducer,
   funds: fundsReducer,
