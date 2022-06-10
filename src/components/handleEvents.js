@@ -1,4 +1,4 @@
-const handleHover = () => {
+export const handleHover = () => {
   const personOverlay = document.querySelector('.person--overlay');
   const personPopup = document.querySelector('.person--popup');
 
@@ -8,4 +8,9 @@ const handleHover = () => {
   }
 };
 
-export default handleHover;
+export const closePopup = () => {
+  const overlay = document.querySelector('.person--overlay');
+  overlay.classList.add('hidden');
+  const popup = document.querySelector('.person--popup');
+  popup.classList.add('hidden');
+};
