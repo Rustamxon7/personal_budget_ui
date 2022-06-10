@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { END_POINT, API_ROUTE } from '../../api/api';
 
 const GET_FUNDS = 'GET_FUNDS';
@@ -68,32 +69,28 @@ export const fetchFunds = (categoryId) => async (dispatch) => {
 export const fetchFund = (id) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${END_POINT}${API_ROUTE}funds/${id}`, {
+    const response = await axios.get(`${END_POINT}${API_ROUTE}funds/${id}`, {
       headers: {
         Authorization: `${token}`,
       },
     });
-    const fund = await response.json();
+    const fund = await response.data;
     dispatch(getFund(fund));
   } catch (error) {
     dispatch(getFund(error));
   }
 };
 
-// /api/v1/categories/:category_id/funds(.:format)
-
 export const addFundAction = (fund, categoryUrl) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${END_POINT}${API_ROUTE}categories/${categoryUrl}/funds`, {
-      method: 'POST',
+    const response = await axios.post(`${END_POINT}${API_ROUTE}categories/${categoryUrl}/funds`, fund, {
       headers: {
         Authorization: `${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(fund),
     });
-    const fundData = await response.json();
+    const fundData = await response.data;
     dispatch(addFund(fundData));
   } catch (error) {
     dispatch(addFund(error));
@@ -103,13 +100,12 @@ export const addFundAction = (fund, categoryUrl) => async (dispatch) => {
 export const removeFundFromAllPersons = (categoryId, fundId) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${END_POINT}${API_ROUTE}categories/${categoryId}/funds/${fundId}`, {
-      method: 'DELETE',
+    const response = await axios.delete(`${END_POINT}${API_ROUTE}categories/${categoryId}/funds/${fundId}`, {
       headers: {
         Authorization: `${token}`,
       },
     });
-    const fund = await response.json();
+    const fund = await response.data;
     dispatch(removeFund(fund));
   } catch (error) {
     dispatch(removeFund(error));
@@ -119,15 +115,13 @@ export const removeFundFromAllPersons = (categoryId, fundId) => async (dispatch)
 export const updateFundFromAllPersons = (fund, categoryId, fundId) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${END_POINT}${API_ROUTE}categories/${categoryId}/funds/${fundId}`, {
-      method: 'PUT',
+    const response = await axios.put(`${END_POINT}${API_ROUTE}categories/${categoryId}/funds/${fundId}`, fund, {
       headers: {
-        'Content-Type': 'application/json',
         Authorization: `${token}`,
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(fund),
     });
-    const updatedFund = await response.json();
+    const updatedFund = await response.data;
     dispatch(updateFund(updatedFund));
   } catch (error) {
     dispatch(updateFund(error));
