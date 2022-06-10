@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import Reloader from '../../components/Reload';
+import handleHover from '../../components/handleEvents';
 import { fetchCurrentUser } from '../../redux/users/currentUser';
 import { fetchPersons, deletePersonAction } from '../../redux/people/person';
 
@@ -17,16 +18,6 @@ const PeopleList = ({ currentUser, isHover }) => {
   const people = useSelector((state) => state.people.people);
 
   const navigate = useNavigate();
-
-  const handleHover = () => {
-    const personOverlay = document.querySelector('.person--overlay');
-    const personPopup = document.querySelector('.person--popup');
-
-    if (personOverlay.classList.contains('hidden')) {
-      personOverlay.classList.remove('hidden');
-      personPopup.classList.remove('hidden');
-    }
-  };
 
   const deletePerson = (id) => {
     dispatch(deletePersonAction(id));
