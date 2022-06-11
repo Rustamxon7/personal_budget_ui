@@ -46,13 +46,13 @@ const Sidebar = ({ setOpen }) => {
               <li>
                 <NavLink activeclassname="active" className="sidebar__nav-link" to="/incomes" exact="true">
                   <ion-icon name="cash-outline" />
-                  <span>Receiptss</span>
+                  <span>Receipts</span>
                 </NavLink>
               </li>
               <li>
                 <NavLink activeclassname="active" className="sidebar__nav-link" to="/expenses" exact="true">
                   <ion-icon name="wallet-outline" />
-                  <span>Expensess</span>
+                  <span>Expenses</span>
                 </NavLink>
               </li>
             </>
