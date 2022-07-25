@@ -28,7 +28,7 @@
     <br />
     <a href="https://personal-budget-ui.netlify.app/">LIVE DEMO</a>
     ·
-    <a href="https://github.com/Rustamxon7/personal_budget_ui/issues">Report Bug</a>
+    <a href="https://github.com/Rustamxon7/personal_budget">Backend Rails API</a>
     ·
     <a href="https://github.com/Rustamxon7/personal_budget_ui/issues">Request Feature</a>
   </p>
