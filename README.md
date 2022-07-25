@@ -64,7 +64,17 @@
 
 ### Live Demo :    <a href="https://personal-budget-ui.netlify.app/">LIVE DEMO</a>
 
+<!-- LOGIN: 
+USER EMAIL test@test.com
+USER PASSWORD mmmmmm
+ -->
 
+```
+LOGIN:
+
+ Email: test@gmail.com
+ Password: mmmmmm
+```
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
