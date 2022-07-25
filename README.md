@@ -18,7 +18,7 @@
     <img src="https://personal-budget-ui.netlify.app/img/beedget.svg" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Personal Bdget UI</h3>
+  <h3 align="center">Personal Budget UI</h3>
 
   <p align="center">
     An awesome Personal Budget UI built with React, Redux, and SCSS.
