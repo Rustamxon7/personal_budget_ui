@@ -1,67 +1,190 @@
-# Getting Started with Create React App
+# PERSONAL BUDGET UI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div id="top"></div>
 
-## Available Scripts
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://personal-budget-ui.netlify.app/">
+    <img src="https://personal-budget-ui.netlify.app/img/beedget.svg" alt="Logo" width="80" height="80">
+  </a>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  <h3 align="center">Personal Bdget UI</h3>
 
-### `npm test`
+  <p align="center">
+    An awesome Personal Budget UI built with React, Redux, and SCSS.
+    <br />
+    <a href="https://personal-budget-ui.netlify.app/"><strong>Explore the website »</strong></a>
+    <br />
+    <br />
+    <a href="https://personal-budget-ui.netlify.app/">LIVE DEMO</a>
+    ·
+    <a href="https://github.com/Rustamxon7/personal_budget_ui/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/Rustamxon7/personal_budget_ui/issues">Request Feature</a>
+  </p>
+</div>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Live Demo :    <a href="https://personal-budget-ui.netlify.app/">LIVE DEMO</a>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![desk](./src/assets/screenshot.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The Personal Budget UI is a React, Redux, and SCSS based UI for managing your personal budget.
+It is one of my most proud projects. I am proud to say that I have built this project from scratch.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Here's why:
+* Front designe is build with HTML and SCSS technologies.
+* User friendly
+* Available on Desktop only.
+* Backend is built with Ruby on Rails API.
+* RESTful API with JSON responses.
 
-## Learn More
+It looks simple, but it is not.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Built With
 
-### Analyzing the Bundle Size
+This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+* [HTML5 ](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5)
+* [CSS3 ](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3)
+* [Ruby on Rails ](https://rubyonrails.org/)
+* [React ](https://reactjs.org/)
+* [Redux ](https://redux.js.org/)
+* [SCSS ](https://sass-lang.com/)
+* [REST API ](https://restfulapi.net/)
 
-### Making a Progressive Web App
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+<!-- GETTING STARTED -->
+## Getting Started
 
-### Deployment
+### Prerequisites
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+This is an example of how to list things you need to use the software and how to install them.
+* Check your internet connection.
+  ```sh
+    curl -I https://personal-budget-ui.netlify.app/
+  ```
 
+### Installation
+
+1. Get a free API Key at [https://example.com](https://example.com)
+2. Clone the repo
+   ```sh
+   git clone https://github.com/Rustamxon7/personal_budget_ui.git
+   ```
+3. Run npm install
+   ```sh
+    npm install
+   ```
+4. Run npm start
+   ```sh
+    npm start
+   ```
+5. Open the browser and go to https://personal-budget-ui.netlify.app/
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- ROADMAP -->
+## Roadmap
+
+- [x] Sign up
+- [x] Sign in
+- [x] Dashboard
+- [x] Add a new person
+- [x] Add a new budget
+- [x] Add a new expense
+- [x] Add a new income
+- [x] Add a new transfer
+- [x] Edit a person
+- [x] Edit a budget
+
+See the [open issues](https://github.com/Rustamxon7/personal_budget_ui/issues) for more details.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- LICENSE -->
+## License
+
+Distributed under the [MIT](./MIT). 
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- CONTACT -->
+## Contact
+
+Rustamjon Tolipov - [email]() - rustamxontolipov788@gmail.com
+
+Project Link: [https://github.com/Rustamxon7/personal_budget_ui](https://github.com/Rustamxon7/personal_budget_ui)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
+[contributors-url]: https://github.com/Rustamxon7/personal_budget_ui/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
+[forks-url]: https://github.com/Rustamxon7/personal_budget_ui/network/members
+[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
+[stars-url]: https://github.com/Rustamxon7/personal_budget_ui/stargazers
+[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-url]: https://github.com/Rustamxon7/personal_budget_ui/issues
+[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+[license-url]: https://github.com/Rustamxon7/personal_budget_ui/blob/master/LICENSE
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/rustamjon-tolipov/
+[product-screenshot]: https://www.webmobilefirst.com/en/screencasts/VpImottb_M/
