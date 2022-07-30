@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 import { loadCurrentUser } from '../redux/auth';
 import PeopleList from '../pages/people/PeopleList';
 import { fetchCurrentUser } from '../redux/users/currentUser';
@@ -14,38 +13,19 @@ const Headers = () => {
 
   const currentUser = useSelector((state) => state.user.user);
 
-  const handleHover = () => {
-    const peopleMenu = document.querySelector('.persons--menu');
+  const [isHover, setIsHover] = useState('hidden');
 
-    if (peopleMenu.classList.contains('hidden')) {
-      peopleMenu.classList.remove('hidden');
-    } else {
-      peopleMenu.classList.add('hidden');
-    }
+  const handleHover = () => {
+    setIsHover(isHover === 'hidden' ? 'show' : 'hidden');
   };
 
   return (
     <header className="header">
-      <div className="searchbar">
-        <ion-icon name="search-outline" class="searchbar--icon" />
-        <input type="text" placeholder="Search" className="searchbar--input" />
-      </div>
-      <div className="profile">
-        <ion-icon class="notification" name="notifications-outline" />
-        {isAuthenticated.data.email ? <ion-icon class="profile--icon" name="person-circle-outline" onClick={handleHover} /> : <ion-icon class="profile--icon" name="person-outline" />}
-      </div>
-      <div className="persons--menu hidden">
-        <div className="persons--menu__title">
-          <span className="menu--user__name">{currentUser.name}</span>
-          <span className="user--avatar">
-            <ion-icon name="person-circle-outline" />
-          </span>
-          <NavLink to="/user/edit" className="edit--person">
-            <ion-icon name="create-outline" />
-          </NavLink>
-        </div>
-        <PeopleList />
-      </div>
+      <ion-icon class="header--icon" name="search" />
+      <input type="text" placeholder="Search" />
+      <ion-icon class="notification header--icon" name="notifications-outline" />
+      {isAuthenticated.data.email ? <ion-icon class="profile--icon header--icon" name="person-circle-outline" onClick={handleHover} /> : <ion-icon class="profile--icon header--icon" name="person-outline" />}
+      <PeopleList currentUser={currentUser} isHover={isHover} setIsHover={setIsHover} />
     </header>
   );
 };

@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
+
 import { loadCurrentUser } from '../../redux/auth';
 import { updatePersonAction, fetchPersons } from '../../redux/people/person';
 
-function EditPerson() {
+const EditPerson = ({ open, setOpen }) => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(loadCurrentUser);
   const location = useLocation();
 
   const persons = useSelector((state) => state.people.people);
   const person = persons.find((person) => person.id === Number(location.pathname.split('/')[2]));
+  const currentPerson = parseInt(localStorage.getItem('currentPerson'), 10);
 
   useEffect(() => {
-    dispatch(fetchPersons(location.pathname.split('/')[2]));
+    dispatch(fetchPersons(currentPerson));
   }, [dispatch, location]);
 
   const navigate = useNavigate();
@@ -33,10 +35,8 @@ function EditPerson() {
     );
     setName('');
     setIcon('');
-    setTimeout(() => {
-      navigate('/');
-      window.location.reload();
-    }, 1000);
+    navigate('/');
+    window.location.reload();
   };
 
   const userImages = document.querySelectorAll('#user-image');
@@ -63,32 +63,26 @@ function EditPerson() {
       <img id="user-image" src="img/icons/child.svg" alt="Child" data-user-type="child" />
     </>
   );
+
   return (
-    <div className="contents">
-      <div className="content--right">
-        <div className="header">
-          <h1 className="sessions--title">Edit Person</h1>
-        </div>
-        <form action="" className="form" onSubmit={handleSubmit}>
-          <h2 className="form--title">Edit Person</h2>
-          <p className="sub--title">Please fill out the form below to create a new person.</p>
+    <>
+      <div className={`overlay ${open ? 'hidden' : ''} edit--person__overlay`} onClick={() => setOpen('hidden')} onKeyDown={() => setOpen('hidden')} role="button" tabIndex="0" aria-label="overlay" />
+      <div className={`popup ${open ? 'hidden' : ''} edit--person__popup`}>
+        <form action="" className="popup__form popup__form--one" onSubmit={handleSubmit}>
           <div className="form--group">
             <label htmlFor="name">Name</label>
-            <input type="text" id="name" className="form--control" value={name} onChange={(e) => setName(e.target.value)} placeholder={person.name} />
+            <input type="text" id="name" className="input-feedback" value={name} onChange={(e) => setName(e.target.value)} placeholder={person.name} />
           </div>
           <div className="form--group persons--choice" onClick={handleChange} onKeyDown={handleChange} role="button" tabIndex="0">
             {iconsList}
           </div>
-          <div className="form--group">
-            <input type="submit" value="Edit" className="submit--btn" />
-          </div>
+          <button type="submit" className="btn">
+            Submit
+          </button>
         </form>
       </div>
-      <div className="content--left">
-        <img src="img/success_factors.svg" alt="Success Factors" className="welcome--img" />
-      </div>
-    </div>
+    </>
   );
-}
+};
 
 export default EditPerson;

@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { createPersonAction } from '../../redux/people/person';
+import { useDispatch, useSelector } from 'react-redux';
+
+import Reloader from '../../components/Reload';
+import { closePopup } from '../../components/handleEvents';
 import { loadCurrentUser } from '../../redux/auth';
+import { createPersonAction } from '../../redux/people/person';
 
 function CreatePerson() {
   const dispatch = useDispatch();
@@ -10,8 +13,6 @@ function CreatePerson() {
 
   const [name, setName] = useState('');
   const [icon, setIcon] = useState('');
-
-  // after the form is submitted, we want to clear the form and redirect to home page
 
   const navigate = useNavigate();
 
@@ -26,10 +27,8 @@ function CreatePerson() {
     );
     setName('');
     setIcon('');
-    setTimeout(() => {
-      navigate('/');
-      window.location.reload();
-    }, 1000);
+    Reloader(1000);
+    navigate('/');
   };
 
   const userImages = document.querySelectorAll('#user-image');
@@ -41,32 +40,26 @@ function CreatePerson() {
   };
 
   return (
-    <div className="contents">
-      <div className="content--right">
-        <div className="header">
-          <h1 className="sessions--title">Personal Budget</h1>
-        </div>
-        <form action="#" method="post" className="form" onSubmit={handleSubmit}>
-          <h2 className="form--title">Create Person</h2>
-          <p className="sub--title">Please fill out the form below to create a new person.</p>
+    <>
+      <div className="overlay person--overlay hidden" onClick={closePopup} onKeyDown={closePopup} role="button" tabIndex="0" aria-label="overlay" />
+      <div className="popup person--popup hidden">
+        <form action="#" className="popup__form popup__form--one" onSubmit={handleSubmit}>
           <div className="form--group">
             <label htmlFor="name">Name</label>
             <input className="form--control" type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
           </div>
+
           <div className="form--group persons--choice" id="description" onClick={handleChange} role="button" tabIndex="0" onKeyDown={handleChange}>
             <img value={icon} id="user-image" src="img/icons/man.svg" alt="Man" data-user-type="man" />
             <img value={icon} id="user-image" src="img/icons/woman.svg" alt="Woman" data-user-type="woman" />
             <img value={icon} id="user-image" src="img/icons/child.svg" alt="Child" data-user-type="child" />
           </div>
-          <div className="form--group">
-            <input type="submit" value="Sign in" className="submit--btn" />
-          </div>
+          <button type="submit" className="btn">
+            Submit
+          </button>
         </form>
       </div>
-      <div className="content--left">
-        <img src="img/success_factors.svg" alt="Success Factors" className="welcome--img" />
-      </div>
-    </div>
+    </>
   );
 }
 

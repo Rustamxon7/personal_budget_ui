@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const END_POINT = 'https://personal-budget-plan.herokuapp.com/';
-const API_ROUTE = '/api/v1/';
+export const END_POINT = 'https://personal-budget-plan.herokuapp.com';
+export const API_ROUTE = '/api/v1/';
 
 // create an endoint for the api using the url and fetching the data
 export const api = axios.create({

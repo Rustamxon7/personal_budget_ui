@@ -15,7 +15,7 @@ export const login = (payload) => async (dispatch) => {
     const response = await api.login(payload);
     dispatch(setCurrentUser(response));
   } catch (error) {
-    dispatch(setCurrentUser(null));
+    dispatch(setCurrentUser(error));
   }
 };
 

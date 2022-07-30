@@ -1,64 +1,61 @@
-import React, { useEffect } from 'react';
+/* eslint-disable func-names */
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, NavLink } from 'react-router-dom';
+
+import { fetchTransactions } from '../../redux/funds/transactions';
 import { fetchPersons } from '../../redux/people/person';
-import Sidebar from '../../components/Sidebar';
-import Header from '../../components/Header';
+
+import EditPerson from './EditPerson';
+import CreatePerson from './CreatePerson';
 import CurrentPersonCategories from '../categories/CurrentPersonCategories';
+
+import Chart from '../../components/chart';
+import Header from '../../components/Header';
+import Sidebar from '../../components/Sidebar';
+
+import Transactions from '../../components/Transactions';
 
 const PersonInfo = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  useEffect(() => {
-    dispatch(fetchPersons());
-  }, [dispatch, location]);
+  localStorage.setItem('currentPerson', location.pathname.split('/')[2]);
+
+  const [open, setOpen] = useState('hidden');
 
   const persons = useSelector((state) => state.people.people);
 
   const person = persons.find((person) => person.id === Number(location.pathname.split('/')[2]));
 
+  const transactions = useSelector((state) => state.transactions.transactions.transactions);
+
+  useEffect(() => {
+    dispatch(fetchPersons());
+    dispatch(fetchTransactions());
+  }, [dispatch, location]);
+
   return (
-    <div className="app">
+    <div className="dashboard">
       {person ? (
         <>
-          <div className="dashboard">
-            <Sidebar id={person.id} />
+          <Sidebar setOpen={setOpen} />
+          <main>
             <Header />
-            <div className="container">
-              <div className="main">
-                <div className="main--title">
-                  <h2>Monthly Budget</h2>
-                  <NavLink to={`/people/${person.id}/create-category`}>
-                    <ion-icon name="add-outline" />
-                  </NavLink>
+            <div className="app main">
+              <div className="app-container grid grid--1-3cols">
+                <div className="app-flex">
+                  <CurrentPersonCategories type={person.id} />
+                  <Chart />
+                  <CreatePerson />
+                  <EditPerson open={open} setOpen={setOpen} />
                 </div>
-
-                <CurrentPersonCategories id={person.id} />
-
-                <div className="main--chart" />
-              </div>
-              <div className="right--sidebar">
-                <div className="right--sidebar__title">
-                  <h2>This week</h2>
-                  <span className="transactions">-$2400</span>
-                </div>
-
-                <div className="transactions--cards">
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
-                  <div className="transaction--card" />
+                <div>
+                  <Transactions data={transactions} />
                 </div>
               </div>
             </div>
-          </div>
+          </main>
         </>
       ) : (
         <p>No person found</p>
